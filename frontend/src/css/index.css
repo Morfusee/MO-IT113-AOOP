@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "@mantine/core/styles.css";
+@import "@mantine/dates/styles.css";
+@import "@mantine/charts/styles.css";
+@import '@mantine/notifications/styles.css';
+
+/* Change the default dark mode color  */
+#root {
+  background-color: var(--mantine-color-dark-8);
+}
+
+.beautifulScrollBar {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.beautifulScrollBar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.beautifulScrollBar:hover {
+  overflow: auto; /* Show the scrollbar on hover */
+}
+
+html[data-mantine-color-scheme="dark"]
+  .beautifulScrollBar::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-dimmed); /* Scrollbar thumb color */
+  border-radius: 10px;
+}
+
+html[data-mantine-color-scheme="dark"]
+  .beautifulScrollBar::-webkit-scrollbar-thumb:hover {
+  background: var(
+    --mantine-color-default-border
+  ); /* Scrollbar thumb color on hover */
+}

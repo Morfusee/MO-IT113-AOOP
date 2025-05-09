@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>
+        System Architecture - MotorPH
+    </title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="System Architecture"/>
+    <link rel="icon" type="image/svg+xml" href="https://morfusee.github.io"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://morfusee.github.io">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://morfusee.github.io">    
+        
+    <meta property="og:image" content="https://morfusee.github.io"/>
+    <meta property="og:url" content="https://morfusee.github.io/MO-IT110-OOP/documentation/system-overview/system-ar/">
+    <meta property="og:title" content="System Architecture - MotorPH" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="System Architecture"/>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content=""/>
+    <meta name="twitter:title" content="System Architecture - MotorPH" />
+    <meta name="twitter:description" content="System Architecture" />
+    <meta name="twitter:image" content="https://morfusee.github.io"/>
+
+    <link rel="canonical" href="https://morfusee.github.io/MO-IT110-OOP/documentation/system-overview/system-ar/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&subset=latin&display=swap"
+          rel="stylesheet"/>
+    
+    <link rel="preload" href="https://morfusee.github.io/MO-IT110-OOP/_lib/index.css" as="style">
+    <link rel="stylesheet" href="https://morfusee.github.io/MO-IT110-OOP/_lib/index.css"/>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+        html {
+            scroll-padding-top: 120px;
+            visibility: hidden;
+            opacity: 0;
+        }
+    </style>
+    <script>
+        function getInitialTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        const theme = getInitialTheme();
+        document.documentElement.classList.add('theme-' + theme);
+    </script>
+    
+</head>
+<body>
+
+<div id="root">
+    <sl-drawer id="menu-drawer" label="Documentation" class="drawer__control" placement="top">
+        <div class="body__drawer">
+            <div class="items">
+                
+                    
+                        <sl-button 
+                            class="nav_button  current " 
+                            size="medium" 
+                            href="/MO-IT110-OOP/"
+                        >
+                            Documentation
+                        </sl-button>
+                         
+                
+                    
+                        <sl-button 
+                            class="nav_button"
+                            size="medium" 
+                            href="https://github.com/Morfusee/MO-IT110-OOP"
+                             target="_blank" 
+                        >
+                            GitHub
+                        </sl-button>
+                         
+                
+            </div>
+            <sl-divider class="divider__drawer"></sl-divider>
+            <nav class="tree">
+                <div class="scroll-panel">
+                    
+                        
+                            
+                            
+                            
+                                <sl-tree class="tree__with_lines" selection="leaf">
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="ikiMdO8m1IaTHDsayq_oZ" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/">Introduction</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hAHG_3IOf1fV6QIJa9Gzf" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/getting-started/">Getting Started</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="W3_MCwNUFStdgy7Cbti7k" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/">Using the Payroll System</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        
+                                            <sl-tree-item 
+                                                id="TcDZaSlB0Mn6CxI1qoGH5" 
+                                                style="--indent-level: 0"
+                                                class="folder"
+                                            >
+                                                <span>System Overview</span>
+                                                
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="SBwvT3kV3mhSazDt094eg" 
+                                            style="--indent-level: 1"
+                                             selected 
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/">System Architecture</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="WwccQZsdntTClpSGKlJbl" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">Technical Diagrams</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="GdcreEJzcRrzsuqHc0j8n" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/testing-and-quality-a/">Testing and Quality Assurance</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                             
+                                            </sl-tree-item>
+                                                                                
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="P-2M5ji1FqqKz4ZwHKbLh" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/faqs/">FAQs</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hxON-Lnd3s7tvbAMaLwXG" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/about/">About Us</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                            
+                                </sl-tree>
+                            
+                        
+                        
+                </div>
+            </nav>
+        </div>
+    </sl-drawer>
+
+    <div class="body__wrapper">
+        <div class="nav__container">
+            <nav>
+                <div class="border-box"></div>
+                <div class="logo">
+                    
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bicycle" viewBox="0 0 16 16">
+  <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5m1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139zM8 9.057 9.598 6.5H6.402zM4.937 9.5a2 2 0 0 0-.487-.877l-.548.877zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53z"/>
+</svg>
+                        </div>
+                    
+                    <div>
+                        
+                            <span class="line-clamp-1">MotorPH</span>
+                        
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="container">
+                        
+                            
+                                <sl-button 
+                                    class="nav_button  current " 
+                                    size="medium" 
+                                    href="/MO-IT110-OOP/"
+                                >
+                                    Documentation
+                                </sl-button>
+                                                    
+                        
+                            
+                                <sl-button 
+                                    class="nav_button" 
+                                    size="medium" 
+                                    href="https://github.com/Morfusee/MO-IT110-OOP"
+                                     target="_blank" 
+                                >
+                                    GitHub
+                                </sl-button>
+                                                    
+                        
+                    </div>
+                </div>
+                <div class="search">
+                    <div>
+                        <sl-button id="search-button" class="search_button">
+                            <sl-icon slot="prefix" name="search"></sl-icon>
+                            Search
+                            <div slot="suffix">
+                                <div class="button__prefix-wrapper">
+                                    <div class="button__prefix-container">
+                                        <sl-icon name="command"></sl-icon>
+                                        <span class="font-w-semibold">K</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </sl-button>
+                    </div>
+                    <div>
+                        <sl-dropdown id="theme-selector" hoist>
+                            <sl-button slot="trigger" class="nav_button">
+                                <sl-icon id="theme-selector-icon" slot="prefix" name="sun"></sl-icon>
+                            </sl-button>
+                            <sl-menu id="theme-selector-menu">
+                                <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
+                                <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
+                                <sl-menu-item type="checkbox" value="system">System</sl-menu-item>
+                            </sl-menu>
+                        </sl-dropdown>
+                    </div>
+                    <div class="menu">
+                        <sl-button id="menu-open-trigger" class="nav_button" outline>
+                            <sl-icon slot="prefix" name="list"></sl-icon>
+                        </sl-button>
+                    </div>
+                </div>
+            </nav>    
+        </div>
+        <div class="content__container">
+            <aside class="tree">
+                <nav id="nav-tree" class="tree">
+                    
+                        
+                            
+                            
+                            
+                                <sl-tree class="tree__with_lines" selection="leaf">
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="ikiMdO8m1IaTHDsayq_oZ" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/">Introduction</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hAHG_3IOf1fV6QIJa9Gzf" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/getting-started/">Getting Started</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="W3_MCwNUFStdgy7Cbti7k" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/">Using the Payroll System</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        
+                                            <sl-tree-item 
+                                                id="TcDZaSlB0Mn6CxI1qoGH5" 
+                                                style="--indent-level: 0"
+                                                expanded
+                                                class="folder"
+                                            >
+                                                <span>System Overview</span>
+                                                
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="SBwvT3kV3mhSazDt094eg" 
+                                            style="--indent-level: 1"
+                                             selected 
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/">System Architecture</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="WwccQZsdntTClpSGKlJbl" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">Technical Diagrams</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="GdcreEJzcRrzsuqHc0j8n" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/testing-and-quality-a/">Testing and Quality Assurance</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                             
+                                            </sl-tree-item>
+                                                                                
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="P-2M5ji1FqqKz4ZwHKbLh" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/faqs/">FAQs</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hxON-Lnd3s7tvbAMaLwXG" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/about/">About Us</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                            
+                                </sl-tree>
+                            
+                        
+                        
+                </nav>
+                <nav id="white-label-container" class="menu">
+                    <a class="white-label" href="https://tiledocs.com" target="_blank">
+                        <div class="card-container">
+                            <div class="icon-section">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="title-section">
+                                <sl-tooltip hoist style="--max-width: 30ch;" placement="top-start" content="This documentation site was created using TileDocs, a fast and user-friendly editor for building and hosting documentation projects.">
+                                    <span>Made with TileDocs</span>
+                                <sl-tooltip>
+                            </div>
+                        </div>
+                    </a>
+                </nav>
+            </aside>
+            
+            <article>
+                <main>
+                    <div class="content">
+                        <h1 id="system-architecture" dir="ltr"><span style="white-space: pre-wrap;">System Architecture</span></h1><p dir="ltr" style="text-align: justify;"><span style="white-space: pre-wrap;">The </span><b><strong class="text-bold" style="white-space: pre-wrap;">Motorph Payroll System</strong></b><span style="white-space: pre-wrap;"> follows a </span><b><strong class="text-bold" style="white-space: pre-wrap;">client-server architecture</strong></b><span style="white-space: pre-wrap;">, where the </span><b><strong class="text-bold" style="white-space: pre-wrap;">frontend (React with TypeScript &amp; Vite)</strong></b><span style="white-space: pre-wrap;"> interacts with the </span><b><strong class="text-bold" style="white-space: pre-wrap;">backend (Spring Boot &amp; Java)</strong></b><span style="white-space: pre-wrap;"> via </span><b><strong class="text-bold" style="white-space: pre-wrap;">RESTful APIs</strong></b><span style="white-space: pre-wrap;">. The backend manages authentication, business logic, and data processing, while the frontend provides an intuitive interface for employees and HR managers.</span></p><hr><h2 id="frontend-structure" dir="ltr"><span style="white-space: pre-wrap;">Frontend Structure</span></h2><p dir="ltr" style="text-align: justify;"><span style="white-space: pre-wrap;">The frontend is built using </span><a href="https://react.dev/" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">React</span></a><span style="white-space: pre-wrap;"> with </span><b><strong class="text-bold" style="white-space: pre-wrap;">TypeScript, </strong></b><a href="https://vite.dev/guide/" target="_blank" rel="noreferrer"><b><strong class="text-bold" style="white-space: pre-wrap;">Vite</strong></b></a><b><strong class="text-bold" style="white-space: pre-wrap;">. </strong></b><span style="white-space: pre-wrap;">This enables a highly reactive user interface that efficiently updates based on state changes, allowing the frontend to fetch, display, and update data seamlessly </span><u><span class="text-underline" style="white-space: pre-wrap;">without requiring full-page reloads.</span></u></p><p dir="ltr"><span style="white-space: pre-wrap;">Most of the app's frontend functionality is under </span><code spellcheck="false" style="white-space: pre-wrap;"><span class="text-code">/frontend/src</span></code><span style="white-space: pre-wrap;">. With that said, all the folders and files listed below are under it.</span></p><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 226px;"><col style="width: 620px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><b><strong style="font-size: var(--sl-font-size-small); color: var(--sl-color-slate-900); white-space: pre-wrap;">Folder</strong></b></p></th><th><p dir="ltr" style="text-align: center;"><b><strong style="font-size: var(--sl-font-size-small); color: var(--sl-color-slate-900); white-space: pre-wrap;">Description</strong></b></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">App.tsx</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Main application component that defines routing.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">components/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Reusable UI components (e.g., menus, modals).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">constants/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Constants for API endpoints, form sections, etc.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">contexts/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">React context for managing application state (e.g., theme).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">controllers/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Functions for interacting with backend services.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">css/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Global stylesheet.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">factories/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Custom component factories</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">hooks/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Custom React hooks (e.g., useAuth, useIsDarkMode).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">layouts/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Layout components (e.g., Sidebar, Layout).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">pages/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">React components for different pages (e.g., Attendance, Employees, Payroll).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">routes/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Route definitions for navigation.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">services/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">API services for making HTTP requests to the backend.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">store/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">State management using zustand.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">types/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">TypeScript type definitions for components and data.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">utils/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Utility functions (e.g., date formatting, permission checking).</span></p></td></tr></tbody></table></div></div><p dir="ltr"><br></p><hr><h2 id="backend-structure" dir="ltr"><span style="white-space: pre-wrap;">Backend Structure</span></h2><p dir="ltr" style="text-align: justify;"><span style="white-space: pre-wrap;">The backend is built using </span><a href="https://spring.io/" target="_blank" rel="noreferrer"><b><strong class="text-bold" style="white-space: pre-wrap;">Java with Spring Boot</strong></b></a><span style="white-space: pre-wrap;">, which provides a robust and scalable framework for developing RESTful APIs. Spring Boot simplifies dependency management, configuration, and security, enabling efficient request handling, database interactions, and business logic execution</span></p><p dir="ltr"><span style="white-space: pre-wrap;">Most of the backend's functionality is under </span><b><code spellcheck="false" style="white-space: pre-wrap;"><strong class="text-bold text-code">/backend/src/main/java/com/oop/motorph</strong></code></b><span style="white-space: pre-wrap;">. All the folders and files listed below are within this directory.</span></p><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 226px;"><col style="width: 620px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><b><strong style="font-size: var(--sl-font-size-small); color: var(--sl-color-slate-900); white-space: pre-wrap;">Folder</strong></b></p></th><th><p dir="ltr" style="text-align: center;"><b><strong style="font-size: var(--sl-font-size-small); color: var(--sl-color-slate-900); white-space: pre-wrap;">Description</strong></b></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">config/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Configuration classes (DatabaseConfig, SecurityConfig).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">controller/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">REST controllers for handling API requests (e.g., EmployeeController, AttendanceController, HRPayrollController).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">dto/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Data Transfer Objects for request and response payloads (e.g., EmployeeDTO, PayrollDTO).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">mapper/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Mappers for converting between entities and DTOs.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">entity/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">JPA entities representing database tables (e.g., Employee, Attendance, Payroll).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">repository/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Spring Data JPA repositories for database interactions (e.g., EmployeeRepository, AttendanceRepository).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">service/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Business logic services (e.g., EmployeeService, PayrollService).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">utils/</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Utility classes and exception handling.</span></p></td></tr></tbody></table></div></div>
+                    </div>
+                </main>
+                <div class="footer">
+                    <div class="content">
+                        <div class="date">
+                            <div>Mar 22, 2025</div>
+                        </div>
+                        
+                            <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/" class="column left-column" title="Using the Payroll System">
+                                <div class="icon">
+                                    <sl-icon name="chevron-left"></sl-icon>
+                                </div>
+                                <div class="label">
+                                    <div class="title">PREVIOUS</div>
+                                    <div class="line-clamp-2">
+                                        Using the Payroll System
+                                    </div>
+                                </div>
+                            </a>
+                        
+                        
+                            <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/" class="column right-column" title="Technical Diagrams">
+                                <div class="label">
+                                    <div class="title">NEXT</div>
+                                    <div class="line-clamp-2">
+                                        Technical Diagrams
+                                    </div>
+                                </div>
+                                <div class="icon">
+                                    <sl-icon name="chevron-right"></sl-icon>
+                                </div>
+                            </a>
+                        
+                    </div>
+                </div>
+            </article>
+            <aside class="toc">
+                <nav class="toc">
+                    
+                    <div class="title">
+                        <sl-icon class="icon" name="list-nested"></sl-icon>
+                        <div>
+                            On this page
+                        </div>
+                    </div>
+                    <div id="toc-list" class="list">
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/#frontend-structure">Frontend Structure</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/#backend-structure">Backend Structure</a>
+                                </div>
+                                
+                        
+                    </div>
+                    
+                </nav>
+            </aside>
+        </div>
+        <footer>
+            <div class="stack__column stack__gap-4 stack__center">
+                
+                <div class="stack__row stack__center">
+                    <span><span>2025 &copy; MotorPH</span></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<sl-dialog id="search-dialog" class="dialog_control dialog__search">
+    <div slot="label">
+        <p>Search</p>
+    </div>
+    <div class="pane stack__column stack__gap-4">
+        <div>
+            <sl-input
+                id="search-input"
+                type="text"
+                size="small"
+                autocomplete="off"
+                autofocus
+                clearable
+                placeholder="Type text you want to search..."
+            >
+            </sl-input>
+        </div>
+        <div id="search-result" class="stack__column stack__gap-4 search-result">
+        </div>
+        <div id="search-footer" class="footer"></div>
+    </div>
+</sl-dialog>
+<script type="module" src="https://morfusee.github.io/MO-IT110-OOP/_lib/index.js" data-shoelace="https://morfusee.github.io/MO-IT110-OOP/_lib"></script>
+<script type="module">
+    import {initPage, initTheme, initSearch, initToc} from 'https://morfusee.github.io/MO-IT110-OOP/_lib/init.js';
+    import {preInitTree} from 'https://morfusee.github.io/MO-IT110-OOP/_lib/pre.js';
+    preInitTree();
+    await initPage();
+    await initTheme('system');
+    await initSearch('https://morfusee.github.io/MO-IT110-OOP', '1742576338798');
+    document.documentElement.style.visibility = 'visible';
+    document.documentElement.style.opacity = '1';
+    initToc();
+</script>
+
+</body>
+</html>

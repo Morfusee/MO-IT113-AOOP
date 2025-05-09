@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>
+        Technical Diagrams - MotorPH
+    </title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Technical Diagrams"/>
+    <link rel="icon" type="image/svg+xml" href="https://morfusee.github.io"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://morfusee.github.io">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://morfusee.github.io">    
+        
+    <meta property="og:image" content="https://morfusee.github.io"/>
+    <meta property="og:url" content="https://morfusee.github.io/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">
+    <meta property="og:title" content="Technical Diagrams - MotorPH" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Technical Diagrams"/>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content=""/>
+    <meta name="twitter:title" content="Technical Diagrams - MotorPH" />
+    <meta name="twitter:description" content="Technical Diagrams" />
+    <meta name="twitter:image" content="https://morfusee.github.io"/>
+
+    <link rel="canonical" href="https://morfusee.github.io/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&subset=latin&display=swap"
+          rel="stylesheet"/>
+    
+    <link rel="preload" href="https://morfusee.github.io/MO-IT110-OOP/_lib/index.css" as="style">
+    <link rel="stylesheet" href="https://morfusee.github.io/MO-IT110-OOP/_lib/index.css"/>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+        html {
+            scroll-padding-top: 120px;
+            visibility: hidden;
+            opacity: 0;
+        }
+    </style>
+    <script>
+        function getInitialTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        const theme = getInitialTheme();
+        document.documentElement.classList.add('theme-' + theme);
+    </script>
+    
+</head>
+<body>
+
+<div id="root">
+    <sl-drawer id="menu-drawer" label="Documentation" class="drawer__control" placement="top">
+        <div class="body__drawer">
+            <div class="items">
+                
+                    
+                        <sl-button 
+                            class="nav_button  current " 
+                            size="medium" 
+                            href="/MO-IT110-OOP/"
+                        >
+                            Documentation
+                        </sl-button>
+                         
+                
+                    
+                        <sl-button 
+                            class="nav_button"
+                            size="medium" 
+                            href="https://github.com/Morfusee/MO-IT110-OOP"
+                             target="_blank" 
+                        >
+                            GitHub
+                        </sl-button>
+                         
+                
+            </div>
+            <sl-divider class="divider__drawer"></sl-divider>
+            <nav class="tree">
+                <div class="scroll-panel">
+                    
+                        
+                            
+                            
+                            
+                                <sl-tree class="tree__with_lines" selection="leaf">
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="ikiMdO8m1IaTHDsayq_oZ" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/">Introduction</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hAHG_3IOf1fV6QIJa9Gzf" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/getting-started/">Getting Started</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="W3_MCwNUFStdgy7Cbti7k" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/">Using the Payroll System</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        
+                                            <sl-tree-item 
+                                                id="TcDZaSlB0Mn6CxI1qoGH5" 
+                                                style="--indent-level: 0"
+                                                class="folder"
+                                            >
+                                                <span>System Overview</span>
+                                                
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="SBwvT3kV3mhSazDt094eg" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/">System Architecture</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="WwccQZsdntTClpSGKlJbl" 
+                                            style="--indent-level: 1"
+                                             selected 
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">Technical Diagrams</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="GdcreEJzcRrzsuqHc0j8n" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/testing-and-quality-a/">Testing and Quality Assurance</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                             
+                                            </sl-tree-item>
+                                                                                
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="P-2M5ji1FqqKz4ZwHKbLh" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/faqs/">FAQs</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hxON-Lnd3s7tvbAMaLwXG" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/about/">About Us</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                            
+                                </sl-tree>
+                            
+                        
+                        
+                </div>
+            </nav>
+        </div>
+    </sl-drawer>
+
+    <div class="body__wrapper">
+        <div class="nav__container">
+            <nav>
+                <div class="border-box"></div>
+                <div class="logo">
+                    
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bicycle" viewBox="0 0 16 16">
+  <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5m1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139zM8 9.057 9.598 6.5H6.402zM4.937 9.5a2 2 0 0 0-.487-.877l-.548.877zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53z"/>
+</svg>
+                        </div>
+                    
+                    <div>
+                        
+                            <span class="line-clamp-1">MotorPH</span>
+                        
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="container">
+                        
+                            
+                                <sl-button 
+                                    class="nav_button  current " 
+                                    size="medium" 
+                                    href="/MO-IT110-OOP/"
+                                >
+                                    Documentation
+                                </sl-button>
+                                                    
+                        
+                            
+                                <sl-button 
+                                    class="nav_button" 
+                                    size="medium" 
+                                    href="https://github.com/Morfusee/MO-IT110-OOP"
+                                     target="_blank" 
+                                >
+                                    GitHub
+                                </sl-button>
+                                                    
+                        
+                    </div>
+                </div>
+                <div class="search">
+                    <div>
+                        <sl-button id="search-button" class="search_button">
+                            <sl-icon slot="prefix" name="search"></sl-icon>
+                            Search
+                            <div slot="suffix">
+                                <div class="button__prefix-wrapper">
+                                    <div class="button__prefix-container">
+                                        <sl-icon name="command"></sl-icon>
+                                        <span class="font-w-semibold">K</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </sl-button>
+                    </div>
+                    <div>
+                        <sl-dropdown id="theme-selector" hoist>
+                            <sl-button slot="trigger" class="nav_button">
+                                <sl-icon id="theme-selector-icon" slot="prefix" name="sun"></sl-icon>
+                            </sl-button>
+                            <sl-menu id="theme-selector-menu">
+                                <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
+                                <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
+                                <sl-menu-item type="checkbox" value="system">System</sl-menu-item>
+                            </sl-menu>
+                        </sl-dropdown>
+                    </div>
+                    <div class="menu">
+                        <sl-button id="menu-open-trigger" class="nav_button" outline>
+                            <sl-icon slot="prefix" name="list"></sl-icon>
+                        </sl-button>
+                    </div>
+                </div>
+            </nav>    
+        </div>
+        <div class="content__container">
+            <aside class="tree">
+                <nav id="nav-tree" class="tree">
+                    
+                        
+                            
+                            
+                            
+                                <sl-tree class="tree__with_lines" selection="leaf">
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="ikiMdO8m1IaTHDsayq_oZ" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/">Introduction</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hAHG_3IOf1fV6QIJa9Gzf" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/getting-started/">Getting Started</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="W3_MCwNUFStdgy7Cbti7k" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/">Using the Payroll System</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        
+                                            <sl-tree-item 
+                                                id="TcDZaSlB0Mn6CxI1qoGH5" 
+                                                style="--indent-level: 0"
+                                                expanded
+                                                class="folder"
+                                            >
+                                                <span>System Overview</span>
+                                                
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="SBwvT3kV3mhSazDt094eg" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/">System Architecture</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="WwccQZsdntTClpSGKlJbl" 
+                                            style="--indent-level: 1"
+                                             selected 
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">Technical Diagrams</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="GdcreEJzcRrzsuqHc0j8n" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/testing-and-quality-a/">Testing and Quality Assurance</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                             
+                                            </sl-tree-item>
+                                                                                
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="P-2M5ji1FqqKz4ZwHKbLh" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/faqs/">FAQs</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hxON-Lnd3s7tvbAMaLwXG" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/about/">About Us</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                            
+                                </sl-tree>
+                            
+                        
+                        
+                </nav>
+                <nav id="white-label-container" class="menu">
+                    <a class="white-label" href="https://tiledocs.com" target="_blank">
+                        <div class="card-container">
+                            <div class="icon-section">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="title-section">
+                                <sl-tooltip hoist style="--max-width: 30ch;" placement="top-start" content="This documentation site was created using TileDocs, a fast and user-friendly editor for building and hosting documentation projects.">
+                                    <span>Made with TileDocs</span>
+                                <sl-tooltip>
+                            </div>
+                        </div>
+                    </a>
+                </nav>
+            </aside>
+            
+            <article>
+                <main>
+                    <div class="content">
+                        <h1 id="technical-diagrams" dir="ltr"><span style="white-space: pre-wrap;">Technical Diagrams</span></h1><hr><h2 id="use-case-diagram" dir="ltr"><span style="white-space: pre-wrap;">Use Case Diagram</span></h2><p dir="ltr"><span style="white-space: pre-wrap;">The diagram below represents the interactions between system actors and the </span><a href="/MO-IT110-OOP/documentation/using-the-payroll-system/" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">system's features</span></a><span style="white-space: pre-wrap;">. </span></p><div class="image-box-wrapper centered"><div class="image-box" style="width: 100%;"><img src="/MO-IT110-OOP/_images/Use Case Diagram (2).png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><p dir="ltr"><span style="white-space: pre-wrap;">To have an in-depth view of this diagram, head over </span><a href="https://docs.google.com/document/d/1aUrxe2ZfLf8DL6grzJIKTECpSMi2UnNerpTK0SFh8V4/edit?usp=sharing" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">here</span></a><span style="white-space: pre-wrap;">.</span></p><h3 id="system-actors" dir="ltr"><span style="white-space: pre-wrap;">System Actors</span></h3><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 191px;"><col style="width: 656px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Actor</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">HR Manager</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Manages employees, attendance, payroll, leave approvals</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">Employee</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Views attendance, requests leave, checks payroll</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">Authentication Service</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">This is just basically a part of the backend that is acting on the log in action of the Employee and HR Manager.</span></p></td></tr></tbody></table></div></div><h2 id="class-diagram" dir="ltr"><span style="white-space: pre-wrap;">Class Diagram</span></h2><p dir="ltr"><span style="white-space: pre-wrap;">The class diagram shown below depicts the relationships between entities in the backend. It also provided developers with a high-level overview of the </span><a href="/MO-IT110-OOP/documentation/system-overview/system-ar/" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">backend's structure</span></a><span style="white-space: pre-wrap;">.</span></p><div class="image-box-wrapper centered"><div class="image-box" style="width: 100%;"><img src="/MO-IT110-OOP/_images/MO-IT110_OOP_Class-Diagram.drawio (1).png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><p dir="ltr"><span style="white-space: pre-wrap;">To have a better look of the diagram, check out the </span><a href="https://docs.google.com/spreadsheets/d/1sTFWNN512xvhlGqbbvHAqM4e54gXWHtx03Tdm3f4C3U/edit?usp=sharing" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">documentation</span></a><span style="white-space: pre-wrap;"> for it.</span></p><h3 id="key-classes" dir="ltr"><span style="white-space: pre-wrap;">Key Classes</span></h3><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 191px;"><col style="width: 655px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Key Classes</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">Employee</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Stores employee details.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">Attendance</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Stores check-in/out records.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">Payroll</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Contains salary and deduction details.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">LeaveRequest</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Tracks employee leave requests</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">User</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Manages authentication credentials</span></p></td></tr></tbody></table></div></div><h2 id="database-schema" dir="ltr"><span style="white-space: pre-wrap;">Database Schema</span></h2><p dir="ltr"><span style="white-space: pre-wrap;">The database is designed and implemented in </span><a href="https://www.h2database.com" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">H2</span></a><span style="white-space: pre-wrap;"> with the following tables:</span></p><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>1</span></div><div class="step-panel-content"><h3 id="users" dir="ltr"><span style="white-space: pre-wrap;">Users</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 153px;"><col style="width: 150px;"><col style="width: 502px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Column Name</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Data Type</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">id</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Unique identifier for the user account.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">username</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(100)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Username for logging into the system.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">password</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">CHAR(60)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Hashed password for the user account.</span></p></td></tr></tbody></table></div></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>2</span></div><div class="step-panel-content"><h3 id="governmentidentification" dir="ltr"><span style="white-space: pre-wrap;">GovernmentIdentification</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 153px;"><col style="width: 150px;"><col style="width: 500px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Column Name</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Data Type</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">id</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Unique identifier for the government identification record.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">Philhealth</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">BIGINT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">PhilHealth ID of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">TIN</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(20)</span><span style="white-space: pre-wrap;">	</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Tax Identification Number of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">Pagibig</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">BIGINT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Pag-IBIG (Home Development Mutual Fund) ID of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">SSS</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(20)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Social Security System ID of the employee.</span></p></td></tr></tbody></table></div></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>3</span></div><div class="step-panel-content"><h3 id="compensation" dir="ltr"><span style="white-space: pre-wrap;">Compensation</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 153px;"><col style="width: 150px;"><col style="width: 501px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Column Name</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Data Type</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">id</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Unique identifier for the compensation record.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">basic_salary</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DECIMAL(10,2)</span><span style="white-space: pre-wrap;">	</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Basic salary of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">rice_subsidy</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DECIMAL(10,2)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Rice subsidy amount for the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">phone_</span></p><p dir="ltr"><span style="white-space: pre-wrap;">allowance</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DECIMAL(10,2)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Phone allowance amount for the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">clothing_</span></p><p dir="ltr"><span style="white-space: pre-wrap;">allowance</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DECIMAL(10,2)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Clothing allowance amount for the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">gross_semi_</span></p><p dir="ltr"><span style="white-space: pre-wrap;">monthly_rate</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DECIMAL(10,2)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Gross semi-monthly rate of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">hourly_rate</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DECIMAL(10,2)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Hourly rate of the employee.</span></p></td></tr></tbody></table></div></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>4</span></div><div class="step-panel-content"><h3 id="employee" dir="ltr"><span style="white-space: pre-wrap;">Employee</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 153px;"><col style="width: 150px;"><col style="width: 502px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Column Name</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Data Type</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">employeeNum</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Unique identifier for the employee (auto-incremented starting from 10001).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">last_name</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(100)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Last name of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">first_name</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(100)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">First name of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">birthday</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DATE</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Birth date of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">address</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">TEXT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Address of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">phone_</span></p><p dir="ltr"><span style="white-space: pre-wrap;">number</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(15)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Phone number of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">status</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(50)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Employment status of the employee (e.g., Regular, Probationary).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">position</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(100)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Job title of the employee.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">immediate_</span></p><p dir="ltr"><span style="white-space: pre-wrap;">supervisor</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(255)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Name of the employee's immediate supervisor.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">government</span></p><p dir="ltr"><span style="white-space: pre-wrap;">IdentificationId</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Foreign key referencing GovernmentIdentification table (ON DELETE CASCADE).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">compensationId</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Foreign key referencing Compensation table (ON DELETE CASCADE).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">userId</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Foreign key referencing Users table (ON DELETE CASCADE).</span></p></td></tr></tbody></table></div></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>5</span></div><div class="step-panel-content"><h3 id="attendance" dir="ltr"><span style="white-space: pre-wrap;">Attendance</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 153px;"><col style="width: 150px;"><col style="width: 504px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Column Name</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Data Type</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">id</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Unique identifier for the attendance record.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">employeeNum</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Employee number associated with the attendance record.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">date</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">DATE</span><span style="white-space: pre-wrap;">	</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Date of the attendance record.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">time_in</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">TIME</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Time the employee clocked in.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">time_out</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">TIME</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Time the employee clocked out.</span></p></td></tr></tbody></table></div></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>6</span></div><div class="step-panel-content"><h3 id="leave-request" dir="ltr"><span style="white-space: pre-wrap;">Leave Request</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><div class="table-box-wrapper"><div class="table-wrapper"><table data-lexical-row-striping="true"><colgroup><col style="width: 153px;"><col style="width: 150px;"><col style="width: 504px;"></colgroup><tbody><tr><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Column Name</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Data Type</span></p></th><th><p dir="ltr" style="text-align: center;"><span style="white-space: pre-wrap;">Description</span></p></th></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">id</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Unique identifier for the leave request.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">employeeNum</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">INT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Employee number associated with the attendance record.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">startDate</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">TIMESTAMP</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Start date of the leave.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">endDate</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">TIMESTAMP</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">End date of the leave.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">notes</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">TEXT</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Any notes or description for the leave request.</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">leave_type</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(50)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Type of leave requested (e.g., Sick Leave, Vacation Leave).</span></p></td></tr><tr><td><p dir="ltr"><span style="white-space: pre-wrap;">status</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">VARCHAR(50)</span></p></td><td><p dir="ltr"><span style="white-space: pre-wrap;">Status of the leave request (e.g., Pending, Approved, Denied).</span></p></td></tr></tbody></table></div></div></div></div></div>
+                    </div>
+                </main>
+                <div class="footer">
+                    <div class="content">
+                        <div class="date">
+                            <div>Mar 22, 2025</div>
+                        </div>
+                        
+                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/" class="column left-column" title="System Architecture">
+                                <div class="icon">
+                                    <sl-icon name="chevron-left"></sl-icon>
+                                </div>
+                                <div class="label">
+                                    <div class="title">PREVIOUS</div>
+                                    <div class="line-clamp-2">
+                                        System Architecture
+                                    </div>
+                                </div>
+                            </a>
+                        
+                        
+                            <a href="/MO-IT110-OOP/documentation/system-overview/testing-and-quality-a/" class="column right-column" title="Testing and Quality Assurance">
+                                <div class="label">
+                                    <div class="title">NEXT</div>
+                                    <div class="line-clamp-2">
+                                        Testing and Quality Assurance
+                                    </div>
+                                </div>
+                                <div class="icon">
+                                    <sl-icon name="chevron-right"></sl-icon>
+                                </div>
+                            </a>
+                        
+                    </div>
+                </div>
+            </article>
+            <aside class="toc">
+                <nav class="toc">
+                    
+                    <div class="title">
+                        <sl-icon class="icon" name="list-nested"></sl-icon>
+                        <div>
+                            On this page
+                        </div>
+                    </div>
+                    <div id="toc-list" class="list">
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#use-case-diagram">Use Case Diagram</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#system-actors">System Actors</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#class-diagram">Class Diagram</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#key-classes">Key Classes</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#database-schema">Database Schema</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#users">Users</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#governmentidentification">GovernmentIdentification</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#compensation">Compensation</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#employee">Employee</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#attendance">Attendance</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/#leave-request">Leave Request</a>
+                                </div>
+                                
+                        
+                    </div>
+                    
+                </nav>
+            </aside>
+        </div>
+        <footer>
+            <div class="stack__column stack__gap-4 stack__center">
+                
+                <div class="stack__row stack__center">
+                    <span><span>2025 &copy; MotorPH</span></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<sl-dialog id="search-dialog" class="dialog_control dialog__search">
+    <div slot="label">
+        <p>Search</p>
+    </div>
+    <div class="pane stack__column stack__gap-4">
+        <div>
+            <sl-input
+                id="search-input"
+                type="text"
+                size="small"
+                autocomplete="off"
+                autofocus
+                clearable
+                placeholder="Type text you want to search..."
+            >
+            </sl-input>
+        </div>
+        <div id="search-result" class="stack__column stack__gap-4 search-result">
+        </div>
+        <div id="search-footer" class="footer"></div>
+    </div>
+</sl-dialog>
+<script type="module" src="https://morfusee.github.io/MO-IT110-OOP/_lib/index.js" data-shoelace="https://morfusee.github.io/MO-IT110-OOP/_lib"></script>
+<script type="module">
+    import {initPage, initTheme, initSearch, initToc} from 'https://morfusee.github.io/MO-IT110-OOP/_lib/init.js';
+    import {preInitTree} from 'https://morfusee.github.io/MO-IT110-OOP/_lib/pre.js';
+    preInitTree();
+    await initPage();
+    await initTheme('system');
+    await initSearch('https://morfusee.github.io/MO-IT110-OOP', '1742576338798');
+    document.documentElement.style.visibility = 'visible';
+    document.documentElement.style.opacity = '1';
+    initToc();
+</script>
+
+</body>
+</html>

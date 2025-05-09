@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>
+        Using the Payroll System - MotorPH
+    </title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Using the Payroll System"/>
+    <link rel="icon" type="image/svg+xml" href="https://morfusee.github.io"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://morfusee.github.io">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://morfusee.github.io">    
+        
+    <meta property="og:image" content="https://morfusee.github.io"/>
+    <meta property="og:url" content="https://morfusee.github.io/MO-IT110-OOP/documentation/using-the-payroll-system/">
+    <meta property="og:title" content="Using the Payroll System - MotorPH" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Using the Payroll System"/>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content=""/>
+    <meta name="twitter:title" content="Using the Payroll System - MotorPH" />
+    <meta name="twitter:description" content="Using the Payroll System" />
+    <meta name="twitter:image" content="https://morfusee.github.io"/>
+
+    <link rel="canonical" href="https://morfusee.github.io/MO-IT110-OOP/documentation/using-the-payroll-system/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&subset=latin&display=swap"
+          rel="stylesheet"/>
+    
+    <link rel="preload" href="https://morfusee.github.io/MO-IT110-OOP/_lib/index.css" as="style">
+    <link rel="stylesheet" href="https://morfusee.github.io/MO-IT110-OOP/_lib/index.css"/>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+        html {
+            scroll-padding-top: 120px;
+            visibility: hidden;
+            opacity: 0;
+        }
+    </style>
+    <script>
+        function getInitialTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        const theme = getInitialTheme();
+        document.documentElement.classList.add('theme-' + theme);
+    </script>
+    
+</head>
+<body>
+
+<div id="root">
+    <sl-drawer id="menu-drawer" label="Documentation" class="drawer__control" placement="top">
+        <div class="body__drawer">
+            <div class="items">
+                
+                    
+                        <sl-button 
+                            class="nav_button  current " 
+                            size="medium" 
+                            href="/MO-IT110-OOP/"
+                        >
+                            Documentation
+                        </sl-button>
+                         
+                
+                    
+                        <sl-button 
+                            class="nav_button"
+                            size="medium" 
+                            href="https://github.com/Morfusee/MO-IT110-OOP"
+                             target="_blank" 
+                        >
+                            GitHub
+                        </sl-button>
+                         
+                
+            </div>
+            <sl-divider class="divider__drawer"></sl-divider>
+            <nav class="tree">
+                <div class="scroll-panel">
+                    
+                        
+                            
+                            
+                            
+                                <sl-tree class="tree__with_lines" selection="leaf">
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="ikiMdO8m1IaTHDsayq_oZ" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/">Introduction</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hAHG_3IOf1fV6QIJa9Gzf" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/getting-started/">Getting Started</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="W3_MCwNUFStdgy7Cbti7k" 
+                                            style="--indent-level: 0"
+                                             selected 
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/">Using the Payroll System</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        
+                                            <sl-tree-item 
+                                                id="TcDZaSlB0Mn6CxI1qoGH5" 
+                                                style="--indent-level: 0"
+                                                class="folder"
+                                            >
+                                                <span>System Overview</span>
+                                                
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="SBwvT3kV3mhSazDt094eg" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/">System Architecture</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="WwccQZsdntTClpSGKlJbl" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">Technical Diagrams</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="GdcreEJzcRrzsuqHc0j8n" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/testing-and-quality-a/">Testing and Quality Assurance</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                             
+                                            </sl-tree-item>
+                                                                                
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="P-2M5ji1FqqKz4ZwHKbLh" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/faqs/">FAQs</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hxON-Lnd3s7tvbAMaLwXG" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/about/">About Us</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                            
+                                </sl-tree>
+                            
+                        
+                        
+                </div>
+            </nav>
+        </div>
+    </sl-drawer>
+
+    <div class="body__wrapper">
+        <div class="nav__container">
+            <nav>
+                <div class="border-box"></div>
+                <div class="logo">
+                    
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bicycle" viewBox="0 0 16 16">
+  <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5m1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139zM8 9.057 9.598 6.5H6.402zM4.937 9.5a2 2 0 0 0-.487-.877l-.548.877zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53z"/>
+</svg>
+                        </div>
+                    
+                    <div>
+                        
+                            <span class="line-clamp-1">MotorPH</span>
+                        
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="container">
+                        
+                            
+                                <sl-button 
+                                    class="nav_button  current " 
+                                    size="medium" 
+                                    href="/MO-IT110-OOP/"
+                                >
+                                    Documentation
+                                </sl-button>
+                                                    
+                        
+                            
+                                <sl-button 
+                                    class="nav_button" 
+                                    size="medium" 
+                                    href="https://github.com/Morfusee/MO-IT110-OOP"
+                                     target="_blank" 
+                                >
+                                    GitHub
+                                </sl-button>
+                                                    
+                        
+                    </div>
+                </div>
+                <div class="search">
+                    <div>
+                        <sl-button id="search-button" class="search_button">
+                            <sl-icon slot="prefix" name="search"></sl-icon>
+                            Search
+                            <div slot="suffix">
+                                <div class="button__prefix-wrapper">
+                                    <div class="button__prefix-container">
+                                        <sl-icon name="command"></sl-icon>
+                                        <span class="font-w-semibold">K</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </sl-button>
+                    </div>
+                    <div>
+                        <sl-dropdown id="theme-selector" hoist>
+                            <sl-button slot="trigger" class="nav_button">
+                                <sl-icon id="theme-selector-icon" slot="prefix" name="sun"></sl-icon>
+                            </sl-button>
+                            <sl-menu id="theme-selector-menu">
+                                <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
+                                <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
+                                <sl-menu-item type="checkbox" value="system">System</sl-menu-item>
+                            </sl-menu>
+                        </sl-dropdown>
+                    </div>
+                    <div class="menu">
+                        <sl-button id="menu-open-trigger" class="nav_button" outline>
+                            <sl-icon slot="prefix" name="list"></sl-icon>
+                        </sl-button>
+                    </div>
+                </div>
+            </nav>    
+        </div>
+        <div class="content__container">
+            <aside class="tree">
+                <nav id="nav-tree" class="tree">
+                    
+                        
+                            
+                            
+                            
+                                <sl-tree class="tree__with_lines" selection="leaf">
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="ikiMdO8m1IaTHDsayq_oZ" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/">Introduction</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hAHG_3IOf1fV6QIJa9Gzf" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/getting-started/">Getting Started</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="W3_MCwNUFStdgy7Cbti7k" 
+                                            style="--indent-level: 0"
+                                             selected 
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/">Using the Payroll System</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        
+                                            <sl-tree-item 
+                                                id="TcDZaSlB0Mn6CxI1qoGH5" 
+                                                style="--indent-level: 0"
+                                                expanded
+                                                class="folder"
+                                            >
+                                                <span>System Overview</span>
+                                                
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="SBwvT3kV3mhSazDt094eg" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/">System Architecture</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="WwccQZsdntTClpSGKlJbl" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/technical-diagrams/">Technical Diagrams</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="GdcreEJzcRrzsuqHc0j8n" 
+                                            style="--indent-level: 1"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/system-overview/testing-and-quality-a/">Testing and Quality Assurance</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                             
+                                            </sl-tree-item>
+                                                                                
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="P-2M5ji1FqqKz4ZwHKbLh" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/faqs/">FAQs</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                                    
+                                        <sl-tree-item 
+                                            id="hxON-Lnd3s7tvbAMaLwXG" 
+                                            style="--indent-level: 0"
+                                            
+                                            class="leaf"
+                                        >
+                                            <a href="/MO-IT110-OOP/documentation/about/">About Us</a>
+                                        </sl-tree-item>                                        
+                                    
+                                
+                            
+                                </sl-tree>
+                            
+                        
+                        
+                </nav>
+                <nav id="white-label-container" class="menu">
+                    <a class="white-label" href="https://tiledocs.com" target="_blank">
+                        <div class="card-container">
+                            <div class="icon-section">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="title-section">
+                                <sl-tooltip hoist style="--max-width: 30ch;" placement="top-start" content="This documentation site was created using TileDocs, a fast and user-friendly editor for building and hosting documentation projects.">
+                                    <span>Made with TileDocs</span>
+                                <sl-tooltip>
+                            </div>
+                        </div>
+                    </a>
+                </nav>
+            </aside>
+            
+            <article>
+                <main>
+                    <div class="content">
+                        <h1 id="using-the-payroll-system" dir="ltr"><span style="white-space: pre-wrap;">Using the Payroll System</span></h1><hr><h2 id="logging-in" dir="ltr"><span style="white-space: pre-wrap;">Logging In</span></h2><ol><li value="1"><span style="white-space: pre-wrap;">Head over to </span><a href="http://localhost:5173/" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">http://localhost:5173/</span></a><span style="white-space: pre-wrap;">.</span></li><li value="2"><span style="white-space: pre-wrap;">Enter your username and password on the login page.</span></li><li value="3"><span style="white-space: pre-wrap;">Click the </span><b><strong class="text-bold" style="white-space: pre-wrap;">Login</strong></b><span style="white-space: pre-wrap;"> button.</span></li><li value="4"><span style="white-space: pre-wrap;">Upon successful login, you will be redirected to the </span><b><strong class="text-bold" style="white-space: pre-wrap;">Attendance </strong></b><span style="white-space: pre-wrap;">or </span><b><strong class="text-bold" style="white-space: pre-wrap;">Employee </strong></b><span style="white-space: pre-wrap;">page.</span></li></ol><div class="callout-box-wrapper"><div class="callout-box" style="background-color: var(--sl-color-slate-50); border: 1px solid var(--sl-color-slate-200);"><div class="callout-box-icon"><sl-icon name="exclamation-circle" style="color: var(--sl-color-slate-400);"></sl-icon></div><div class="callout-box-content" style="color: var(--sl-color-slate-600);"><p dir="ltr"><b><strong style="white-space: pre-wrap;">Note</strong></b></p><p dir="ltr"><span style="white-space: pre-wrap;">Initially, the HR Manager's credentials will be provided automatically. You can also </span><a href="/MO-IT110-OOP/documentation/faqs/" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">log in as an employee</span></a><span style="white-space: pre-wrap;">.</span></p></div></div></div><hr><h2 id="attendance-management" dir="ltr"><span style="white-space: pre-wrap;">Attendance Management</span></h2><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>1</span></div><div class="step-panel-content"><h3 id="view-attendance" dir="ltr"><span style="font-weight: 600; white-space: pre-wrap;">View Attendance</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p><span style="white-space: pre-wrap;">On the </span><b><strong style="white-space: pre-wrap;">Attendance</strong></b><span style="white-space: pre-wrap;"> page, both HR Managers and Employees can view attendance records and access attendance analytics.</span></p><div class="tabs-group-wrapper"><sl-tab-group><sl-tab slot="nav" panel="panel_0">HR Manager</sl-tab><sl-tab-panel name="panel_0"><h4 id="viewing-own-attendance" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Viewing own attendance</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Navigate to the </span><b><strong style="white-space: pre-wrap;">Attendance</strong></b><span style="white-space: pre-wrap;"> page.</span></li><li value="2"><span style="white-space: pre-wrap;">Select the </span><b><strong style="white-space: pre-wrap;">month and year</strong></b><span style="white-space: pre-wrap;"> from the dropdown.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 080416.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="3"><li value="3"><span style="white-space: pre-wrap;">If attendance data exists for the selected period, it will be displayed in a table.</span></li></ol><h4 id="viewing-another-employee's-attendance" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Viewing another employee’s attendance</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Navigate to the </span><b><strong style="white-space: pre-wrap;">Attendance</strong></b><span style="white-space: pre-wrap;"> page.</span></li><li value="2"><span style="white-space: pre-wrap;">Use the </span><b><strong style="white-space: pre-wrap;">employee selection combobox</strong></b><span style="white-space: pre-wrap;"> beside the </span><b><strong style="white-space: pre-wrap;">month and year </strong></b><span style="white-space: pre-wrap;">dropdown to choose an employee.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 081929.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="3"><li value="3"><span style="white-space: pre-wrap;">Select the </span><b><strong style="white-space: pre-wrap;">month and year</strong></b><span style="white-space: pre-wrap;"> from the dropdown.</span></li><li value="4"><span style="white-space: pre-wrap;">The selected employee’s attendance data will be displayed in a table.</span></li></ol></sl-tab-panel><sl-tab slot="nav" panel="panel_1">Employees</sl-tab><sl-tab-panel name="panel_1"><h4 id="viewing-own-attendance" dir="ltr"><b><strong style="white-space: pre-wrap;">Viewing Own Attendance</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Navigate to the </span><b><strong style="white-space: pre-wrap;">Attendance</strong></b><span style="white-space: pre-wrap;"> page.</span></li><li value="2"><span style="white-space: pre-wrap;">Select the </span><b><strong style="white-space: pre-wrap;">month and year</strong></b><span style="white-space: pre-wrap;"> from the dropdown.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 080416.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="3"><li value="3"><span style="white-space: pre-wrap;">If attendance data exists for the selected period, it will be displayed in a table.</span></li></ol></sl-tab-panel></sl-tab-group></div></div></div></div><p dir="ltr"><br></p><hr><h2 id="employee-management" dir="ltr"><span style="white-space: pre-wrap;">Employee Management</span></h2><p dir="ltr"><b><strong class="text-bold" style="white-space: pre-wrap;">Important:</strong></b><span style="white-space: pre-wrap;"> This feature set is </span><b><strong class="text-bold" style="white-space: pre-wrap;">only accessible </strong></b><span style="white-space: pre-wrap;">by the </span><u><span class="text-underline" style="white-space: pre-wrap;">HR Manager</span></u><b><strong class="text-bold" style="white-space: pre-wrap;">.</strong></b></p><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>1</span></div><div class="step-panel-content"><h3 id="view-employee-list" dir="ltr"><span style="white-space: pre-wrap;">View Employee List</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p dir="ltr"><span style="white-space: pre-wrap;">To view the employees of MotorPH, the HR Manager can simply head over to the </span><b><strong style="white-space: pre-wrap;">Employee </strong></b><span style="white-space: pre-wrap;">page.</span></p></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>2</span></div><div class="step-panel-content"><h3 id="search-employees" dir="ltr"><span style="white-space: pre-wrap;">Search Employees</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p dir="ltr"><span style="white-space: pre-wrap;">The HR Manager can also search for an employee using the search bar at the top of the page.</span></p><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 082825.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><div class="callout-box-wrapper"><div class="callout-box" style="background-color: var(--sl-color-slate-50); border: 1px solid var(--sl-color-slate-200);"><div class="callout-box-icon"><sl-icon name="exclamation-circle" style="color: var(--sl-color-slate-400);"></sl-icon></div><div class="callout-box-content" style="color: var(--sl-color-slate-600);"><p dir="ltr"><b><strong style="white-space: pre-wrap;">Note</strong></b></p><p><span style="white-space: pre-wrap;">If there are no employees found, the table will just return an error message.</span></p></div></div></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>3</span></div><div class="step-panel-content"><h3 id="create-employees" dir="ltr"><span style="white-space: pre-wrap;">Create Employees</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p dir="ltr"><span style="white-space: pre-wrap;">To create an employee on this page, the HR Manager must:</span></p><ol><li value="1"><span style="white-space: pre-wrap;">Click the </span><b><strong style="white-space: pre-wrap;">Create</strong></b><span style="white-space: pre-wrap;"> button placed on the top right of the table.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 083325.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="2"><li value="2"><span style="white-space: pre-wrap;">Fill out all the necessary fields.</span></li><li value="3"><span style="white-space: pre-wrap;">Finally, click the </span><b><strong style="white-space: pre-wrap;">Create Employee</strong></b><span style="white-space: pre-wrap;"> button.</span></li><li value="4"><span style="white-space: pre-wrap;">If successful, the created employee should appear at the bottom of the list.</span></li></ol><div class="callout-box-wrapper"><div class="callout-box" style="background-color: var(--sl-color-slate-50); border: 1px solid var(--sl-color-slate-200);"><div class="callout-box-icon"><sl-icon name="exclamation-circle" style="color: var(--sl-color-slate-400);"></sl-icon></div><div class="callout-box-content" style="color: var(--sl-color-slate-600);"><p><b><strong style="white-space: pre-wrap;">Note</strong></b></p><p dir="ltr"><span style="white-space: pre-wrap;">Passwords are auto-generated in the backend. Learn more </span><a href="/MO-IT110-OOP/documentation/faqs/" target="_blank" rel="noreferrer"><span style="white-space: pre-wrap;">here</span></a><span style="white-space: pre-wrap;">.</span></p></div></div></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>4</span></div><div class="step-panel-content"><h3 id="delete-employees" dir="ltr"><span style="white-space: pre-wrap;">Delete Employees</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><ol><li value="1"><span style="white-space: pre-wrap;">Click the </span><b><strong style="white-space: pre-wrap;">three-dot icon</strong></b><span style="white-space: pre-wrap;"> at the end of the row for the employee you want to delete.</span></li><li value="2"><span style="white-space: pre-wrap;">In the dropdown menu, click </span><b><strong style="white-space: pre-wrap;">Delete</strong></b><span style="white-space: pre-wrap;">.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 085302.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="3"><li value="3"><span style="white-space: pre-wrap;">Confirm the action by clicking </span><b><strong style="white-space: pre-wrap;">Delete </strong></b><span style="white-space: pre-wrap;">in the modal prompt.</span></li></ol></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>5</span></div><div class="step-panel-content"><h3 id="edit-employees" dir="ltr"><span style="white-space: pre-wrap;">Edit Employees</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p><span style="white-space: pre-wrap;">To edit an employee on this page, the HR Manager must:</span></p><ol><li value="1"><span style="white-space: pre-wrap;">Similar to deleting an employee, click the </span><b><strong style="white-space: pre-wrap;">three-dot icon</strong></b><span style="white-space: pre-wrap;"> at the end of the row for the employee you want to edit.</span></li><li value="2"><span style="white-space: pre-wrap;">In the dropdown menu, click </span><b><strong style="white-space: pre-wrap;">Edit</strong></b><span style="white-space: pre-wrap;">.</span></li><li value="3"><span style="white-space: pre-wrap;">In the </span><b><strong style="white-space: pre-wrap;">Edit Employee</strong></b><span style="white-space: pre-wrap;"> modal, update the necessary details.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 085604.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="4"><li value="4"><span style="white-space: pre-wrap;">Click the </span><b><strong style="white-space: pre-wrap;">Edit Employee</strong></b><span style="white-space: pre-wrap;"> button once done.</span></li></ol><div class="callout-box-wrapper"><div class="callout-box" style="background-color: var(--sl-color-amber-50); border: 1px solid var(--sl-color-amber-200);"><div class="callout-box-icon"><sl-icon name="exclamation-triangle" style="color: var(--sl-color-amber-400);"></sl-icon></div><div class="callout-box-content" style="color: var(--sl-color-amber-600);"><p dir="ltr"><b><strong style="white-space: pre-wrap;">Warning</strong></b></p><p dir="ltr"><span style="white-space: pre-wrap;">Leaving fields empty will prevent the employee from being edited.</span></p></div></div></div></div></div></div><p dir="ltr"><br></p><hr><h2 id="payroll-management" dir="ltr"><span style="white-space: pre-wrap;">Payroll Management</span></h2><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>1</span></div><div class="step-panel-content"><h3 id="calculate-monthly-salary" dir="ltr"><span style="font-weight: 600; white-space: pre-wrap;">Calculate Monthly Salary</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p><span style="white-space: pre-wrap;">Employees, including the HR Manager, can calculate for their monthly net salary.</span></p><div class="tabs-group-wrapper"><sl-tab-group><sl-tab slot="nav" panel="panel_0">HR Manager</sl-tab><sl-tab-panel name="panel_0"><h4 id="calculating-own-salary" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Calculating own salary</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Select the desired </span><b><strong style="white-space: pre-wrap;">year</strong></b><span style="white-space: pre-wrap;"> from the dropdown.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 091840.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><div class="callout-box-wrapper"><div class="callout-box" style="background-color: var(--sl-color-teal-50); border: 1px solid var(--sl-color-teal-200);"><div class="callout-box-icon"><sl-icon name="lightbulb" style="color: var(--sl-color-teal-400);"></sl-icon></div><div class="callout-box-content" style="color: var(--sl-color-teal-600);"><p dir="ltr"><b><strong style="white-space: pre-wrap;">Tip</strong></b></p><p><span style="white-space: pre-wrap;">If the selected year has no payroll months to display, try using </span><code spellcheck="false" style="white-space: pre-wrap;"><span>2022</span></code><span style="white-space: pre-wrap;">.</span></p></div></div></div><ol start="2"><li value="2"><span style="white-space: pre-wrap;">Select the desired </span><b><strong style="white-space: pre-wrap;">payroll month</strong></b><span style="white-space: pre-wrap;"> from the list.</span></li><li value="3"><span style="white-space: pre-wrap;">The payroll breakdown for the selected month will be displayed in the </span><b><strong style="white-space: pre-wrap;">right corner</strong></b><span style="white-space: pre-wrap;"> of the screen.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 093141.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><h4 id="calculating-other-employee's-salary" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Calculating other employee's salary</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Select the desired </span><b><strong style="white-space: pre-wrap;">year</strong></b><span style="white-space: pre-wrap;"> from the dropdown.</span></li><li value="2"><span style="white-space: pre-wrap;">Use the </span><b><strong style="white-space: pre-wrap;">employee selection combobox</strong></b><span style="white-space: pre-wrap;"> beside the </span><b><strong style="white-space: pre-wrap;">month and year </strong></b><span style="white-space: pre-wrap;">dropdown to choose an employee.</span></li><li value="3"><span style="white-space: pre-wrap;">Select the desired </span><b><strong style="white-space: pre-wrap;">payroll month</strong></b><span style="white-space: pre-wrap;"> from the list. </span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 093513.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="4"><li value="4"><span style="white-space: pre-wrap;">The payroll breakdown for the selected month will be displayed in the </span><b><strong style="white-space: pre-wrap;">right corner</strong></b><span style="white-space: pre-wrap;"> of the screen.</span></li></ol></sl-tab-panel><sl-tab slot="nav" panel="panel_1">Employees</sl-tab><sl-tab-panel name="panel_1"><h4 id="calculating-own-salary" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Calculating own salary</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Select the desired </span><b><strong style="white-space: pre-wrap;">year</strong></b><span style="white-space: pre-wrap;"> from the dropdown.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 091840.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><div class="callout-box-wrapper"><div class="callout-box" style="background-color: var(--sl-color-teal-50); border: 1px solid var(--sl-color-teal-200);"><div class="callout-box-icon"><sl-icon name="lightbulb" style="color: var(--sl-color-teal-400);"></sl-icon></div><div class="callout-box-content" style="color: var(--sl-color-teal-600);"><p dir="ltr"><b><strong style="white-space: pre-wrap;">No Payroll Months</strong></b></p><p><span style="white-space: pre-wrap;">If the selected year has no payroll months to display, try using </span><code spellcheck="false" style="white-space: pre-wrap;"><span>2022</span></code><span style="white-space: pre-wrap;">.</span></p></div></div></div><ol start="2"><li value="2"><span style="white-space: pre-wrap;">Select the desired </span><b><strong style="white-space: pre-wrap;">payroll month</strong></b><span style="white-space: pre-wrap;"> from the list.</span></li><li value="3"><span style="white-space: pre-wrap;">The payroll breakdown for the selected month will be displayed in the </span><b><strong style="white-space: pre-wrap;">right corner</strong></b><span style="white-space: pre-wrap;"> of the screen.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 093141.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div></sl-tab-panel></sl-tab-group></div></div></div></div><h2 id="leave-request-management" dir="ltr"><span style="white-space: pre-wrap;">Leave Request Management</span></h2><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>1</span></div><div class="step-panel-content"><h3 id="create-leave-request" dir="ltr"><span style="font-weight: 600; white-space: pre-wrap;">Create Leave Request</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p dir="ltr"><span style="white-space: pre-wrap;">Both Employees and HR Managers can create leave requests by following these steps:</span></p><ol><li value="1"><span style="white-space: pre-wrap;">Click the </span><b><strong style="white-space: pre-wrap;">Create</strong></b><span style="white-space: pre-wrap;"> button on the </span><b><strong style="white-space: pre-wrap;">Leave Request</strong></b><span style="white-space: pre-wrap;"> page.</span></li><li value="2"><span style="white-space: pre-wrap;">In the modal form, fill in the </span><b><strong style="white-space: pre-wrap;">leave type, start date, and end date</strong></b><span style="white-space: pre-wrap;"> fields.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 110824.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><p dir="ltr"><span style="white-space: pre-wrap;">3. Click </span><b><strong style="white-space: pre-wrap;">Confirm</strong></b><span style="white-space: pre-wrap;"> to submit the request.</span></p><p dir="ltr"><span style="white-space: pre-wrap;">Once submitted, the leave request will appear under the </span><b><strong style="white-space: pre-wrap;">Pending</strong></b><span style="white-space: pre-wrap;"> status filter.</span></p></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>2</span></div><div class="step-panel-content"><h3 id="delete-leave-request" dir="ltr"><span style="font-weight: 600; white-space: pre-wrap;">Delete Leave Request</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><div class="tabs-group-wrapper"><sl-tab-group><sl-tab slot="nav" panel="panel_0">HR Manager</sl-tab><sl-tab-panel name="panel_0"><h4 id="deleting-own-leave-request" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Deleting own leave request</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Select the leave request(s) you want to delete.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 111151.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="2"><li value="2"><span style="white-space: pre-wrap;">Click the </span><b><strong style="white-space: pre-wrap;">Delete </strong></b><span style="white-space: pre-wrap;">button.</span></li><li value="3"><span style="white-space: pre-wrap;">In the confirmation modal, click </span><b><strong style="white-space: pre-wrap;">Delete </strong></b><span style="white-space: pre-wrap;">to confirm.</span></li></ol><h4 id="deleting-other-employee's-leave-request" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Deleting other employee's leave request</strong></b></h4><p dir="ltr"><i><em style="white-space: pre-wrap;">This process is identical to </em></i><i><b><strong style="white-space: pre-wrap;">deleting your own leave request.</strong></b></i></p></sl-tab-panel><sl-tab slot="nav" panel="panel_1">Employees</sl-tab><sl-tab-panel name="panel_1"><h4 id="deleting-own-leave-request" dir="ltr"><b><strong style="font-size: var(--sl-font-size-medium); white-space: pre-wrap;">Deleting own leave request</strong></b></h4><ol><li value="1"><span style="white-space: pre-wrap;">Select the leave request(s) you want to delete.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 112249.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="2"><li value="2"><span style="white-space: pre-wrap;">Click the </span><b><strong style="white-space: pre-wrap;">Delete </strong></b><span style="white-space: pre-wrap;">button.</span></li><li value="3"><span style="white-space: pre-wrap;">In the confirmation modal, click </span><b><strong style="white-space: pre-wrap;">Delete </strong></b><span style="white-space: pre-wrap;">to confirm.</span></li></ol><div class="callout-box-wrapper"><div class="callout-box" style="background-color: var(--sl-color-slate-50); border: 1px solid var(--sl-color-slate-200);"><div class="callout-box-icon"><sl-icon name="exclamation-circle" style="color: var(--sl-color-slate-400);"></sl-icon></div><div class="callout-box-content" style="color: var(--sl-color-slate-600);"><p dir="ltr"><b><strong style="white-space: pre-wrap;">Note</strong></b></p><p dir="ltr"><span style="white-space: pre-wrap;">Employees cannot delete other employees' requests. Only the HR Manager can do that.</span></p></div></div></div></sl-tab-panel></sl-tab-group></div></div></div></div><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>3</span></div><div class="step-panel-content"><h3 id="approve-or-deny-leave-request" dir="ltr"><span style="white-space: pre-wrap;">Approve or Deny Leave Request</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p dir="ltr"><b><strong style="white-space: pre-wrap;">Important:</strong></b><span style="white-space: pre-wrap;"> This feature is only available to the HR Manager.</span></p><p dir="ltr"><span style="white-space: pre-wrap;">To approve or deny leave requests, the HR Manager must do the following:</span></p><ol><li value="1"><span style="white-space: pre-wrap;">Select the leave request(s) to approve or deny.</span></li></ol><div class="image-box-wrapper centered"><div class="image-box" style="width: 70%;"><img src="/MO-IT110-OOP/_images/Screenshot 2025-03-20 112839.png" style="width: 100%; border-radius: var(--sl-border-radius-small); border: 1px solid var(--sl-color-neutral-300);"></div></div><ol start="2"><li value="2"><span style="white-space: pre-wrap;">Depending on the current status of the request, either the </span><b><strong style="white-space: pre-wrap;">Approve </strong></b><span style="white-space: pre-wrap;">or </span><b><strong style="white-space: pre-wrap;">Deny </strong></b><span style="white-space: pre-wrap;">button will be clickable.</span></li><li value="3"><span style="white-space: pre-wrap;">Click the appropriate button to update the status of the selected leave request(s).</span></li></ol></div></div></div><h2 id="profile-management" dir="ltr"><span style="white-space: pre-wrap;">Profile Management</span></h2><div class="step-panel-wrapper"><div class="step-panel-head-row"><div class="step-panel-number step-panel-number-circle-outline" style="--step-panel-number-size: 1.5em;"><span>1</span></div><div class="step-panel-content"><h3 id="view-profile" dir="ltr"><span style="white-space: pre-wrap;">View Profile</span></h3></div></div><div class="step-panel-content-row"><div class="step-panel-side" style="--step-panel-number-size: 1.5em;"><div class="step-panel-side-line"></div></div><div class="step-panel-content"><p dir="ltr"><span style="white-space: pre-wrap;">Both roles have access to this page. To access this feature, simply navigate to the </span><b><strong style="white-space: pre-wrap;">Profile</strong></b><span style="white-space: pre-wrap;"> page.</span></p></div></div></div>
+                    </div>
+                </main>
+                <div class="footer">
+                    <div class="content">
+                        <div class="date">
+                            <div>Mar 22, 2025</div>
+                        </div>
+                        
+                            <a href="/MO-IT110-OOP/documentation/getting-started/" class="column left-column" title="Getting Started">
+                                <div class="icon">
+                                    <sl-icon name="chevron-left"></sl-icon>
+                                </div>
+                                <div class="label">
+                                    <div class="title">PREVIOUS</div>
+                                    <div class="line-clamp-2">
+                                        Getting Started
+                                    </div>
+                                </div>
+                            </a>
+                        
+                        
+                            <a href="/MO-IT110-OOP/documentation/system-overview/system-ar/" class="column right-column" title="System Architecture">
+                                <div class="label">
+                                    <div class="title">NEXT</div>
+                                    <div class="line-clamp-2">
+                                        System Architecture
+                                    </div>
+                                </div>
+                                <div class="icon">
+                                    <sl-icon name="chevron-right"></sl-icon>
+                                </div>
+                            </a>
+                        
+                    </div>
+                </div>
+            </article>
+            <aside class="toc">
+                <nav class="toc">
+                    
+                    <div class="title">
+                        <sl-icon class="icon" name="list-nested"></sl-icon>
+                        <div>
+                            On this page
+                        </div>
+                    </div>
+                    <div id="toc-list" class="list">
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#logging-in">Logging In</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#attendance-management">Attendance Management</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#view-attendance">View Attendance</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#employee-management">Employee Management</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#view-employee-list">View Employee List</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#search-employees">Search Employees</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#create-employees">Create Employees</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#delete-employees">Delete Employees</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#edit-employees">Edit Employees</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#payroll-management">Payroll Management</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#calculate-monthly-salary">Calculate Monthly Salary</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#leave-request-management">Leave Request Management</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#create-leave-request">Create Leave Request</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#delete-leave-request">Delete Leave Request</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#approve-or-deny-leave-request">Approve or Deny Leave Request</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-2 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#profile-management">Profile Management</a>
+                                </div>
+                                
+                        
+                            
+                                <div class="heading-3 line-clamp-2">
+                                    <a href="/MO-IT110-OOP/documentation/using-the-payroll-system/#view-profile">View Profile</a>
+                                </div>
+                                
+                        
+                    </div>
+                    
+                </nav>
+            </aside>
+        </div>
+        <footer>
+            <div class="stack__column stack__gap-4 stack__center">
+                
+                <div class="stack__row stack__center">
+                    <span><span>2025 &copy; MotorPH</span></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<sl-dialog id="search-dialog" class="dialog_control dialog__search">
+    <div slot="label">
+        <p>Search</p>
+    </div>
+    <div class="pane stack__column stack__gap-4">
+        <div>
+            <sl-input
+                id="search-input"
+                type="text"
+                size="small"
+                autocomplete="off"
+                autofocus
+                clearable
+                placeholder="Type text you want to search..."
+            >
+            </sl-input>
+        </div>
+        <div id="search-result" class="stack__column stack__gap-4 search-result">
+        </div>
+        <div id="search-footer" class="footer"></div>
+    </div>
+</sl-dialog>
+<script type="module" src="https://morfusee.github.io/MO-IT110-OOP/_lib/index.js" data-shoelace="https://morfusee.github.io/MO-IT110-OOP/_lib"></script>
+<script type="module">
+    import {initPage, initTheme, initSearch, initToc} from 'https://morfusee.github.io/MO-IT110-OOP/_lib/init.js';
+    import {preInitTree} from 'https://morfusee.github.io/MO-IT110-OOP/_lib/pre.js';
+    preInitTree();
+    await initPage();
+    await initTheme('system');
+    await initSearch('https://morfusee.github.io/MO-IT110-OOP', '1742576338798');
+    document.documentElement.style.visibility = 'visible';
+    document.documentElement.style.opacity = '1';
+    initToc();
+</script>
+
+</body>
+</html>
