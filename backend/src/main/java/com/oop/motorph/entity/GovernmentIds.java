@@ -11,9 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-// @Data
-// @NoArgsConstructor
-// @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "GOVERNMENTIDENTIFICATION")
 
 public class GovernmentIds {
@@ -24,71 +24,21 @@ public class GovernmentIds {
     private Long governmentId;
 
     @Column(name = "philhealth")
-    private String philhealth;
+    private String philhealth = "N/A";
 
     @Column(name = "sss")
-    private String sss;
+    private String sss = "N/A";
 
     @Column(name = "pagibig")
-    private String pagibig;
+    private String pagibig = "N/A";
 
     @Column(name = "tin")
-    private String tin;
-
-    // Constructors
-    public GovernmentIds() {
-        this.philhealth = "N/A";
-        this.sss = "N/A";
-        this.pagibig = "N/A";
-        this.tin = "N/A";
-    }
+    private String tin = "N/A";
 
     public GovernmentIds(String philhealth, String sss, String pagibig, String tin) {
         this.philhealth = philhealth;
         this.sss = sss;
         this.pagibig = pagibig;
-        this.tin = tin;
-    }
-
-    // Getters
-    public Long getGovernmentId() {
-        return governmentId;
-    }
-
-    public String getPhilhealth() {
-        return philhealth;
-    }
-
-    public String getSss() {
-        return sss;
-    }
-
-    public String getPagibig() {
-        return pagibig;
-    }
-
-    public String getTin() {
-        return tin;
-    }
-
-    // Setters
-    public void setGovernmentId(Long governmentId) {
-        this.governmentId = governmentId;
-    }
-
-    public void setPhilhealth(String philhealth) {
-        this.philhealth = philhealth;
-    }
-
-    public void setSss(String sss) {
-        this.sss = sss;
-    }
-
-    public void setPagibig(String pagibig) {
-        this.pagibig = pagibig;
-    }
-
-    public void setTin(String tin) {
         this.tin = tin;
     }
 }

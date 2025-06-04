@@ -51,7 +51,7 @@ public class EmployeeTestUtils {
     }
 
     public Compensation createCompensation() {
-        return new Compensation(100_000D, 1000D, 500D, 1000D, 50_000D, 1000D);
+        return new Compensation(null, 100_000D, 1000D, 500D, 1000D, 50_000D, 1000D);
     }
 
     public Employee createAndSaveEmployee() {

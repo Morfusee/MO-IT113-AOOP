@@ -10,10 +10,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// @Builder
-// @Data
-// @NoArgsConstructor
-// @AllArgsConstructor
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Payroll {
 
@@ -62,120 +62,6 @@ public class Payroll {
         this.salaryAfterTax = calculateSalaryAfterTax(taxableSalary);
         this.grossSalary = calculateGrossSalary();
         this.netSalary = calculateNetSalary();
-    }
-
-    // Getters
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public List<Attendance> getAttendance() {
-        return attendance;
-    }
-
-    public Compensation getCompensation() {
-        return compensation;
-    }
-
-    public Double getTotalAllowances() {
-        return totalAllowances;
-    }
-
-    public Double getTotalHoursRendered() {
-        return totalHoursRendered;
-    }
-
-    public Double getSssDeduction() {
-        return sssDeduction;
-    }
-
-    public Double getPhilhealthDeduction() {
-        return philhealthDeduction;
-    }
-
-    public Double getPagibigDeduction() {
-        return pagibigDeduction;
-    }
-
-    public Double getTotalDeductions() {
-        return totalDeductions;
-    }
-
-    public Double getTaxableSalary() {
-        return taxableSalary;
-    }
-
-    public Double getSalaryAfterTax() {
-        return salaryAfterTax;
-    }
-
-    public Double getWithHoldingTax() {
-        return withHoldingTax;
-    }
-
-    public Double getGrossSalary() {
-        return grossSalary;
-    }
-
-    public Double getNetSalary() {
-        return netSalary;
-    }
-
-    // Setters
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public void setAttendance(List<Attendance> attendance) {
-        this.attendance = attendance;
-    }
-
-    public void setCompensation(Compensation compensation) {
-        this.compensation = compensation;
-    }
-
-    public void setTotalAllowances(Double totalAllowances) {
-        this.totalAllowances = totalAllowances;
-    }
-
-    public void setTotalHoursRendered(Double totalHoursRendered) {
-        this.totalHoursRendered = totalHoursRendered;
-    }
-
-    public void setSssDeduction(Double sssDeduction) {
-        this.sssDeduction = sssDeduction;
-    }
-
-    public void setPhilhealthDeduction(Double philhealthDeduction) {
-        this.philhealthDeduction = philhealthDeduction;
-    }
-
-    public void setPagibigDeduction(Double pagibigDeduction) {
-        this.pagibigDeduction = pagibigDeduction;
-    }
-
-    public void setTotalDeductions(Double totalDeductions) {
-        this.totalDeductions = totalDeductions;
-    }
-
-    public void setTaxableSalary(Double taxableSalary) {
-        this.taxableSalary = taxableSalary;
-    }
-
-    public void setSalaryAfterTax(Double salaryAfterTax) {
-        this.salaryAfterTax = salaryAfterTax;
-    }
-
-    public void setWithHoldingTax(Double withHoldingTax) {
-        this.withHoldingTax = withHoldingTax;
-    }
-
-    public void setGrossSalary(Double grossSalary) {
-        this.grossSalary = grossSalary;
-    }
-
-    public void setNetSalary(Double netSalary) {
-        this.netSalary = netSalary;
     }
 
     // Methods
