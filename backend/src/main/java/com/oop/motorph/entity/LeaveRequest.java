@@ -11,14 +11,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 @Entity
-// @Data
-// @Builder
-// @NoArgsConstructor
-// @AllArgsConstructor
+@Data
+@Builder
+@AllArgsConstructor
 @Table(name = "LEAVEREQUEST")
-
 public class LeaveRequest {
 
     @Id
@@ -47,7 +48,6 @@ public class LeaveRequest {
     @Column(name = "status", nullable = false)
     private String status;
 
-    // Constructors
     public LeaveRequest() {
         this.employeeNum = 0L;
         this.startDate = new Timestamp(System.currentTimeMillis());
@@ -64,72 +64,6 @@ public class LeaveRequest {
         this.endDate = endDate;
         this.notes = notes;
         this.leaveType = leaveType;
-        this.status = status;
-    }
-
-    // Getters
-    public Integer getId() {
-        return id;
-    }
-
-    public Long getEmployeeNum() {
-        return employeeNum;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Timestamp getStartDate() {
-        return startDate;
-    }
-
-    public Timestamp getEndDate() {
-        return endDate;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public String getLeaveType() {
-        return leaveType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    // Setters
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setEmployeeNum(Long employeeNum) {
-        this.employeeNum = employeeNum;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public void setStartDate(Timestamp startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
-    }
-
-    public void setStatus(String status) {
         this.status = status;
     }
 }

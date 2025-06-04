@@ -1,8 +1,9 @@
 package com.oop.motorph.entity;
 
 import lombok.EqualsAndHashCode;
+import lombok.Data;
 
-// @Data
+@Data
 @EqualsAndHashCode(callSuper = true)
 public class HRManager extends Employee {
 

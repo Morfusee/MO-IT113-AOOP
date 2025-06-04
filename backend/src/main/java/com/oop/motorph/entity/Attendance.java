@@ -19,10 +19,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-// @Data
-// @Builder
-// @AllArgsConstructor
-// @NoArgsConstructor
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ATTENDANCE")
 @JsonIgnoreProperties(ignoreUnknown = true)
 
@@ -69,30 +69,6 @@ public class Attendance {
         this.overtimeHours = calculateOvertime();
     }
 
-    public Attendance() {
-    }
-
-    // Getters
-    public Long getAttendanceId() {
-        return attendanceId;
-    }
-
-    public Long getEmployeeNumber() {
-        return employeeNumber;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public Time getTimeIn() {
-        return timeIn;
-    }
-
-    public Time getTimeOut() {
-        return timeOut;
-    }
-    
     // DO NOT REMOVE THIS
     public String getStatus() {
         if (calculateTotalHours() == 0) {
@@ -107,47 +83,6 @@ public class Attendance {
         }
 
         return "Present";
-    }
-
-    public double getTotalHours() {
-        return totalHours;
-    }
-
-    public double getOvertimeHours() {
-        return overtimeHours;
-    }
-
-    // Setters
-    public void setAttendanceId(Long attendanceId) {
-        this.attendanceId = attendanceId;
-    }
-
-    public void setEmployeeNumber(Long employeeNumber) {
-        this.employeeNumber = employeeNumber;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public void setTimeIn(Time timeIn) {
-        this.timeIn = timeIn;
-    }
-
-    public void setTimeOut(Time timeOut) {
-        this.timeOut = timeOut;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setTotalHours(double totalHours) {
-        this.totalHours = totalHours;
-    }
-
-    public void setOvertimeHours(double overtimeHours) {
-        this.overtimeHours = overtimeHours;
     }
 
     // Methods
