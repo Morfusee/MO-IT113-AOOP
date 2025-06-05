@@ -12,6 +12,9 @@ public class PayrollDTOMapper implements Function<Payroll, PayrollDTO> {
     @Override
     public PayrollDTO apply(Payroll payroll) {
         return new PayrollDTO(
+                payroll.getEmployee().getEmployeeNumber(),
+                payroll.getEmployee().getPersonalInfo(),
+                payroll.getEmployee().getEmploymentInfo(),
                 payroll.getGrossSalary(),
                 payroll.getTotalHoursRendered(),
                 payroll.getCompensation().getHourlyRate(),
@@ -33,6 +36,9 @@ public class PayrollDTOMapper implements Function<Payroll, PayrollDTO> {
 
     public PayrollDTO mapToPayroll(Payroll payroll) {
         return PayrollDTO.builder()
+                .employeeNum(payroll.getEmployee().getEmployeeNumber())
+                .personalInfo(payroll.getEmployee().getPersonalInfo())
+                .employeeInfo(payroll.getEmployee().getEmploymentInfo())
                 .grossSalary(payroll.getGrossSalary())
                 .totalHoursRendered(payroll.getTotalHoursRendered())
                 .hourlyRate(payroll.getCompensation().getHourlyRate())
