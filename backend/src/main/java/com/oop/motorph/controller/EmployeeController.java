@@ -44,9 +44,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/{employeeNum}")
-    public ResponseEntity<ApiResponse<?>> getEmployeeById(@PathVariable Long employeeNum) {
+    public ResponseEntity<ApiResponse<?>> getEmployeeByEmployeeNum(@PathVariable Long employeeNum) {
         try {
-            EmployeeDTO fetchedEmployee = employeeService.getEmployeeById(employeeNum);
+            EmployeeDTO fetchedEmployee = employeeService.getEmployeeByEmployeeNum(employeeNum);
             return ResponseEntity.ok().body(ApiResponse.success(
                     "Employee fetched successfully.",
                     fetchedEmployee));
