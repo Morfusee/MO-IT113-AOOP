@@ -26,7 +26,9 @@ public class PayrollDTOMapper implements Function<Payroll, PayrollDTO> {
                 payroll.getTaxableSalary(),
                 payroll.getSalaryAfterTax(),
                 payroll.getWithHoldingTax(),
-                payroll.getNetSalary());
+                payroll.getNetSalary(),
+                payroll.getStartDate(),
+                payroll.getEndDate());
     }
 
     public PayrollDTO mapToPayroll(Payroll payroll) {
@@ -46,6 +48,8 @@ public class PayrollDTOMapper implements Function<Payroll, PayrollDTO> {
                 .salaryAfterTax(payroll.getSalaryAfterTax())
                 .withHoldingTax(payroll.getWithHoldingTax())
                 .netSalary(payroll.getNetSalary())
+                .startDate(payroll.getStartDate())
+                .endDate(payroll.getEndDate())
                 .build();
     }
 

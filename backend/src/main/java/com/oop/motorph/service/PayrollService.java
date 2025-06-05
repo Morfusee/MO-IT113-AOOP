@@ -42,7 +42,7 @@ public class PayrollService {
                 endDate);
 
         // Create payroll object
-        return payrollDetailsDTOMapper.mapToPayroll(new Payroll(employee, attendance));
+        return payrollDetailsDTOMapper.mapToPayroll(new Payroll(employee, attendance, startDate, endDate));
     }
 
     public List<Date> getPayrollDates(Integer year) {

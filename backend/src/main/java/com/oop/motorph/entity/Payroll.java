@@ -1,5 +1,6 @@
 package com.oop.motorph.entity;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -46,8 +47,13 @@ public class Payroll {
 
     private Double netSalary;
 
+    private Date startDate;
+
+    private Date endDate;
+
     // Constructors
-    public Payroll(Employee employee, List<Attendance> attendance) {
+    public Payroll(Employee employee, List<Attendance> attendance,
+            Date startDate, Date endDate) {
         this.compensation = employee.getCompensation();
         this.employee = employee;
         this.attendance = attendance;
@@ -62,6 +68,8 @@ public class Payroll {
         this.salaryAfterTax = calculateSalaryAfterTax(taxableSalary);
         this.grossSalary = calculateGrossSalary();
         this.netSalary = calculateNetSalary();
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     // Methods
