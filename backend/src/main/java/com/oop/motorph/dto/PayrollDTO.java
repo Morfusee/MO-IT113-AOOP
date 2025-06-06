@@ -1,9 +1,17 @@
 package com.oop.motorph.dto;
 
+import java.sql.Date;
+
+import com.oop.motorph.entity.EmploymentInfo;
+import com.oop.motorph.entity.PersonalInfo;
+
 import lombok.Builder;
 
 @Builder
 public record PayrollDTO(
+        Long employeeNum,
+        PersonalInfo personalInfo,
+        EmploymentInfo employeeInfo,
         Double grossSalary,
         Double totalHoursRendered,
         Double hourlyRate,
@@ -18,6 +26,8 @@ public record PayrollDTO(
         Double taxableSalary,
         Double salaryAfterTax,
         Double withHoldingTax,
-        Double netSalary) {
+        Double netSalary,
+        Date startDate,
+        Date endDate) {
 
 }

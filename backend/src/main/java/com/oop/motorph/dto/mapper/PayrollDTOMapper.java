@@ -12,6 +12,9 @@ public class PayrollDTOMapper implements Function<Payroll, PayrollDTO> {
     @Override
     public PayrollDTO apply(Payroll payroll) {
         return new PayrollDTO(
+                payroll.getEmployee().getEmployeeNumber(),
+                payroll.getEmployee().getPersonalInfo(),
+                payroll.getEmployee().getEmploymentInfo(),
                 payroll.getGrossSalary(),
                 payroll.getTotalHoursRendered(),
                 payroll.getCompensation().getHourlyRate(),
@@ -26,11 +29,16 @@ public class PayrollDTOMapper implements Function<Payroll, PayrollDTO> {
                 payroll.getTaxableSalary(),
                 payroll.getSalaryAfterTax(),
                 payroll.getWithHoldingTax(),
-                payroll.getNetSalary());
+                payroll.getNetSalary(),
+                payroll.getStartDate(),
+                payroll.getEndDate());
     }
 
     public PayrollDTO mapToPayroll(Payroll payroll) {
         return PayrollDTO.builder()
+                .employeeNum(payroll.getEmployee().getEmployeeNumber())
+                .personalInfo(payroll.getEmployee().getPersonalInfo())
+                .employeeInfo(payroll.getEmployee().getEmploymentInfo())
                 .grossSalary(payroll.getGrossSalary())
                 .totalHoursRendered(payroll.getTotalHoursRendered())
                 .hourlyRate(payroll.getCompensation().getHourlyRate())
@@ -46,6 +54,8 @@ public class PayrollDTOMapper implements Function<Payroll, PayrollDTO> {
                 .salaryAfterTax(payroll.getSalaryAfterTax())
                 .withHoldingTax(payroll.getWithHoldingTax())
                 .netSalary(payroll.getNetSalary())
+                .startDate(payroll.getStartDate())
+                .endDate(payroll.getEndDate())
                 .build();
     }
 

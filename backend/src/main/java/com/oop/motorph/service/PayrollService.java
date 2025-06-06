@@ -1,13 +1,18 @@
 package com.oop.motorph.service;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oop.motorph.dto.AttendanceDTO;
+import com.oop.motorph.dto.EmployeeDTO;
 import com.oop.motorph.dto.PayrollDTO;
 import com.oop.motorph.dto.mapper.AttendanceAnalyticsDTOMapper;
 import com.oop.motorph.dto.mapper.AttendanceDTOMapper;
@@ -32,6 +37,9 @@ public class PayrollService {
     @Autowired
     private PayrollDTOMapper payrollDetailsDTOMapper;
 
+    @Autowired
+    private EmployeeService employeeService;
+
     public PayrollDTO generatePayroll(Long employeeNum, Date startDate, Date endDate) {
         // Get employee by employee number
         Employee employee = employeeRepository.findByEmployeeNumber(employeeNum)
@@ -42,7 +50,36 @@ public class PayrollService {
                 endDate);
 
         // Create payroll object
-        return payrollDetailsDTOMapper.mapToPayroll(new Payroll(employee, attendance));
+        return payrollDetailsDTOMapper.mapToPayroll(new Payroll(employee, attendance, startDate, endDate));
+    }
+
+    public List<PayrollDTO> generateAnnualPayroll(Long employeeNum, Integer year) {
+        Objects.requireNonNull(employeeNum, "Employee number cannot be null.");
+        Objects.requireNonNull(year, "Year cannot be null.");
+
+        // Fetch employee details - crucial for validation and later report parameters
+        EmployeeDTO employeeDetails = employeeService.getEmployeeByEmployeeNum(employeeNum);
+        if (employeeDetails == null) {
+            throw new EntityNotFoundException("Employee with ID " + employeeNum + " not found.");
+        }
+
+        List<Date> payrollStartDates = getPayrollDates(year);
+        // getPayrollDates method already throws ResourceNotFoundException if empty,
+        // so no explicit check needed here unless you want different handling.
+
+        List<PayrollDTO> allPayrollPeriodsData = new ArrayList<>();
+
+        for (Date sqlStartDate : payrollStartDates) {
+            LocalDate startDate = sqlStartDate.toLocalDate();
+
+            LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
+            Date sqlEndDate = Date.valueOf(endDate);
+
+            // Generate payroll for each period using the existing method
+            PayrollDTO payrollDTO = generatePayroll(employeeNum, sqlStartDate, sqlEndDate);
+            allPayrollPeriodsData.add(payrollDTO);
+        }
+        return allPayrollPeriodsData;
     }
 
     public List<Date> getPayrollDates(Integer year) {

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e9fc5607-57df-48de-a114-8625664ab4a6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="employeeNum" class="java.lang.Long"/>
+	<field name="personalInfo.firstName" class="java.lang.String"/>
+	<field name="personalInfo.lastName" class="java.lang.String"/>
+	<field name="employeeInfo.position" class="java.lang.String"/>
+	<field name="grossSalary" class="java.lang.Double"/>
+	<field name="totalHoursRendered" class="java.lang.Double"/>
+	<field name="hourlyRate" class="java.lang.Double"/>
+	<field name="totalAllowances" class="java.lang.Double"/>
+	<field name="riceSubsidy" class="java.lang.Double"/>
+	<field name="phoneAllowance" class="java.lang.Double"/>
+	<field name="clothingAllowance" class="java.lang.Double"/>
+	<field name="totalDeductions" class="java.lang.Double"/>
+	<field name="sssDeduction" class="java.lang.Double"/>
+	<field name="philhealthDeduction" class="java.lang.Double"/>
+	<field name="pagibigDeduction" class="java.lang.Double"/>
+	<field name="taxableSalary" class="java.lang.Double"/>
+	<field name="salaryAfterTax" class="java.lang.Double"/>
+	<field name="withHoldingTax" class="java.lang.Double"/>
+	<field name="netSalary" class="java.lang.Double"/>
+    <field name="startDate" class="java.sql.Date"/>
+    <field name="endDate" class="java.sql.Date"/>
+	<title>
+		<band height="100" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="30" uuid="a99f25a0-97eb-4efe-bbfc-72e40e4c18bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="35" width="277" height="20" uuid="6d3f2261-826d-4a05-af48-80d029a281ee"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Employee No: " + $F{employeeNum}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="55" width="277" height="20" uuid="d4d56f9b-7f65-488e-8fcb-a77197d9da68"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Employee Name: " + ($F{personalInfo.firstName} != null ? ($F{personalInfo.firstName} + " " + $F{personalInfo.lastName})  : "N/A")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="35" width="277" height="20" uuid="14bf9e24-a8d9-4a3f-aca8-3e72b0ec4c43"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Position: " + ($F{employeeInfo.position} != null ? $F{employeeInfo.position} : "N/A")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-5" y="80" width="555" height="20" uuid="c03fb6ae-81c5-42c9-91ca-6dd3ca925408"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[--- Start of Payroll Report ---]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="300" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+			<staticText>
+				<reportElement x="0" y="53" width="200" height="20" uuid="70d28243-711b-457d-a56a-8155f66f82b5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Earnings]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="78" width="150" height="15" uuid="b3519255-a075-499b-9634-d99c2440f256"/>
+				<text><![CDATA[Gross Salary:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="78" width="100" height="15" uuid="634be8c7-e57c-4eb6-a0c6-1e39a1cb1bfd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{grossSalary}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="98" width="150" height="15" uuid="d02ab0c8-7d4a-474b-bb2a-a4666d4283af"/>
+				<text><![CDATA[Total Hours Rendered:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="98" width="100" height="15" uuid="21e3551b-2ee3-4397-8a16-2ac997433732"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{totalHoursRendered}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="118" width="150" height="15" uuid="5513b601-27dc-4217-a15f-e1b0aa2df22d"/>
+				<text><![CDATA[Hourly Rate:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="118" width="100" height="15" uuid="2f8c64aa-8d77-495c-9ede-eb42cc44e8b6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{hourlyRate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="138" width="150" height="15" uuid="2d2255f0-9f06-443b-857e-5b5386ea38d1"/>
+				<text><![CDATA[Total Allowances:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="138" width="100" height="15" uuid="fb4e01e3-8ebc-4843-8786-c16cb9bc0186"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{totalAllowances}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="158" width="130" height="15" uuid="460da613-8165-44ce-a3ad-92ef71802e52"/>
+				<text><![CDATA[  Rice Subsidy:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="158" width="100" height="15" uuid="e70b77d0-3909-449b-9ce1-597a3e2037c7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{riceSubsidy}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="173" width="130" height="15" uuid="a7781226-4e74-4278-8962-a513ca245aa8"/>
+				<text><![CDATA[  Phone Allowance:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="173" width="100" height="15" uuid="52b6d4eb-5fea-4609-b4f2-4e1f4c2789a7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{phoneAllowance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="188" width="130" height="15" uuid="041747ff-b746-4052-b05e-5481fdd0eae9"/>
+				<text><![CDATA[  Clothing Allowance:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="188" width="100" height="15" uuid="ce78d04d-252a-47e9-a2e7-20bcab7c924a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{clothingAllowance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="300" y="53" width="200" height="20" uuid="86bb9203-aa0a-4b64-9ab9-27d99a364774"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deductions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="78" width="150" height="15" uuid="28d8c8aa-cb54-4a11-bb83-1ca5472580bd"/>
+				<text><![CDATA[Total Deductions:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="78" width="100" height="15" uuid="f381818d-9a3a-4706-8b9d-91a481e77233"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{totalDeductions}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="98" width="130" height="15" uuid="6af91436-6b3f-43bf-994f-545425563250"/>
+				<text><![CDATA[  SSS:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="98" width="100" height="15" uuid="f71d2dd2-4b60-415e-b777-921ebca8a0aa"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{sssDeduction}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="113" width="130" height="15" uuid="37fdd293-ded3-4f7c-b228-5c0b892ab981"/>
+				<text><![CDATA[  Philhealth:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="113" width="100" height="15" uuid="7e9ad469-ef0a-4a16-95b5-c7ba707b547e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{philhealthDeduction}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="128" width="130" height="15" uuid="f2f1b029-8155-4cc6-90b0-469b0c68700d"/>
+				<text><![CDATA[  Pag-IBIG:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="128" width="100" height="15" uuid="1906ab88-b0f4-4659-89a2-b8e5e2e72960"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{pagibigDeduction}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="300" y="148" width="150" height="15" uuid="ab31e8d8-0499-4330-bd77-78f539e26e64"/>
+				<text><![CDATA[Taxable Salary:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="148" width="100" height="15" uuid="bf334dbd-ef4a-434f-b98c-ec0bc83e553a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{taxableSalary}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="300" y="168" width="150" height="15" uuid="cc927446-6ed5-4e93-99ef-c069f94d6e4e"/>
+				<text><![CDATA[Withholding Tax:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="168" width="100" height="15" uuid="c562f6e0-ae88-4a9a-85f2-84738e05776e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{withHoldingTax}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="300" y="188" width="150" height="15" uuid="13a4d82d-61e7-48eb-8049-e026a6f96412"/>
+				<text><![CDATA[Salary After Tax:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="188" width="100" height="15" uuid="c82391a4-17f2-4f68-909f-15767d2b2d37"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{salaryAfterTax}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="260" width="555" height="1" uuid="4724ee10-1b60-4343-a920-78c046e845f1"/>
+			</line>
+			<staticText>
+				<reportElement x="300" y="217" width="150" height="20" uuid="8fe09f72-ab8b-4270-b236-fbf10473f416"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net Salary:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="450" y="217" width="100" height="20" uuid="df800345-7daa-4a04-b47c-a339f0e35781"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{netSalary}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="273" y="29" width="277" height="20" uuid="b0355191-83e4-447b-90c9-358946587366"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd").format($F{startDate}) + " to " + new java.text.SimpleDateFormat("yyyy-MM-dd").format($F{endDate})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="273" y="9" width="277" height="20" uuid="48ecca84-feca-43be-b59d-f2c02087f028"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Payroll Period: "]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="0" width="100" height="30" uuid="34d9b0de-cd85-4469-9ee4-5402544c57dd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="-1" y="10" width="555" height="20" uuid="256f26d2-b942-4648-bc5f-4dea2dd2306f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[--- End of Payroll Report ---]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
