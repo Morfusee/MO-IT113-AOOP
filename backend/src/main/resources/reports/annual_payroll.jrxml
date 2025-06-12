@@ -41,7 +41,7 @@
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font size="20" isBold="true" isUnderline="false"/>
                 </textElement>
-                <text><![CDATA[YOUR COMPANY NAME HERE]]></text>
+                <text><![CDATA[MotorPH]]></text>
             </staticText>
             <textField>
                 <reportElement x="0" y="35" width="555" height="30" uuid="b1c2d3e4-f5a6-7890-1234-567890abcde1"/>
