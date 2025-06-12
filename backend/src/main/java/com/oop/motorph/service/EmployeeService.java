@@ -1,9 +1,12 @@
 package com.oop.motorph.service;
 
+
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.oop.motorph.dto.EmployeeDTO;
 import com.oop.motorph.dto.EmployeeRequestDTO;
@@ -18,39 +21,50 @@ import com.oop.motorph.repository.GovernmentIdRepository;
 import com.oop.motorph.repository.UserRepository;
 import com.oop.motorph.utils.ApiResponse;
 
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+
 
 @Service
 @Transactional
 public class EmployeeService {
 
+
     @Autowired
     private EmployeeRepository employeeRepository;
+
 
     @Autowired
     private UserRepository userRepository;
 
+
     @Autowired
     private GovernmentIdRepository governmentIdRepository;
+
 
     @Autowired
     private CompensationRepository compensationRepository;
 
+
     @Autowired
     private EmployeeDTOMapper employeeDTOMapper;
+
 
     @Autowired
     private EmployeeRequestDTOMapper employeeRequestDTOMapper;
 
+
     @PersistenceContext
     private EntityManager entityManager;
+
 
     // Get all employees
     public List<EmployeeDTO> getAllEmployees() {
         return employeeRepository.findAll().stream().map(employeeDTOMapper).toList();
     }
+
 
     // Get employee by id
     public EmployeeDTO getEmployeeById(Long employeeNum) {
@@ -58,10 +72,22 @@ public class EmployeeService {
                 .orElse(null);
     }
 
+
     // Get employee by employeeNum
     public EmployeeDTO getEmployeeByEmployeeNum(Long employeeNum) {
         return employeeRepository.findByEmployeeNumber(employeeNum).stream().map(employeeDTOMapper)
                 .findFirst().orElse(null);
     }
 
+
+    public List<Long> getAllEmployeeNums() {
+        return employeeRepository.findAllEmployeeNumbers();
+    }
+
+
 }
+
+
+
+
+
