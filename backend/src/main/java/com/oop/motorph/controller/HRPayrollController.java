@@ -1,9 +1,7 @@
 package com.oop.motorph.controller;
 
-
 import java.sql.Date;
 import java.util.Map;
-
 
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.oop.motorph.service.PayrollService;
 import com.oop.motorph.utils.ApiResponse;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/manager/payroll")
 public class HRPayrollController {
 
-
     @Autowired
     private PayrollService payrollService;
-
 
     @GetMapping("")
     public ResponseEntity<ApiResponse<?>> getPayroll(@RequestParam(required = true) Long employeeNum,
             @RequestParam(required = true, name = "startDate") String startDateStr,
             @RequestParam(required = true, name = "endDate") String endDateStr) {
-
 
         try {
             Date startDate = Date.valueOf(startDateStr);
@@ -47,7 +40,6 @@ public class HRPayrollController {
         }
     }
 
-
     @GetMapping("/months")
     public ResponseEntity<ApiResponse<?>> getPayrollDates(@RequestParam(required = true) Integer year) {
         try {
@@ -60,8 +52,4 @@ public class HRPayrollController {
         }
     }
 
-
 }
-
-
-
