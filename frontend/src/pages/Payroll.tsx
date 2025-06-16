@@ -17,9 +17,21 @@ import {
   IconArrowLeft,
   IconArrowRight,
   IconCaretDownFilled,
+  IconDownload,
 } from "@tabler/icons-react";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router";
+import { AsyncSelect } from "../components/combobox/AsyncSelect";
+import {
+  allowancesDetailsFallback,
+  deductionsDetailsFallback,
+  grossSalaryDetailsFallback,
+  netSalaryDetailsFallback,
+  salaryAfterTaxDetailsFallback,
+  taxableSalaryDetailsFallback,
+} from "../constants/payrollSections";
 import payrollController from "../controllers/payrollController";
+import userController from "../controllers/userController";
 import {
   PayrollAllowancesDetails,
   PayrollDeductionsDetails,
@@ -30,18 +42,6 @@ import {
 } from "../types/payroll";
 import { FetchedPayrollMonths } from "../types/responses";
 import { getLastDayOfMonth, stringToMonthString } from "../utils/dateUtils";
-import userController from "../controllers/userController";
-import { useSearchParams } from "react-router";
-import {
-  allowancesDetailsFallback,
-  deductionsDetailsFallback,
-  grossSalaryDetailsFallback,
-  netSalaryDetailsFallback,
-  salaryAfterTaxDetailsFallback,
-  taxableSalaryDetailsFallback,
-} from "../constants/payrollSections";
-import { AsyncSelect } from "../components/combobox/AsyncSelect";
-import { isAdmin } from "../utils/permissionUtils";
 import {
   formatAllowances,
   formatDeductions,
@@ -50,12 +50,13 @@ import {
   formatSalaryAfterTax,
   formatTaxableSalary,
 } from "../utils/formatters";
+import { isAdmin } from "../utils/permissionUtils";
 
 function Payroll() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2022, 1));
   const [payrollMonths, setPayrollMonths] = useState<FetchedPayrollMonths>([]);
 
-  const { getPayrollMonths } = payrollController();
+  const { getPayrollMonths, getGeneratePayrollReport } = payrollController();
 
   useEffect(() => {
     getPayrollMonths(selectedDate).then((response) => {
@@ -75,7 +76,8 @@ function Payroll() {
       className="relative"
     >
       <Flex mah={"100%"} w={"100%"} gap={rem(10)} direction={"column"}>
-        <Flex gap={10} align={"center"} w={"100%"}>
+        {/* <Flex gap={10} justify={"space-between"} wrap={"wrap"}> */}
+        <Flex gap={10} align={"center"}>
           <DatesProvider
             settings={{
               locale: "en",
@@ -93,13 +95,19 @@ function Payroll() {
           </DatesProvider>
           <AsyncSelect />
         </Flex>
-        <Flex gap={rem(10)} wrap={"wrap"}>
-          {payrollMonths.map((month, index) => (
-            <PayrollList month={month} key={index} />
-          ))}
+        <Flex gap={10} align={"center"}>
+          <Button variant="default" onClick={getGeneratePayrollReport}>
+            Approve
+          </Button>
         </Flex>
-        <PayrollDetails />
       </Flex>
+      <Flex gap={rem(10)} wrap={"wrap"}>
+        {payrollMonths.map((month, index) => (
+          <PayrollList month={month} key={index} />
+        ))}
+      </Flex>
+      <PayrollDetails />
+      {/* </Flex> */}
     </Container>
   );
 }
@@ -165,7 +173,7 @@ function PayrollList({ month }: { month: FetchedPayrollMonths[number] }) {
 
 function PayrollDetails() {
   const [searchParam, setSearchParam] = useSearchParams();
-  const { getPayroll } = payrollController();
+  const { getPayroll, getGeneratePayrollReport } = payrollController();
   const { getUser } = userController();
 
   const [payrollDetails, setPayrollDetails] = useState({
@@ -257,6 +265,13 @@ function PayrollDetails() {
                   )}
                 </Text>
               </Stack>
+              <ActionIcon
+                variant="subtle"
+                ml={"auto"}
+                onClick={getGeneratePayrollReport}
+              >
+                <IconDownload />
+              </ActionIcon>
             </Flex>
 
             <PayrollSummaryGrossSalary

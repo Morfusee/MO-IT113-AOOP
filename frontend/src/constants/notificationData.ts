@@ -40,3 +40,20 @@ export const leaveRequestNotification = {
     },
   },
 };
+
+export const reportRequestNotification = {
+  generate: {
+    success: {
+      title: "Report Generation Successful",
+      message: "The report has been successfully generated.",
+    },
+    error: {
+      title: "Report Generation Failed",
+      message: "Failed to generate report.",
+    },
+    loading: {
+      title: "Generating Report",
+      message: "Please wait while your report is being prepared...",
+    },
+  },
+};
