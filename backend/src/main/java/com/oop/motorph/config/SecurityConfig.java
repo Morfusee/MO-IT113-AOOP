@@ -38,7 +38,8 @@ public class SecurityConfig {
                         .allowedOrigins("http://localhost:5173")
                         .allowedMethods("GET", "POST", "PATCH", "DELETE")
                         .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowCredentials(true)
+                        .exposedHeaders("Content-Disposition", "Filename");
             }
         };
     }
