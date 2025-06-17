@@ -39,7 +39,7 @@ public class ReportServiceTest {
     private static final Long EMPLOYEE_NUMBER_INVALID = 99999L;
     private static final String EMPLOYEE_NUMBER_INVALID_STR = "99999";
     private static final String INVALID_USER_ID_STR = "invalid";
-    private static final int TEST_YEAR = 2024;
+    private static final int YEAR = 2024;
     private static final String LAST_NAME = "Doe";
     private static final String FIRST_NAME = "John";
     private static final String BIRTHDATE = "1990-01-01";
@@ -54,7 +54,7 @@ public class ReportServiceTest {
     private static final Double TOTAL_ALLOWANCES = 3000.0;
     private static final LocalDate START_DATE = LocalDate.of(2024, 1, 1);
     private static final LocalDate END_DATE = LocalDate.of(2024, 1, 31);
-    private static final String TEST_REPORT_NAME = "Test Report";
+    private static final String REPORT_NAME = "Test Report";
     private static final String ANNUAL_REPORT_NAME = "Annual Report";
     private static final String SUMMARY_REPORT_NAME = "Summary Report";
 
@@ -94,7 +94,7 @@ public class ReportServiceTest {
         mockPayrollServiceGeneratePayrollForPeriod();
 
         byte[] result = reportService.generateEmployeePayrollReport(EMPLOYEE_NUMBER_VALID_STR, START_DATE, END_DATE,
-                TEST_REPORT_NAME);
+                REPORT_NAME);
 
         assertNotNull(result);
         verify(employeeService).getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_VALID);
@@ -104,13 +104,13 @@ public class ReportServiceTest {
     @Test
     void testGenerateEmployeePayrollReport_NullDates() {
         assertThrows(IllegalArgumentException.class, () -> reportService
-                .generateEmployeePayrollReport(EMPLOYEE_NUMBER_VALID_STR, null, null, TEST_REPORT_NAME));
+                .generateEmployeePayrollReport(EMPLOYEE_NUMBER_VALID_STR, null, null, REPORT_NAME));
     }
 
     @Test
     void testGenerateEmployeePayrollReport_InvalidUserId() {
         assertThrows(IllegalArgumentException.class, () -> reportService
-                .generateEmployeePayrollReport(INVALID_USER_ID_STR, START_DATE, END_DATE, TEST_REPORT_NAME));
+                .generateEmployeePayrollReport(INVALID_USER_ID_STR, START_DATE, END_DATE, REPORT_NAME));
     }
 
     @Test
@@ -118,22 +118,22 @@ public class ReportServiceTest {
         when(employeeService.getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_INVALID)).thenReturn(null);
 
         assertThrows(EntityNotFoundException.class, () -> reportService
-                .generateEmployeePayrollReport(EMPLOYEE_NUMBER_INVALID_STR, START_DATE, END_DATE, TEST_REPORT_NAME));
+                .generateEmployeePayrollReport(EMPLOYEE_NUMBER_INVALID_STR, START_DATE, END_DATE, REPORT_NAME));
     }
 
     @Test
     void testGenerateEmployeeAnnualPayrollReport() throws JRException, FileNotFoundException {
         List<PayrollDTO> annualPayroll = Arrays.asList(payrollDTO);
         mockEmployeeServiceGetEmployeeByEmployeeNum();
-        when(payrollService.generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, TEST_YEAR))
+        when(payrollService.generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, YEAR))
                 .thenReturn(annualPayroll);
 
-        byte[] result = reportService.generateEmployeeAnnualPayrollReport(EMPLOYEE_NUMBER_VALID_STR, TEST_YEAR,
+        byte[] result = reportService.generateEmployeeAnnualPayrollReport(EMPLOYEE_NUMBER_VALID_STR, YEAR,
                 ANNUAL_REPORT_NAME);
 
         assertNotNull(result);
         verify(employeeService).getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_VALID);
-        verify(payrollService).generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, TEST_YEAR);
+        verify(payrollService).generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, YEAR);
     }
 
     @Test
@@ -145,12 +145,12 @@ public class ReportServiceTest {
     @Test
     void testGenerateAllEmployeesAnnualPayrollReport() throws JRException, FileNotFoundException {
         List<PayrollDTO> annualPayrollSummary = Arrays.asList(payrollDTO);
-        when(payrollService.generateAnnualPayrollsForAllEmployees(TEST_YEAR)).thenReturn(annualPayrollSummary);
+        when(payrollService.generateAnnualPayrollsForAllEmployees(YEAR)).thenReturn(annualPayrollSummary);
 
-        byte[] result = reportService.generateAllEmployeesAnnualPayrollReport(TEST_YEAR, SUMMARY_REPORT_NAME);
+        byte[] result = reportService.generateAllEmployeesAnnualPayrollReport(YEAR, SUMMARY_REPORT_NAME);
 
         assertNotNull(result);
-        verify(payrollService).generateAnnualPayrollsForAllEmployees(TEST_YEAR);
+        verify(payrollService).generateAnnualPayrollsForAllEmployees(YEAR);
     }
 
     @Test

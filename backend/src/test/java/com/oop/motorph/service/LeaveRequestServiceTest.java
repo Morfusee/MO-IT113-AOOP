@@ -36,7 +36,7 @@ public class LeaveRequestServiceTest {
     private LeaveRequestService leaveRequestService;
 
     // Test constants
-    private static final Long EMPLOYEE_NUM = 10001L;
+    private static final Long EMPLOYEE_NUMBER = 10001L;
     private static final Long LEAVE_REQUEST_ID = 1L;
     private static final Long NON_EXISTENT_ID = 999L;
     private static final String EMPLOYEE_LAST_NAME = "Doe";
@@ -60,12 +60,12 @@ public class LeaveRequestServiceTest {
     @BeforeEach
     void setUp() {
         employee = new Employee();
-        employee.setEmployeeNumber(EMPLOYEE_NUM);
+        employee.setEmployeeNumber(EMPLOYEE_NUMBER);
         employee.setPersonalInfo(new PersonalInfo(EMPLOYEE_LAST_NAME, EMPLOYEE_FIRST_NAME, EMPLOYEE_BIRTHDATE,
                 EMPLOYEE_ADDRESS, EMPLOYEE_PHONE));
 
         leaveRequest = new LeaveRequest(
-                EMPLOYEE_NUM,
+                EMPLOYEE_NUMBER,
                 START_DATE_VALID,
                 END_DATE_VALID,
                 NOTES,
@@ -76,7 +76,7 @@ public class LeaveRequestServiceTest {
 
         leaveRequestDTO = LeaveRequestDTO.builder()
                 .id(LEAVE_REQUEST_ID.intValue())
-                .employeeNum(EMPLOYEE_NUM)
+                .employeeNum(EMPLOYEE_NUMBER)
                 .employeeName(EMPLOYEE_FULL_NAME)
                 .startDate(START_DATE_VALID)
                 .endDate(END_DATE_VALID)
@@ -118,10 +118,10 @@ public class LeaveRequestServiceTest {
     @Test
     void testGetLeaveRequestByEmployeeNumAndStatus() {
         List<LeaveRequest> leaveRequests = Arrays.asList(leaveRequest);
-        when(leaveRequestRepository.findByEmployeeNumAndStatus(EMPLOYEE_NUM, STATUS_PENDING)).thenReturn(leaveRequests);
+        when(leaveRequestRepository.findByEmployeeNumAndStatus(EMPLOYEE_NUMBER, STATUS_PENDING)).thenReturn(leaveRequests);
         when(leaveRequestDTOMapper.apply(leaveRequest)).thenReturn(leaveRequestDTO);
 
-        List<LeaveRequestDTO> results = leaveRequestService.getLeaveRequestByEmployeeNum(EMPLOYEE_NUM, STATUS_PENDING);
+        List<LeaveRequestDTO> results = leaveRequestService.getLeaveRequestByEmployeeNum(EMPLOYEE_NUMBER, STATUS_PENDING);
 
         assertNotNull(results);
         assertEquals(1, results.size());
@@ -141,7 +141,7 @@ public class LeaveRequestServiceTest {
     @Test
     void testCreateLeaveRequest_InvalidDates() {
         LeaveRequest invalidRequest = new LeaveRequest(
-                EMPLOYEE_NUM,
+                EMPLOYEE_NUMBER,
                 START_DATE_INVALID,
                 END_DATE_INVALID,
                 NOTES,

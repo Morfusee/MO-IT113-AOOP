@@ -38,7 +38,7 @@ public class AttendanceAnalyticsServiceTest {
     private List<Attendance> attendances;
     private AttendanceAnalyticsDTO expectedDTO;
 
-    private static final Long EMPLOYEE_NUM = 10001L;
+    private static final Long EMPLOYEE_NUMBER = 10001L;
     private static final Date START_DATE = Date.valueOf("2024-02-01");
     private static final Date END_DATE = Date.valueOf("2024-02-02");
     private static final Time CHECK_IN_TIME = Time.valueOf("08:00:00");
@@ -47,8 +47,8 @@ public class AttendanceAnalyticsServiceTest {
 
     @BeforeEach
     void setUp() {
-        attendance1 = new Attendance(EMPLOYEE_NUM, START_DATE, CHECK_IN_TIME, CHECK_OUT_TIME);
-        attendance2 = new Attendance(EMPLOYEE_NUM, END_DATE, CHECK_IN_TIME, CHECK_OUT_TIME);
+        attendance1 = new Attendance(EMPLOYEE_NUMBER, START_DATE, CHECK_IN_TIME, CHECK_OUT_TIME);
+        attendance2 = new Attendance(EMPLOYEE_NUMBER, END_DATE, CHECK_IN_TIME, CHECK_OUT_TIME);
         attendances = Arrays.asList(attendance1, attendance2);
         expectedDTO = new AttendanceAnalyticsDTO(2L, 0L, 0L, TOTAL_RENDERED_HOURS, CHECK_IN_TIME, CHECK_OUT_TIME);
     }
@@ -83,11 +83,11 @@ public class AttendanceAnalyticsServiceTest {
     @Test
     void testGetAttendanceAnalyticsByEmployeeNum() {
         // Arrange
-        when(attendanceRepository.findByEmployeeNumber(EMPLOYEE_NUM)).thenReturn(attendances);
+        when(attendanceRepository.findByEmployeeNumber(EMPLOYEE_NUMBER)).thenReturn(attendances);
         mockMapperBehavior();
 
         // Act
-        AttendanceAnalyticsDTO result = attendanceAnalyticsService.getAttendanceAnalyticsByEmployeeNum(EMPLOYEE_NUM);
+        AttendanceAnalyticsDTO result = attendanceAnalyticsService.getAttendanceAnalyticsByEmployeeNum(EMPLOYEE_NUMBER);
 
         // Assert
         assertAttendanceAnalyticsDTO(result);
@@ -96,13 +96,13 @@ public class AttendanceAnalyticsServiceTest {
     @Test
     void testGetAttendanceAnalyticsByEmployeeNumAndDateRange() {
         // Arrange
-        when(attendanceRepository.findByEmployeeNumberAndDateBetween(EMPLOYEE_NUM, START_DATE, END_DATE))
+        when(attendanceRepository.findByEmployeeNumberAndDateBetween(EMPLOYEE_NUMBER, START_DATE, END_DATE))
                 .thenReturn(attendances);
         mockMapperBehavior();
 
         // Act
         AttendanceAnalyticsDTO result = attendanceAnalyticsService.getAttendanceAnalyticsByEmployeeNum(
-                EMPLOYEE_NUM, START_DATE, END_DATE);
+                EMPLOYEE_NUMBER, START_DATE, END_DATE);
 
         // Assert
         assertAttendanceAnalyticsDTO(result);

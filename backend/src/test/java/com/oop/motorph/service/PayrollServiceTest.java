@@ -52,7 +52,7 @@ public class PayrollServiceTest {
 
     private static final Long EMPLOYEE_NUMBER_VALID = 10001L;
     private static final Long EMPLOYEE_NUMBER_INVALID = 99999L;
-    private static final int TEST_YEAR = 2024;
+    private static final int YEAR = 2024;
     private static final Date START_DATE = Date.valueOf("2024-01-01");
     private static final Date END_DATE = Date.valueOf("2024-01-31");
     private static final Date ATTENDANCE_DATE = Date.valueOf("2024-01-15");
@@ -131,10 +131,10 @@ public class PayrollServiceTest {
         EmployeeDTO employeeDTO = new EmployeeDTO(employee);
 
         when(employeeService.getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_VALID)).thenReturn(employeeDTO);
-        when(attendanceRepository.findPayrollDatesByYear(TEST_YEAR)).thenReturn(payrollDates);
+        when(attendanceRepository.findPayrollDatesByYear(YEAR)).thenReturn(payrollDates);
         mockCommonPayrollGeneration(); // Mocks employee and attendance find, and payroll mapping
 
-        List<PayrollDTO> results = payrollService.generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, TEST_YEAR);
+        List<PayrollDTO> results = payrollService.generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, YEAR);
 
         assertNotNull(results);
         assertFalse(results.isEmpty());
@@ -147,7 +147,7 @@ public class PayrollServiceTest {
         when(employeeService.getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_INVALID)).thenReturn(null);
 
         assertThrows(EntityNotFoundException.class,
-                () -> payrollService.generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_INVALID, TEST_YEAR));
+                () -> payrollService.generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_INVALID, YEAR));
     }
 
     @Test
@@ -156,10 +156,10 @@ public class PayrollServiceTest {
         List<Date> payrollDates = Arrays.asList(START_DATE);
 
         when(employeeRepository.findAllEmployeeNumbers()).thenReturn(employeeNums);
-        when(attendanceRepository.findPayrollDatesByYear(TEST_YEAR)).thenReturn(payrollDates);
+        when(attendanceRepository.findPayrollDatesByYear(YEAR)).thenReturn(payrollDates);
         mockCommonPayrollGeneration();
 
-        List<PayrollDTO> results = payrollService.generateAnnualPayrollsForAllEmployees(TEST_YEAR);
+        List<PayrollDTO> results = payrollService.generateAnnualPayrollsForAllEmployees(YEAR);
 
         assertNotNull(results);
         assertFalse(results.isEmpty());
@@ -170,9 +170,9 @@ public class PayrollServiceTest {
     @Test
     void testGetPayrollStartDatesForYear() {
         List<Date> expectedDates = Arrays.asList(START_DATE);
-        when(attendanceRepository.findPayrollDatesByYear(TEST_YEAR)).thenReturn(expectedDates);
+        when(attendanceRepository.findPayrollDatesByYear(YEAR)).thenReturn(expectedDates);
 
-        List<Date> results = payrollService.getPayrollStartDatesForYear(TEST_YEAR);
+        List<Date> results = payrollService.getPayrollStartDatesForYear(YEAR);
 
         assertNotNull(results);
         assertEquals(1, results.size());
