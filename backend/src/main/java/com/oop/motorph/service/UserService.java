@@ -19,7 +19,8 @@ public class UserService {
         // Find user by username and password
         User user = userRepository.findByUsernameAndPassword(username.trim(), password.trim());
 
-        if (user.getPassword().trim().equals(password.trim()) && user.getUsername().trim().equals(username.trim())) {
+        if (user != null && user.getPassword().trim().equals(password.trim())
+                && user.getUsername().trim().equals(username.trim())) {
             EmployeeDTO employee = employeeService.getEmployeeById(user.getUserId());
 
             // Return employee number if user is an employee
@@ -32,7 +33,7 @@ public class UserService {
 
     public EmployeeDTO authenticateUser(Long employeeNum) {
         EmployeeDTO employee = employeeService.getEmployeeByEmployeeNum((employeeNum));
-        
+
         if (employee != null) {
             // Return employee number if user is an employee
             return employee;
