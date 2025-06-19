@@ -26,22 +26,38 @@ public class AttendanceAnalyticsService {
     @Autowired
     private AttendanceAnalyticsDTOMapper attendanceAnalyticsDTOMapper;
 
+    /**
+     * Retrieves analytics for all attendance records.
+     * 
+     * @return AttendanceAnalyticsDTO containing aggregated data.
+     */
     public AttendanceAnalyticsDTO getAllAttendanceAnalytics() {
         List<Attendance> attendances = attendanceRepository.findAll();
-
         return attendanceAnalyticsDTOMapper.mapToAnalyticsDTO(attendances);
     }
 
+    /**
+     * Retrieves analytics for a specific employee's attendance.
+     * 
+     * @param employeeNum The employee number.
+     * @return AttendanceAnalyticsDTO for the employee.
+     */
     public AttendanceAnalyticsDTO getAttendanceAnalyticsByEmployeeNum(Long employeeNum) {
         List<Attendance> attendances = attendanceRepository.findByEmployeeNumber(employeeNum);
-
         return attendanceAnalyticsDTOMapper.mapToAnalyticsDTO(attendances);
     }
 
+    /**
+     * Retrieves analytics for a specific employee's attendance within a date range.
+     * 
+     * @param employeeNum The employee number.
+     * @param startDate   The start date of the range.
+     * @param endDate     The end date of the range.
+     * @return AttendanceAnalyticsDTO for the filtered records.
+     */
     public AttendanceAnalyticsDTO getAttendanceAnalyticsByEmployeeNum(Long employeeNum, Date startDate, Date endDate) {
         List<Attendance> attendances = attendanceRepository.findByEmployeeNumberAndDateBetween(employeeNum, startDate,
                 endDate);
-
         return attendanceAnalyticsDTOMapper.mapToAnalyticsDTO(attendances);
     }
 
