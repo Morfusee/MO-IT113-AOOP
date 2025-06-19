@@ -1,23 +1,30 @@
 package com.oop.motorph.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.sql.Timestamp;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
+
 import com.oop.motorph.entity.LeaveRequest;
+
 import jakarta.transaction.Transactional;
 
+/**
+ * Unit tests for the {@link LeaveRequestRepository}.
+ */
 @DataJpaTest
 public class LeaveRequestRepositoryTest {
 
     @Autowired
     private LeaveRequestRepository leaveRequestRepository;
 
-    // Test constants
+    // Constants used across tests
     private static final Long EMPLOYEE_NUMBER = 10022L;
     private static final String NOTES = "Test leave request";
     private static final String LEAVE_TYPE = "Sick Leave";
@@ -27,6 +34,9 @@ public class LeaveRequestRepositoryTest {
 
     private LeaveRequest savedLeaveRequest;
 
+    /**
+     * Initializes the database with a single LeaveRequest entry before each test.
+     */
     @BeforeEach
     @Transactional
     @Rollback
@@ -42,7 +52,9 @@ public class LeaveRequestRepositoryTest {
         savedLeaveRequest = leaveRequestRepository.save(leaveRequest);
     }
 
-    // Helper method to assert leave request properties
+    /**
+     * Asserts that the leave request contains expected values.
+     */
     private void assertLeaveRequestProperties(LeaveRequest request) {
         assertEquals(EMPLOYEE_NUMBER, request.getEmployeeNum());
         assertEquals(NOTES, request.getNotes());
@@ -50,6 +62,9 @@ public class LeaveRequestRepositoryTest {
         assertEquals(STATUS, request.getStatus());
     }
 
+    /**
+     * Tests retrieval of leave requests by employee number.
+     */
     @Test
     @Transactional
     @Rollback
@@ -62,6 +77,9 @@ public class LeaveRequestRepositoryTest {
         assertLeaveRequestProperties(found.get(0));
     }
 
+    /**
+     * Tests retrieval of a leave request by its ID.
+     */
     @Test
     @Transactional
     @Rollback
@@ -74,6 +92,9 @@ public class LeaveRequestRepositoryTest {
         assertLeaveRequestProperties(found);
     }
 
+    /**
+     * Tests retrieval of leave requests by status.
+     */
     @Test
     @Transactional
     @Rollback
@@ -86,6 +107,9 @@ public class LeaveRequestRepositoryTest {
         assertLeaveRequestProperties(found.get(0));
     }
 
+    /**
+     * Tests retrieval of leave requests by employee number and status.
+     */
     @Test
     @Transactional
     @Rollback
@@ -99,6 +123,9 @@ public class LeaveRequestRepositoryTest {
         assertLeaveRequestProperties(found.get(0));
     }
 
+    /**
+     * Tests saving a leave request to the repository.
+     */
     @Test
     @Transactional
     @Rollback
@@ -108,6 +135,9 @@ public class LeaveRequestRepositoryTest {
         assertLeaveRequestProperties(savedLeaveRequest);
     }
 
+    /**
+     * Tests deleting a leave request and verifying it no longer exists.
+     */
     @Test
     @Transactional
     @Rollback

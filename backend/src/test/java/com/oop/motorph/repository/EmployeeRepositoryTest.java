@@ -1,15 +1,19 @@
 package com.oop.motorph.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 import java.util.Optional;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
+
 import com.oop.motorph.entity.*;
+
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
@@ -31,20 +35,20 @@ public class EmployeeRepositoryTest {
     private Employee employee1;
     private Employee employee2;
 
+    /**
+     * Sets up test data before each test runs.
+     */
     @BeforeEach
     void setUp() {
-        // Create test employees
         employee1 = createTestEmployee(
-                EMPLOYEE_NUMBER_1,
-                "john.doe", "Passw0rd!",
+                EMPLOYEE_NUMBER_1, "john.doe", "Passw0rd!",
                 "Doe", "John", "1990-01-15", "123 Maple Street, Quezon City", "09171234567",
                 "Regular", "Software Engineer", "IT Department",
                 55000.0, 1200.0, 1100.0, 950.0, 27500.0, 343.75,
                 "001234567890", "04-1234567-8", "987654321098", "123-456-789-000");
 
         employee2 = createTestEmployee(
-                EMPLOYEE_NUMBER_2,
-                "jane.smith", "SecureP@ss2!",
+                EMPLOYEE_NUMBER_2, "jane.smith", "SecureP@ss2!",
                 "Smith", "Jane", "1992-03-20", "456 Pine Avenue, Makati City", "09187654321",
                 "Probationary", "HR Manager", "Human Resources",
                 62000.0, 1600.0, 1400.0, 1200.0, 31000.0, 387.50,
@@ -54,13 +58,18 @@ public class EmployeeRepositoryTest {
         employeeRepository.save(employee2);
     }
 
+    /**
+     * Resets the auto-increment value after each test.
+     */
     @AfterEach
     void resetAutoIncrement() {
         entityManager.createNativeQuery("ALTER TABLE employee ALTER COLUMN employeeNum RESTART WITH 10026")
                 .executeUpdate();
     }
 
-    // Helper method to create test employees
+    /**
+     * Helper method to create test employees with full nested info.
+     */
     private Employee createTestEmployee(Long employeeNumber, String username, String password,
             String lastName, String firstName, String birthdate,
             String address, String phoneNumber,
@@ -68,6 +77,7 @@ public class EmployeeRepositoryTest {
             Double basicSalary, Double riceSubsidy, Double phoneAllowance,
             Double clothingAllowance, Double grossSemiMonthlyRate, Double hourlyRate,
             String philhealth, String sss, String pagibig, String tin) {
+
         Employee employee = new Employee();
         employee.setEmployeeNumber(employeeNumber);
         employee.setUsername(username);
@@ -80,6 +90,9 @@ public class EmployeeRepositoryTest {
         return employee;
     }
 
+    /**
+     * Tests successful lookup of an employee by employee number.
+     */
     @Test
     @Transactional
     @Rollback
@@ -91,6 +104,9 @@ public class EmployeeRepositoryTest {
         assertEquals(employee1.getUsername(), foundEmployee.get().getUsername());
     }
 
+    /**
+     * Tests that a nonexistent employee number returns empty result.
+     */
     @Test
     @Transactional
     @Rollback
@@ -99,6 +115,9 @@ public class EmployeeRepositoryTest {
         assertFalse(foundEmployee.isPresent());
     }
 
+    /**
+     * Tests that all employee numbers can be retrieved.
+     */
     @Test
     @Transactional
     @Rollback
@@ -111,13 +130,15 @@ public class EmployeeRepositoryTest {
         assertTrue(employeeNumbers.contains(EMPLOYEE_NUMBER_2));
     }
 
+    /**
+     * Tests saving a new employee.
+     */
     @Test
     @Transactional
     @Rollback
     void testSaveEmployee() {
         Employee newEmployee = createTestEmployee(
-                NEW_EMPLOYEE_NUMBER,
-                "bob.brown", "NewP@ssw0rd3!",
+                NEW_EMPLOYEE_NUMBER, "bob.brown", "NewP@ssw0rd3!",
                 "Brown", "Bob", "1992-03-03", "789 Willow Lane, Pasig City", "09191122334",
                 "Regular", "Data Analyst", "Data & Analytics",
                 48000.0, 1100.0, 900.0, 800.0, 24000.0, 300.0,
@@ -133,11 +154,13 @@ public class EmployeeRepositoryTest {
         assertEquals("04-5555555-5", savedEmployee.getGovernmentIds().getSss());
     }
 
+    /**
+     * Tests updating an existing employee.
+     */
     @Test
     @Transactional
     @Rollback
     void testUpdateEmployee() {
-        // Update employee details
         employee1.setUsername("updated.john.doe");
         employee1.getPersonalInfo().setFirstName("Jonathan");
         employee1.getGovernmentIds().setPhilhealth("1234567899");
@@ -145,13 +168,15 @@ public class EmployeeRepositoryTest {
 
         Employee updatedEmployee = employeeRepository.save(employee1);
 
-        // Verify updates
         assertEquals("updated.john.doe", updatedEmployee.getUsername());
         assertEquals("Jonathan", updatedEmployee.getPersonalInfo().getFirstName());
         assertEquals("1234567899", updatedEmployee.getGovernmentIds().getPhilhealth());
         assertEquals("123-456-789-001", updatedEmployee.getGovernmentIds().getTin());
     }
 
+    /**
+     * Tests deleting an employee by ID.
+     */
     @Test
     @Transactional
     @Rollback

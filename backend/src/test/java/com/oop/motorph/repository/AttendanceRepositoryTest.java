@@ -1,15 +1,19 @@
 package com.oop.motorph.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
+
 import com.oop.motorph.entity.Attendance;
+
 import jakarta.transaction.Transactional;
 
 @DataJpaTest
@@ -18,7 +22,7 @@ public class AttendanceRepositoryTest {
     @Autowired
     private AttendanceRepository attendanceRepository;
 
-    // Test constants
+    // Constants for reusable test data
     private static final Long EMPLOYEE_NUMBER = 10001L;
     private static final Long NON_EXISTENT_EMPLOYEE_NUMBER = 99999L;
     private static final Date DATE_2024_01_01 = Date.valueOf("2024-01-01");
@@ -31,11 +35,13 @@ public class AttendanceRepositoryTest {
     private Attendance attendance1;
     private Attendance attendance2;
 
+    /**
+     * Setup test data before each test case.
+     */
     @BeforeEach
     void setUp() {
-        attendanceRepository.deleteAll(); // Clear the database before each test
+        attendanceRepository.deleteAll();
 
-        // Create test attendance records
         attendance1 = new Attendance(EMPLOYEE_NUMBER, DATE_2024_01_01, START_TIME, END_TIME);
         attendance2 = new Attendance(EMPLOYEE_NUMBER, DATE_2024_01_02, START_TIME, END_TIME);
 
@@ -43,7 +49,9 @@ public class AttendanceRepositoryTest {
         attendanceRepository.save(attendance2);
     }
 
-    // Helper method for common assertions
+    /**
+     * Helper method to assert attendance list size and contents.
+     */
     private void assertAttendanceList(List<Attendance> attendances, int expectedSize) {
         assertNotNull(attendances);
         assertEquals(expectedSize, attendances.size());
@@ -52,16 +60,22 @@ public class AttendanceRepositoryTest {
         }
     }
 
+    /**
+     * Test fetching attendance by employee number.
+     */
     @Test
     @Transactional
     @Rollback
     void testFindByEmployeeNumber() {
         List<Attendance> attendances = attendanceRepository.findByEmployeeNumber(EMPLOYEE_NUMBER);
-        
+
         assertAttendanceList(attendances, 2);
         assertEquals(EMPLOYEE_NUMBER, attendances.get(1).getEmployeeNumber());
     }
 
+    /**
+     * Test fetching attendance records between two dates.
+     */
     @Test
     @Transactional
     @Rollback
@@ -74,6 +88,9 @@ public class AttendanceRepositoryTest {
         assertTrue(attendances.get(1).getDate().compareTo(DATE_2024_01_02) <= 0);
     }
 
+    /**
+     * Test finding distinct payroll dates by year.
+     */
     @Test
     @Transactional
     @Rollback
@@ -85,6 +102,9 @@ public class AttendanceRepositoryTest {
         assertEquals(DATE_2024_01_01, payrollDates.get(0));
     }
 
+    /**
+     * Test behavior when querying an employee number with no records.
+     */
     @Test
     @Transactional
     @Rollback
@@ -93,6 +113,9 @@ public class AttendanceRepositoryTest {
         assertAttendanceList(attendances, 0);
     }
 
+    /**
+     * Test querying date ranges with no attendance records.
+     */
     @Test
     @Transactional
     @Rollback
@@ -102,6 +125,9 @@ public class AttendanceRepositoryTest {
         assertAttendanceList(attendances, 0);
     }
 
+    /**
+     * Test payroll date lookup for a year with no attendance records.
+     */
     @Test
     @Transactional
     @Rollback

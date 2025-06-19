@@ -1,21 +1,27 @@
 package com.oop.motorph.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
+
 import com.oop.motorph.entity.*;
+
 import jakarta.transaction.Transactional;
 
+/**
+ * Unit tests for {@link UserRepository}.
+ */
 @DataJpaTest
 public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
 
-    // Test constants
+    // Constants used across tests
     private static final Long EMPLOYEE_NUMBER = 10026L;
     private static final String USERNAME = "john.doe";
     private static final String PASSWORD = "Passw0rd!";
@@ -25,44 +31,51 @@ public class UserRepositoryTest {
 
     private User savedUser;
 
+    /**
+     * Sets up a test user before each test case runs.
+     */
     @BeforeEach
     @Transactional
     @Rollback
     public void setup() {
         Employee user = createTestUser(
-            EMPLOYEE_NUMBER,
-            USERNAME,
-            PASSWORD,
-            "Doe", "John", "1990-01-15", 
-            "123 Maple Street, Quezon City", "09171234567",
-            "Regular", "Software Engineer", "IT Department",
-            55000.0, 1200.0, 1100.0, 950.0, 27500.0, 343.75,
-            "001234567890", "04-1234567-8", "987654321098", "123-456-789-000"
-        );
+                EMPLOYEE_NUMBER,
+                USERNAME,
+                PASSWORD,
+                "Doe", "John", "1990-01-15",
+                "123 Maple Street, Quezon City", "09171234567",
+                "Regular", "Software Engineer", "IT Department",
+                55000.0, 1200.0, 1100.0, 950.0, 27500.0, 343.75,
+                "001234567890", "04-1234567-8", "987654321098", "123-456-789-000");
 
         savedUser = userRepository.save(user);
     }
 
-    // Helper method to create test user
+    /**
+     * Creates a sample Employee with detailed info to be used as a test user.
+     */
     private Employee createTestUser(Long employeeNumber, String username, String password,
-                                  String lastName, String firstName, String birthdate,
-                                  String address, String phoneNumber,
-                                  String employmentStatus, String position, String department,
-                                  Double basicSalary, Double riceSubsidy, Double phoneAllowance,
-                                  Double clothingAllowance, Double grossSemiMonthlyRate, Double hourlyRate,
-                                  String philhealth, String sss, String pagibig, String tin) {
+            String lastName, String firstName, String birthdate,
+            String address, String phoneNumber,
+            String employmentStatus, String position, String department,
+            Double basicSalary, Double riceSubsidy, Double phoneAllowance,
+            Double clothingAllowance, Double grossSemiMonthlyRate, Double hourlyRate,
+            String philhealth, String sss, String pagibig, String tin) {
         Employee user = new Employee();
         user.setEmployeeNumber(employeeNumber);
         user.setUsername(username);
         user.setPassword(password);
         user.setPersonalInfo(new PersonalInfo(lastName, firstName, birthdate, address, phoneNumber));
         user.setEmploymentInfo(new EmploymentInfo(employmentStatus, position, department));
-        user.setCompensation(new Compensation(null, basicSalary, riceSubsidy, phoneAllowance, 
-                                           clothingAllowance, grossSemiMonthlyRate, hourlyRate));
+        user.setCompensation(new Compensation(null, basicSalary, riceSubsidy, phoneAllowance,
+                clothingAllowance, grossSemiMonthlyRate, hourlyRate));
         user.setGovernmentIds(new GovernmentIds(null, philhealth, sss, pagibig, tin));
         return user;
     }
 
+    /**
+     * Tests that a user is saved successfully and fields match expected values.
+     */
     @Test
     @Transactional
     @Rollback
@@ -73,18 +86,24 @@ public class UserRepositoryTest {
         assertEquals(PASSWORD, savedUser.getPassword());
     }
 
+    /**
+     * Tests finding a user with valid credentials.
+     */
     @Test
     @Transactional
     @Rollback
     public void testFindByUsernameAndPassword() {
         User found = userRepository.findByUsernameAndPassword(USERNAME, PASSWORD);
-        
+
         assertNotNull(found);
         assertEquals(savedUser.getUserId(), found.getUserId());
         assertEquals(USERNAME, found.getUsername());
         assertEquals(PASSWORD, found.getPassword());
     }
 
+    /**
+     * Tests that searching with invalid credentials returns null.
+     */
     @Test
     @Transactional
     @Rollback
@@ -93,6 +112,9 @@ public class UserRepositoryTest {
         assertNull(notFound);
     }
 
+    /**
+     * Tests existence check by username.
+     */
     @Test
     @Transactional
     @Rollback
@@ -101,6 +123,9 @@ public class UserRepositoryTest {
         assertFalse(userRepository.existsByUsername(INVALID_CREDENTIAL));
     }
 
+    /**
+     * Tests deletion of a user from the repository.
+     */
     @Test
     @Transactional
     @Rollback
@@ -109,6 +134,9 @@ public class UserRepositoryTest {
         assertFalse(userRepository.existsById(savedUser.getUserId()));
     }
 
+    /**
+     * Tests updating username and password fields of a user.
+     */
     @Test
     @Transactional
     @Rollback
