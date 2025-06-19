@@ -47,3 +47,21 @@ export const payrollMonthsApi = async (year: number) => {
 
   return response;
 };
+
+export const payrollGenerateReport = async () => {
+  const response = await axiosInstance
+    .get<Blob>(BackendRoutes.GENERATE_REPORT + "/annual/summary", {
+      params: {
+        year: 2022,
+      },
+      responseType: "blob",
+    })
+    .then((res) => {
+      if (res.status != 200) {
+        throw new Error("Failed to generate report.");
+      }
+
+      return res;
+    });
+  return response;
+};

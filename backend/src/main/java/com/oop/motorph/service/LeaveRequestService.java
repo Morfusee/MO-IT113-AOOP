@@ -30,6 +30,12 @@ public class LeaveRequestService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Retrieves a leave request by ID.
+     * 
+     * @param leaveRequestId The ID of the leave request.
+     * @return LeaveRequestDTO if found.
+     */
     public LeaveRequestDTO getLeaveRequestById(Long leaveRequestId) {
         return leaveRequestRepository.findById(leaveRequestId).stream()
                 .map(leaveRequestDTOMapper)
@@ -39,17 +45,37 @@ public class LeaveRequestService {
                 .orElseThrow(() -> new RuntimeException("Leave request not found."));
     }
 
+    /**
+     * Retrieves leave requests by employee number and status.
+     * 
+     * @param employeeNum The employee number.
+     * @param status      The status of the leave request.
+     * @return List of LeaveRequestDTOs.
+     */
     public List<LeaveRequestDTO> getLeaveRequestByEmployeeNum(Long employeeNum, String status) {
         return leaveRequestRepository.findByEmployeeNumAndStatus(employeeNum, status).stream()
                 .map(leaveRequestDTOMapper)
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves all leave requests by status.
+     * 
+     * @param status The leave request status.
+     * @return List of LeaveRequestDTOs.
+     */
     public List<LeaveRequestDTO> getLeaveRequestByStatus(String status) {
-        return leaveRequestRepository.findByStatus(status).stream().map(leaveRequestDTOMapper)
+        return leaveRequestRepository.findByStatus(status).stream()
+                .map(leaveRequestDTOMapper)
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Creates a new leave request.
+     * 
+     * @param leaveRequest The LeaveRequest entity to be saved.
+     * @return The created LeaveRequestDTO.
+     */
     public LeaveRequestDTO createLeaveRequest(LeaveRequest leaveRequest) {
 
         if (leaveRequest.getStartDate().after(leaveRequest.getEndDate())) {
@@ -60,32 +86,38 @@ public class LeaveRequestService {
 
         /*
          * Clear the persistence context to ensure that the fields
-         * of the returned object are up-to-date
-         * Solves the employee null issue
+         * of the returned object are up-to-date.
          */
         entityManager.refresh(leaveRequest);
 
         return leaveRequestDTOMapper.toDTO(savedLeaveRequest);
     }
 
+    /**
+     * Updates an existing leave request.
+     * 
+     * @param leaveRequest The updated LeaveRequestDTO.
+     * @return The updated LeaveRequestDTO.
+     */
     public LeaveRequestDTO updateLeaveRequest(LeaveRequestDTO leaveRequest) {
-        // Get the leave request by ID
         LeaveRequest leaveRequestToUpdate = leaveRequestRepository.findById(leaveRequest.id()).stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Leave request not found."));
 
-        // Update the leave request
         leaveRequestDTOMapper.updateEntity(leaveRequestToUpdate, leaveRequest);
 
-        // Save the updated leave request
         LeaveRequest updatedLeaveRequest = leaveRequestRepository.save(leaveRequestToUpdate);
 
-        // Return the updated leave request
         return leaveRequestDTOMapper.toDTO(updatedLeaveRequest);
     }
 
+    /**
+     * Deletes a leave request by ID.
+     * 
+     * @param leaveRequestId The ID of the leave request to delete.
+     * @return The deleted LeaveRequestDTO.
+     */
     public LeaveRequestDTO deleteLeaveRequestById(Long leaveRequestId) {
-        // Get the leave request by ID
         LeaveRequestDTO leaveRequest = leaveRequestRepository.findById(leaveRequestId).stream()
                 .map(leaveRequestDTOMapper)
                 .collect(Collectors.toList())
@@ -93,10 +125,8 @@ public class LeaveRequestService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Leave request not found."));
 
-        // Delete the leave request
         leaveRequestRepository.deleteById(leaveRequestId);
 
-        // Return the deleted leave request
         return leaveRequest;
     }
 }

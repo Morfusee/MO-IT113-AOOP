@@ -10,12 +10,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents the compensation details for an employee.
+ * This entity maps to the "COMPENSATION" table in the database.
+ * It includes various components of an employee's salary and allowances.
+ */
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "COMPENSATION")
-
 public class Compensation {
 
     @Id

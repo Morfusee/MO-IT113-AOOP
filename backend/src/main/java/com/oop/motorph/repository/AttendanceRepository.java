@@ -13,19 +13,36 @@ import com.oop.motorph.entity.Attendance;
 @Repository
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
-    List<Attendance> findByEmployeeNumber(Long employeeNumber);
+        /**
+         * Retrieves all attendance records for a given employee.
+         * 
+         * @param employeeNumber The unique employee number.
+         * @return List of Attendance records.
+         */
+        List<Attendance> findByEmployeeNumber(Long employeeNumber);
 
-    List<Attendance> findByEmployeeNumberAndDateBetween(Long employeeNumber, Date startDate,
-            Date endDate);
+        /**
+         * Retrieves attendance records for a specific employee within a date range.
+         * 
+         * @param employeeNumber The unique employee number.
+         * @param startDate      The start date of the range.
+         * @param endDate        The end date of the range.
+         * @return List of Attendance records in the given date range.
+         */
+        List<Attendance> findByEmployeeNumberAndDateBetween(Long employeeNumber, Date startDate, Date endDate);
 
-    // @Query("SELECT DISTINCT CAST(FORMATDATETIME(a.date, 'yyyy-MM-01') AS date) AS
-    // uniqueMonth " +
-    // "FROM Attendance a ORDER BY uniqueMonth")
-    // List<Date> findPayrollDates();
-
-    @Query("SELECT DISTINCT CAST(FORMATDATETIME(a.date, 'yyyy-MM-01') AS date) AS uniqueMonth " +
-            "FROM Attendance a " +
-            "WHERE YEAR(a.date) = :year " +
-            "ORDER BY uniqueMonth")
-    List<Date> findPayrollDatesByYear(@Param("year") int year);
+        /**
+         * Retrieves the distinct months (formatted as the first day of the month)
+         * from attendance records for a specific year.
+         * 
+         * This is used to determine available payroll months.
+         * 
+         * @param year The year to filter attendance records.
+         * @return List of distinct first-day-of-month dates.
+         */
+        @Query("SELECT DISTINCT CAST(FORMATDATETIME(a.date, 'yyyy-MM-01') AS date) AS uniqueMonth " +
+                        "FROM Attendance a " +
+                        "WHERE YEAR(a.date) = :year " +
+                        "ORDER BY uniqueMonth")
+        List<Date> findPayrollDatesByYear(@Param("year") int year);
 }

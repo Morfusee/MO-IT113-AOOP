@@ -40,24 +40,23 @@ public class PayrollService {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Generates payrolls for all employees for the entire specified year.
+     *
+     * @param year The target year.
+     * @return List of PayrollDTOs representing each employee’s monthly payroll.
+     */
     public List<PayrollDTO> generateAnnualPayrollsForAllEmployees(Integer year) {
-        // Fetch all employeeNumbers
         List<Long> employeeList = employeeRepository.findAllEmployeeNumbers();
-
-        // Get all payroll STARTING dates
         List<Date> payrollStartDates = getPayrollStartDatesForYear(year);
-
-        // Get all the payroll data in all of the periods
         List<PayrollDTO> allPayrollPeriodsData = new ArrayList<>();
 
         for (Long employeeNum : employeeList) {
             for (Date sqlStartDate : payrollStartDates) {
                 LocalDate startDate = sqlStartDate.toLocalDate();
-
                 LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
                 Date sqlEndDate = Date.valueOf(endDate);
 
-                // Generate payroll for each period using the existing method
                 PayrollDTO payrollDTO = generatePayrollForPeriod(employeeNum, sqlStartDate, sqlEndDate);
                 allPayrollPeriodsData.add(payrollDTO);
             }
@@ -65,46 +64,60 @@ public class PayrollService {
         return allPayrollPeriodsData;
     }
 
+    /**
+     * Generates a payroll for a specific employee for a specific date range.
+     *
+     * @param employeeNum The employee number.
+     * @param startDate   Start date of the payroll period.
+     * @param endDate     End date of the payroll period.
+     * @return A PayrollDTO representing the computed payroll.
+     */
     public PayrollDTO generatePayrollForPeriod(Long employeeNum, Date startDate, Date endDate) {
-        // Get employee by employee number
         Employee employee = employeeRepository.findByEmployeeNumber(employeeNum)
                 .orElseThrow(EntityNotFoundException::new);
 
-        // Check if employee exists
         List<Attendance> attendance = attendanceRepository.findByEmployeeNumberAndDateBetween(employeeNum, startDate,
                 endDate);
 
-        // Create payroll object
         return payrollDetailsDTOMapper.mapToPayroll(new Payroll(employee, attendance, startDate, endDate));
     }
 
+    /**
+     * Generates payrolls for a specific employee for all months of the specified
+     * year.
+     *
+     * @param employeeNum The employee number.
+     * @param year        The target year.
+     * @return List of PayrollDTOs for each month of the year.
+     */
     public List<PayrollDTO> generateAnnualPayrollForEmployee(Long employeeNum, Integer year) {
-
-        // Fetch employee details - crucial for validation and later report parameters
         EmployeeDTO employeeDetails = employeeService.getEmployeeByEmployeeNum(employeeNum);
         if (employeeDetails == null) {
             throw new EntityNotFoundException("Employee with ID " + employeeNum + " not found.");
         }
 
         List<Date> payrollStartDates = getPayrollStartDatesForYear(year);
-        // getPayrollDates method already throws ResourceNotFoundException if empty,
-        // so no explicit check needed here unless you want different handling.
-
         List<PayrollDTO> allPayrollPeriodsData = new ArrayList<>();
 
         for (Date sqlStartDate : payrollStartDates) {
             LocalDate startDate = sqlStartDate.toLocalDate();
-
             LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
             Date sqlEndDate = Date.valueOf(endDate);
 
-            // Generate payroll for each period using the existing method
             PayrollDTO payrollDTO = generatePayrollForPeriod(employeeNum, sqlStartDate, sqlEndDate);
             allPayrollPeriodsData.add(payrollDTO);
         }
+
         return allPayrollPeriodsData;
     }
 
+    /**
+     * Retrieves the list of payroll start dates (first of each month) for the given
+     * year.
+     *
+     * @param year The target year.
+     * @return List of payroll period start dates.
+     */
     public List<Date> getPayrollStartDatesForYear(Integer year) {
         return attendanceRepository.findPayrollDatesByYear(year);
     }

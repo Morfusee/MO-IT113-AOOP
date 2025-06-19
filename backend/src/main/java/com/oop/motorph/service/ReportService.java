@@ -42,35 +42,46 @@ public class ReportService {
     @Autowired
     PayrollService payrollService;
 
+    /**
+     * Compiles a Jasper report template and exports it as a PDF byte array.
+     *
+     * @param data           Data to populate the report.
+     * @param parameters     Parameters to pass into the report.
+     * @param reportFileName Name of the JRXML template (without extension).
+     * @return The PDF report as a byte array.
+     */
     public byte[] compileAndExportReport(List<?> data, Map<String, Object> parameters, String reportFileName)
             throws JRException, FileNotFoundException {
-        // Load the .jrxml file (or .jasper if pre-compiled)
+
         File file = ResourceUtils.getFile("classpath:reports/" + reportFileName + ".jrxml");
         InputStream inputStream = new FileInputStream(file);
 
-        // Compile the report if it's a .jrxml file. If it's already .jasper, skip this.
         JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
-
-        // Use the new DynamicJRDataSource to handle various data structures
         JRDataSource dynamicDataSource = new DynamicJRDataSource(data);
-
-        // Fill the report with data and parameters
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dynamicDataSource);
 
-        // Export the report to PDF (or other formats like HTML, XLS)
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         JRPdfExporter exporter = new JRPdfExporter();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
         exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(byteArrayOutputStream));
-        SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
-        exporter.setConfiguration(configuration);
+        exporter.setConfiguration(new SimplePdfExporterConfiguration());
         exporter.exportReport();
 
         return byteArrayOutputStream.toByteArray();
     }
 
+    /**
+     * Generates a payroll report for a specific employee over a custom date range.
+     *
+     * @param userId    Employee ID as string.
+     * @param startDate Start date of the payroll period.
+     * @param endDate   End date of the payroll period.
+     * @param title     Custom report title.
+     * @return PDF report as byte array.
+     */
     public byte[] generateEmployeePayrollReport(String userId, LocalDate startDate, LocalDate endDate, String title)
             throws JRException, FileNotFoundException {
+
         if (startDate == null || endDate == null) {
             throw new IllegalArgumentException("Start date and end date are required for payroll report.");
         }
@@ -80,20 +91,27 @@ public class ReportService {
 
         Long employeeNum = prepareCommonEmployeeParameters(userId, parameters);
 
-        Date sqlStartDate = Date.valueOf(startDate);
-        Date sqlEndDate = Date.valueOf(endDate);
+        PayrollDTO payrollDTO = payrollService.generatePayrollForPeriod(
+                employeeNum,
+                Date.valueOf(startDate),
+                Date.valueOf(endDate));
 
-        PayrollDTO payrollDTO = payrollService.generatePayrollForPeriod(employeeNum, sqlStartDate, sqlEndDate);
+        parameters.put("PayrollPeriod", startDate + " to " + endDate);
 
-        parameters.put("PayrollPeriod", startDate.toString() + " to " + endDate.toString());
-
-        return compileAndExportReport(List.of(payrollDTO), parameters, "payroll"); // Assuming 'payroll' is your
-                                                                                   // template name
-
+        return compileAndExportReport(List.of(payrollDTO), parameters, "payroll");
     }
 
+    /**
+     * Generates an annual payroll report for a specific employee.
+     *
+     * @param userId Employee ID as string.
+     * @param year   Year for which to generate the report.
+     * @param title  Custom report title.
+     * @return PDF report as byte array.
+     */
     public byte[] generateEmployeeAnnualPayrollReport(String userId, Integer year, String title)
             throws JRException, FileNotFoundException {
+
         if (year == null) {
             throw new IllegalArgumentException("Year is required for annual payroll report.");
         }
@@ -101,9 +119,7 @@ public class ReportService {
         Map<String, Object> parameters = new HashMap<>(
                 Map.of("ReportTitle", Objects.requireNonNullElse(title, "Annual Payroll Report for " + year)));
 
-        Long employeeNum = prepareCommonEmployeeParameters(userId, parameters); // Populate common params
-
-        // Get the annual payroll data from the PayrollService
+        Long employeeNum = prepareCommonEmployeeParameters(userId, parameters);
         List<PayrollDTO> annualPayrollData = payrollService.generateAnnualPayrollForEmployee(employeeNum, year);
 
         parameters.put("ReportYear", year);
@@ -111,8 +127,16 @@ public class ReportService {
         return compileAndExportReport(annualPayrollData, parameters, "annual_payroll");
     }
 
+    /**
+     * Generates a company-wide annual payroll summary report.
+     *
+     * @param year  Year for which to generate the report.
+     * @param title Custom report title.
+     * @return PDF report as byte array.
+     */
     public byte[] generateAllEmployeesAnnualPayrollReport(Integer year, String title)
             throws JRException, FileNotFoundException {
+
         if (year == null) {
             throw new IllegalArgumentException("Year is required for annual payroll report.");
         }
@@ -120,7 +144,6 @@ public class ReportService {
         Map<String, Object> parameters = new HashMap<>(
                 Map.of("ReportTitle", Objects.requireNonNullElse(title, "Annual Payroll Report Summary for " + year)));
 
-        // Get the annual payroll data from the PayrollService
         List<PayrollDTO> annualPayrollSummaryData = payrollService.generateAnnualPayrollsForAllEmployees(year);
 
         parameters.put("ReportYear", year);
@@ -128,6 +151,14 @@ public class ReportService {
         return compileAndExportReport(annualPayrollSummaryData, parameters, "annual_payroll");
     }
 
+    /**
+     * Parses and validates user ID, fetches employee details, and populates
+     * standard report parameters.
+     *
+     * @param userId     Employee ID string.
+     * @param parameters Report parameter map to populate.
+     * @return Parsed employee number.
+     */
     private Long prepareCommonEmployeeParameters(String userId, Map<String, Object> parameters) {
         if (userId == null || userId.trim().isEmpty()) {
             throw new IllegalArgumentException("Employee ID is required.");
@@ -142,7 +173,6 @@ public class ReportService {
 
         EmployeeDTO employeeDetails = employeeService.getEmployeeByEmployeeNum(employeeNum);
         if (employeeDetails == null) {
-            // Use your custom ResourceNotFoundException or a more specific one if available
             throw new EntityNotFoundException("Employee with ID " + employeeNum + " not found.");
         }
 
