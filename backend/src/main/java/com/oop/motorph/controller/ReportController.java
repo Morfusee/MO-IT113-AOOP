@@ -1,18 +1,11 @@
 package com.oop.motorph.controller;
 
-import java.io.FileNotFoundException;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList; // Example for data
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import javax.sql.DataSource; // If you are using a database connection for your reports
 
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +31,14 @@ import com.oop.motorph.utils.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
 import net.sf.jasperreports.engine.JRException;
 
+/**
+ * REST controller for generating various reports, primarily focusing on
+ * payroll.
+ * This controller provides endpoints to generate individual employee payroll
+ * reports,
+ * annual payroll reports for a single employee, and a summary of annual payroll
+ * reports for all employees.
+ */
 @RestController
 @RequestMapping("/reports")
 @CrossOrigin(origins = "http://localhost:5173/")
@@ -53,12 +53,24 @@ public class ReportController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Generates a payroll report for a specific employee within a given date range.
+     * The report is returned as a PDF file.
+     *
+     * @param title     Optional title for the report.
+     * @param userId    The employee ID (user ID) for whom the payroll report is
+     *                  generated.
+     * @param startDate The start date of the payroll period.
+     * @param endDate   The end date of the payroll period.
+     * @return A ResponseEntity containing the PDF report bytes, or an error
+     *         response.
+     */
     @GetMapping("/payroll")
     public ResponseEntity<?> generateEmployeePayrollReport(
             @RequestParam(required = false) String title,
-            @RequestParam String userId, // Required for this report
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, // Required
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) { // Required
+            @RequestParam String userId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         try {
             byte[] reportBytes = reportService.generateEmployeePayrollReport(userId, startDate, endDate, title);
@@ -73,11 +85,10 @@ public class ReportController {
                     .body(reportBytes);
 
         } catch (IllegalArgumentException | EntityNotFoundException e) {
-            // Use a Global Exception Handler for a cleaner approach
-            // For now, keeping your current response logic for illustration
+            // Handle specific business logic exceptions for bad requests
             return ResponseEntity.badRequest().body(ApiResponse.badRequestException(e.getMessage()));
         } catch (Exception e) {
-            // General catch for other exceptions
+            // General catch for other unexpected exceptions
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.error(
                     HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     "Error generating payroll report.",
@@ -85,11 +96,22 @@ public class ReportController {
         }
     }
 
+    /**
+     * Generates an annual payroll report for a specific employee for a given year.
+     * The report is returned as a PDF file.
+     *
+     * @param title  Optional title for the report.
+     * @param userId The employee ID (user ID) for whom the annual payroll report is
+     *               generated.
+     * @param year   The year for which the annual payroll report is generated.
+     * @return A ResponseEntity containing the PDF report bytes, or an error
+     *         response.
+     */
     @GetMapping("/payroll/annual")
     public ResponseEntity<?> generateEmployeeAnnualPayrollReport(
             @RequestParam(required = false) String title,
-            @RequestParam String userId, // Required for this report
-            @RequestParam Integer year) { // Required
+            @RequestParam String userId,
+            @RequestParam Integer year) {
 
         try {
             byte[] reportBytes = reportService.generateEmployeeAnnualPayrollReport(userId, year, title);
@@ -113,10 +135,22 @@ public class ReportController {
         }
     }
 
+    /**
+     * Generates a summary annual payroll report for all employees for a given year.
+     * This report provides an overview of annual payroll data across the entire
+     * organization.
+     * The report is returned as a PDF file.
+     *
+     * @param title Optional title for the report.
+     * @param year  The year for which the annual payroll summary report is
+     *              generated.
+     * @return A ResponseEntity containing the PDF report bytes, or an error
+     *         response.
+     */
     @GetMapping("/payroll/annual/summary")
     public ResponseEntity<?> generateAllEmployeesAnnualPayrollReport(
             @RequestParam(required = false) String title,
-            @RequestParam Integer year) { // Required
+            @RequestParam Integer year) {
 
         try {
             byte[] reportBytes = reportService.generateAllEmployeesAnnualPayrollReport(year, title);

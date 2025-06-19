@@ -20,6 +20,11 @@ import com.oop.motorph.entity.LeaveRequest;
 import com.oop.motorph.service.LeaveRequestService;
 import com.oop.motorph.utils.ApiResponse;
 
+/**
+ * REST controller for managing employee leave requests.
+ * This controller provides endpoints for employees to view, create, and delete
+ * their own leave requests.
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/leave-requests")
@@ -28,13 +33,25 @@ public class LeaveRequestController {
     @Autowired
     private LeaveRequestService leaveRequestService;
 
+    /**
+     * Retrieves leave requests for a specific employee, optionally filtered by
+     * status.
+     * This endpoint is intended for employees to view their own leave requests.
+     *
+     * @param employeeNum The employee number for whom to retrieve leave requests
+     *                    (required).
+     * @param status      Optional status (e.g., "Pending", "Approved", "Rejected")
+     *                    to filter leave requests.
+     *                    Defaults to "Pending" if not provided.
+     * @return A ResponseEntity containing an ApiResponse with a list of
+     *         LeaveRequestDTOs or an error message.
+     */
     @GetMapping("")
     public ResponseEntity<ApiResponse<?>> getAllLeaveRequests(@RequestParam(required = true) Long employeeNum,
             @RequestParam(required = false, defaultValue = "Pending") String status) {
         try {
-            // If fetching created by HR Manager or User (CREATED BY ME)
             return ResponseEntity.ok().body(ApiResponse.success(
-                    " Fetched all leave requests successfully.",
+                    "Fetched all leave requests successfully.",
                     leaveRequestService.getLeaveRequestByEmployeeNum(employeeNum, status)));
 
         } catch (Exception e) {
@@ -45,6 +62,15 @@ public class LeaveRequestController {
         }
     }
 
+    /**
+     * Retrieves a single leave request by its unique ID.
+     * This endpoint allows an employee to view detailed information about a
+     * specific leave request they submitted.
+     *
+     * @param id The unique ID of the leave request to retrieve.
+     * @return A ResponseEntity containing an ApiResponse with the LeaveRequestDTO
+     *         or an error message.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<?>> getLeaveRequestById(@PathVariable Long id) {
         try {
@@ -59,6 +85,15 @@ public class LeaveRequestController {
         }
     }
 
+    /**
+     * Creates a new leave request.
+     * This endpoint allows an employee to submit a new leave request.
+     *
+     * @param leaveRequest The LeaveRequest entity containing the data for the new
+     *                     leave request.
+     * @return A ResponseEntity containing an ApiResponse with the created
+     *         LeaveRequestDTO or an error message.
+     */
     @PostMapping("")
     public ResponseEntity<ApiResponse<?>> createLeaveRequest(@RequestBody LeaveRequest leaveRequest) {
         try {
@@ -73,6 +108,14 @@ public class LeaveRequestController {
         }
     }
 
+    /**
+     * Deletes a leave request by its unique ID.
+     * This endpoint allows an employee to withdraw a submitted leave request.
+     *
+     * @param id The unique ID of the leave request to delete.
+     * @return A ResponseEntity containing an ApiResponse with the deleted
+     *         LeaveRequestDTO or an error message.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<?>> deleteLeaveRequestById(@PathVariable Long id) {
         try {
@@ -86,15 +129,3 @@ public class LeaveRequestController {
         }
     }
 }
-
-// Example post request
-/*
- * {
- * "employeeNum": 10001,
- * "startDate": "2024-02-22T15:07:02.000+00:00",
- * "endDate": "2024-02-24T15:07:03.000+00:00",
- * "notes": "adasdsadsadsda",
- * "leaveType": "Sick Leave",
- * "status": "Approved"
- * }
- */

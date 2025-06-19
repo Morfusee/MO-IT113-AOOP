@@ -21,6 +21,11 @@ import com.oop.motorph.dto.EmployeeRequestDTO;
 import com.oop.motorph.service.EmployeeService;
 import com.oop.motorph.utils.ApiResponse;
 
+/**
+ * REST controller for managing employee-related operations.
+ * Handles API requests for fetching, adding, updating, and deleting employee
+ * records.
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/employees")
@@ -28,6 +33,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Retrieves a list of all employees.
+     *
+     * @return A ResponseEntity containing an ApiResponse with a list of
+     *         EmployeeDTOs or an error message.
+     */
     @GetMapping("")
     public ResponseEntity<ApiResponse<?>> getAllEmployees() {
         try {
@@ -43,6 +54,13 @@ public class EmployeeController {
         }
     }
 
+    /**
+     * Retrieves a single employee by their employee number.
+     *
+     * @param employeeNum The employee number to retrieve.
+     * @return A ResponseEntity containing an ApiResponse with an EmployeeDTO or an
+     *         error message.
+     */
     @GetMapping("/{employeeNum}")
     public ResponseEntity<ApiResponse<?>> getEmployeeByEmployeeNum(@PathVariable Long employeeNum) {
         try {
@@ -51,7 +69,6 @@ public class EmployeeController {
                     "Employee fetched successfully.",
                     fetchedEmployee));
         } catch (Exception e) {
-
             return ResponseEntity.badRequest().body(ApiResponse.error(
                     Response.SC_BAD_REQUEST,
                     "Failed to fetch employee.",
