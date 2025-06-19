@@ -15,6 +15,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Represents a leave request submitted by an employee.
+ * This entity maps to the "LEAVEREQUEST" table in the database.
+ * It includes details such as the employee, leave period, type, and status.
+ */
 @Entity
 @Data
 @Builder
@@ -48,6 +53,10 @@ public class LeaveRequest {
     @Column(name = "status", nullable = false)
     private String status;
 
+    /**
+     * Default constructor for LeaveRequest.
+     * Initializes fields with default or current timestamp values.
+     */
     public LeaveRequest() {
         this.employeeNum = 0L;
         this.startDate = new Timestamp(System.currentTimeMillis());
@@ -57,6 +66,18 @@ public class LeaveRequest {
         this.status = "N/A";
     }
 
+    /**
+     * Parameterized constructor for LeaveRequest.
+     * Initializes a LeaveRequest with specified details.
+     *
+     * @param employeeNum The employee number submitting the request.
+     * @param startDate   The start date and time of the leave.
+     * @param endDate     The end date and time of the leave.
+     * @param notes       Any additional notes or reasons for the leave.
+     * @param leaveType   The type of leave (e.g., sick, vacation).
+     * @param status      The current status of the leave request (e.g., pending,
+     *                    approved).
+     */
     public LeaveRequest(Long employeeNum, Timestamp startDate, Timestamp endDate, String notes, String leaveType,
             String status) {
         this.employeeNum = employeeNum;
