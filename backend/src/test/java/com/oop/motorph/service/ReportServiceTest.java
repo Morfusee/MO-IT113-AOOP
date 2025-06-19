@@ -2,22 +2,26 @@ package com.oop.motorph.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import com.oop.motorph.dto.EmployeeDTO;
 import com.oop.motorph.dto.PayrollDTO;
 import com.oop.motorph.entity.Employee;
 import com.oop.motorph.entity.EmploymentInfo;
 import com.oop.motorph.entity.PersonalInfo;
+
 import jakarta.persistence.EntityNotFoundException;
 import net.sf.jasperreports.engine.JRException;
 
@@ -79,48 +83,73 @@ public class ReportServiceTest {
                 .build();
     }
 
+    /**
+     * Mocks payroll generation for a specific period.
+     */
     private void mockPayrollServiceGeneratePayrollForPeriod() {
         when(payrollService.generatePayrollForPeriod(eq(EMPLOYEE_NUMBER_VALID), any(Date.class), any(Date.class)))
                 .thenReturn(payrollDTO);
     }
 
+    /**
+     * Mocks employee retrieval by employee number.
+     */
     private void mockEmployeeServiceGetEmployeeByEmployeeNum() {
         when(employeeService.getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_VALID)).thenReturn(employeeDTO);
     }
 
+    /**
+     * Tests generating an employee payroll report for a specific period.
+     */
     @Test
     void testGenerateEmployeePayrollReport() throws JRException, FileNotFoundException {
         mockEmployeeServiceGetEmployeeByEmployeeNum();
         mockPayrollServiceGeneratePayrollForPeriod();
 
-        byte[] result = reportService.generateEmployeePayrollReport(EMPLOYEE_NUMBER_VALID_STR, START_DATE, END_DATE,
-                REPORT_NAME);
+        byte[] result = reportService.generateEmployeePayrollReport(
+                EMPLOYEE_NUMBER_VALID_STR, START_DATE, END_DATE, REPORT_NAME
+        );
 
         assertNotNull(result);
         verify(employeeService).getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_VALID);
         verify(payrollService).generatePayrollForPeriod(eq(EMPLOYEE_NUMBER_VALID), any(Date.class), any(Date.class));
     }
 
+    /**
+     * Tests that generating a report throws an error when start/end dates are null.
+     */
     @Test
     void testGenerateEmployeePayrollReport_NullDates() {
-        assertThrows(IllegalArgumentException.class, () -> reportService
-                .generateEmployeePayrollReport(EMPLOYEE_NUMBER_VALID_STR, null, null, REPORT_NAME));
+        assertThrows(IllegalArgumentException.class, () ->
+                reportService.generateEmployeePayrollReport(
+                        EMPLOYEE_NUMBER_VALID_STR, null, null, REPORT_NAME));
     }
 
+    /**
+     * Tests that invalid employee number strings throw an error.
+     */
     @Test
     void testGenerateEmployeePayrollReport_InvalidUserId() {
-        assertThrows(IllegalArgumentException.class, () -> reportService
-                .generateEmployeePayrollReport(INVALID_USER_ID_STR, START_DATE, END_DATE, REPORT_NAME));
+        assertThrows(IllegalArgumentException.class, () ->
+                reportService.generateEmployeePayrollReport(
+                        INVALID_USER_ID_STR, START_DATE, END_DATE, REPORT_NAME));
     }
 
+    /**
+     * Tests that an exception is thrown when the employee is not found.
+     */
     @Test
     void testGenerateEmployeePayrollReport_EmployeeNotFound() {
         when(employeeService.getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_INVALID)).thenReturn(null);
 
-        assertThrows(EntityNotFoundException.class, () -> reportService
-                .generateEmployeePayrollReport(EMPLOYEE_NUMBER_INVALID_STR, START_DATE, END_DATE, REPORT_NAME));
+        assertThrows(EntityNotFoundException.class, () ->
+                reportService.generateEmployeePayrollReport(
+                        EMPLOYEE_NUMBER_INVALID_STR, START_DATE, END_DATE, REPORT_NAME));
     }
 
+    /**
+     * Tests generating an annual payroll report for a specific employee.
+     */
     @Test
     void testGenerateEmployeeAnnualPayrollReport() throws JRException, FileNotFoundException {
         List<PayrollDTO> annualPayroll = Arrays.asList(payrollDTO);
@@ -128,20 +157,27 @@ public class ReportServiceTest {
         when(payrollService.generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, YEAR))
                 .thenReturn(annualPayroll);
 
-        byte[] result = reportService.generateEmployeeAnnualPayrollReport(EMPLOYEE_NUMBER_VALID_STR, YEAR,
-                ANNUAL_REPORT_NAME);
+        byte[] result = reportService.generateEmployeeAnnualPayrollReport(
+                EMPLOYEE_NUMBER_VALID_STR, YEAR, ANNUAL_REPORT_NAME);
 
         assertNotNull(result);
         verify(employeeService).getEmployeeByEmployeeNum(EMPLOYEE_NUMBER_VALID);
         verify(payrollService).generateAnnualPayrollForEmployee(EMPLOYEE_NUMBER_VALID, YEAR);
     }
 
+    /**
+     * Tests that passing null as year for employee annual report throws an error.
+     */
     @Test
     void testGenerateEmployeeAnnualPayrollReport_NullYear() {
-        assertThrows(IllegalArgumentException.class, () -> reportService
-                .generateEmployeeAnnualPayrollReport(EMPLOYEE_NUMBER_VALID_STR, null, ANNUAL_REPORT_NAME));
+        assertThrows(IllegalArgumentException.class, () ->
+                reportService.generateEmployeeAnnualPayrollReport(
+                        EMPLOYEE_NUMBER_VALID_STR, null, ANNUAL_REPORT_NAME));
     }
 
+    /**
+     * Tests generating annual payroll report for all employees.
+     */
     @Test
     void testGenerateAllEmployeesAnnualPayrollReport() throws JRException, FileNotFoundException {
         List<PayrollDTO> annualPayrollSummary = Arrays.asList(payrollDTO);
@@ -153,9 +189,12 @@ public class ReportServiceTest {
         verify(payrollService).generateAnnualPayrollsForAllEmployees(YEAR);
     }
 
+    /**
+     * Tests that passing null as year for all-employee report throws an error.
+     */
     @Test
     void testGenerateAllEmployeesAnnualPayrollReport_NullYear() {
-        assertThrows(IllegalArgumentException.class,
-                () -> reportService.generateAllEmployeesAnnualPayrollReport(null, SUMMARY_REPORT_NAME));
+        assertThrows(IllegalArgumentException.class, () ->
+                reportService.generateAllEmployeesAnnualPayrollReport(null, SUMMARY_REPORT_NAME));
     }
 }

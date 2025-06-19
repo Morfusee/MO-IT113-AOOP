@@ -2,17 +2,20 @@ package com.oop.motorph.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import com.oop.motorph.dto.AttendanceDTO;
 import com.oop.motorph.dto.mapper.AttendanceDTOMapper;
 import com.oop.motorph.entity.Attendance;
@@ -30,6 +33,7 @@ public class AttendanceServiceTest {
     @InjectMocks
     private AttendanceService attendanceService;
 
+    // Test constants
     private static final Long EMPLOYEE_NUMBER = 10001L;
     private static final Date DATE_1 = Date.valueOf("2024-02-01");
     private static final Date DATE_2 = Date.valueOf("2024-02-02");
@@ -47,22 +51,33 @@ public class AttendanceServiceTest {
     private AttendanceDTO attendanceDTO2;
     private List<Attendance> attendances;
 
+    /**
+     * Sets up test data before each test.
+     */
     @BeforeEach
     void setUp() {
         attendance1 = new Attendance(EMPLOYEE_NUMBER, DATE_1, TIME_IN, TIME_OUT);
         attendance2 = new Attendance(EMPLOYEE_NUMBER, DATE_2, TIME_IN, TIME_OUT);
 
-        attendanceDTO1 = new AttendanceDTO(EMPLOYEE_NUMBER, DATE_1, TIME_IN, TIME_OUT, STATUS_PRESENT, RENDERED_HOURS, OVERTIME_HOURS);
-        attendanceDTO2 = new AttendanceDTO(EMPLOYEE_NUMBER, DATE_2, TIME_IN, TIME_OUT, STATUS_PRESENT, RENDERED_HOURS, OVERTIME_HOURS);
+        attendanceDTO1 = new AttendanceDTO(EMPLOYEE_NUMBER, DATE_1, TIME_IN, TIME_OUT, STATUS_PRESENT, RENDERED_HOURS,
+                OVERTIME_HOURS);
+        attendanceDTO2 = new AttendanceDTO(EMPLOYEE_NUMBER, DATE_2, TIME_IN, TIME_OUT, STATUS_PRESENT, RENDERED_HOURS,
+                OVERTIME_HOURS);
 
         attendances = Arrays.asList(attendance1, attendance2);
     }
 
+    /**
+     * Helper to stub mapper behavior for a list of attendance entities.
+     */
     private void mockAttendanceDTOMapperForList() {
         when(attendanceDTOMapper.apply(attendance1)).thenReturn(attendanceDTO1);
         when(attendanceDTOMapper.apply(attendance2)).thenReturn(attendanceDTO2);
     }
 
+    /**
+     * Helper to assert equality of two {@link AttendanceDTO} objects.
+     */
     private void assertAttendanceDTO(AttendanceDTO expected, AttendanceDTO actual) {
         assertNotNull(actual);
         assertEquals(expected.employeeNumber(), actual.employeeNumber());
@@ -74,6 +89,10 @@ public class AttendanceServiceTest {
         assertEquals(expected.overtimeHours(), actual.overtimeHours());
     }
 
+    /**
+     * Verifies that {@link AttendanceService#getAllAttendances()} returns all
+     * records correctly.
+     */
     @Test
     void testGetAllAttendances() {
         when(attendanceRepository.findAll()).thenReturn(attendances);
@@ -87,6 +106,10 @@ public class AttendanceServiceTest {
         assertAttendanceDTO(attendanceDTO2, result.get(1));
     }
 
+    /**
+     * Verifies that {@link AttendanceService#getAttendanceById(Long)} returns the
+     * correct record.
+     */
     @Test
     void testGetAttendanceById() {
         when(attendanceRepository.findById(ATTENDANCE_ID_VALID)).thenReturn(Optional.of(attendance1));
@@ -97,6 +120,10 @@ public class AttendanceServiceTest {
         assertAttendanceDTO(attendanceDTO1, result);
     }
 
+    /**
+     * Ensures that requesting an invalid attendance ID throws a
+     * {@link RuntimeException}.
+     */
     @Test
     void testGetAttendanceById_NotFound() {
         when(attendanceRepository.findById(ATTENDANCE_ID_INVALID)).thenReturn(Optional.empty());
@@ -106,6 +133,9 @@ public class AttendanceServiceTest {
         });
     }
 
+    /**
+     * Verifies filtering by employee number returns correct mapped DTOs.
+     */
     @Test
     void testGetAttendanceByEmployeeNum() {
         when(attendanceRepository.findByEmployeeNumber(EMPLOYEE_NUMBER)).thenReturn(attendances);
@@ -119,6 +149,10 @@ public class AttendanceServiceTest {
         assertAttendanceDTO(attendanceDTO2, result.get(1));
     }
 
+    /**
+     * Verifies filtering by employee number and date range returns correct mapped
+     * DTOs.
+     */
     @Test
     void testGetAttendanceByEmployeeNumAndDateRange() {
         Date startDate = DATE_1;

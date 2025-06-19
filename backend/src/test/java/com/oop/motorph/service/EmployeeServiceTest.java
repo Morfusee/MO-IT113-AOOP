@@ -1,17 +1,19 @@
 package com.oop.motorph.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import com.oop.motorph.dto.EmployeeDTO;
 import com.oop.motorph.dto.mapper.EmployeeDTOMapper;
 import com.oop.motorph.entity.Employee;
@@ -30,6 +32,7 @@ public class EmployeeServiceTest {
     @InjectMocks
     private EmployeeService employeeService;
 
+    // Constants for test data
     private static final Long EMPLOYEE_NUMBER_1 = 10001L;
     private static final Long EMPLOYEE_NUMBER_2 = 10002L;
     private static final String USERNAME_1 = "john.doe";
@@ -51,6 +54,9 @@ public class EmployeeServiceTest {
     private EmployeeDTO employeeDTO2;
     private List<Employee> employees;
 
+    /**
+     * Initializes test data before each test case.
+     */
     @BeforeEach
     void setUp() {
         employee1 = new Employee();
@@ -69,11 +75,17 @@ public class EmployeeServiceTest {
         employees = Arrays.asList(employee1, employee2);
     }
 
+    /**
+     * Stubs the mapper to return expected DTOs.
+     */
     private void mockEmployeeDTOMapper() {
         when(employeeDTOMapper.apply(employee1)).thenReturn(employeeDTO1);
         when(employeeDTOMapper.apply(employee2)).thenReturn(employeeDTO2);
     }
 
+    /**
+     * Helper method to validate that two {@link EmployeeDTO} instances are equal.
+     */
     private void assertEmployeeDTO(EmployeeDTO expected, EmployeeDTO actual) {
         assertNotNull(actual);
         assertEquals(expected.employee().getEmployeeNumber(), actual.employee().getEmployeeNumber());
@@ -90,6 +102,9 @@ public class EmployeeServiceTest {
                 actual.employee().getPersonalInfo().getPhoneNumber());
     }
 
+    /**
+     * Tests {@link EmployeeService#getAllEmployees()} for correct result.
+     */
     @Test
     void testGetAllEmployees() {
         when(employeeRepository.findAll()).thenReturn(employees);
@@ -103,6 +118,9 @@ public class EmployeeServiceTest {
         assertEmployeeDTO(employeeDTO2, result.get(1));
     }
 
+    /**
+     * Tests {@link EmployeeService#getEmployeeById(Long)} for a valid employee ID.
+     */
     @Test
     void testGetEmployeeById() {
         when(employeeRepository.findById(EMPLOYEE_NUMBER_1)).thenReturn(Optional.of(employee1));
@@ -113,6 +131,10 @@ public class EmployeeServiceTest {
         assertEmployeeDTO(employeeDTO1, result);
     }
 
+    /**
+     * Tests {@link EmployeeService#getEmployeeByEmployeeNum(Long)} using the
+     * employee number.
+     */
     @Test
     void testGetEmployeeByEmployeeNum() {
         when(employeeRepository.findByEmployeeNumber(EMPLOYEE_NUMBER_1)).thenReturn(Optional.of(employee1));
@@ -123,6 +145,10 @@ public class EmployeeServiceTest {
         assertEmployeeDTO(employeeDTO1, result);
     }
 
+    /**
+     * Tests {@link EmployeeService#getAllEmployeeNums()} for retrieving employee
+     * numbers only.
+     */
     @Test
     void testGetAllEmployeeNums() {
         List<Long> expectedEmployeeNums = Arrays.asList(EMPLOYEE_NUMBER_1, EMPLOYEE_NUMBER_2);

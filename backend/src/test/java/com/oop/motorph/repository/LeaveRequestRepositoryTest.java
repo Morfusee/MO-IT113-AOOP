@@ -15,9 +15,6 @@ import com.oop.motorph.entity.LeaveRequest;
 
 import jakarta.transaction.Transactional;
 
-/**
- * Unit tests for the {@link LeaveRequestRepository}.
- */
 @DataJpaTest
 public class LeaveRequestRepositoryTest {
 

@@ -2,12 +2,14 @@ package com.oop.motorph.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import com.oop.motorph.dto.EmployeeDTO;
 import com.oop.motorph.entity.Employee;
 import com.oop.motorph.entity.PersonalInfo;
@@ -63,6 +65,9 @@ public class UserServiceTest {
         employeeDTO = new EmployeeDTO(employee);
     }
 
+    /**
+     * Verifies that the returned EmployeeDTO matches the expected properties.
+     */
     private void assertEmployeeDTOProperties(EmployeeDTO expected, EmployeeDTO actual) {
         assertNotNull(actual);
         assertNotNull(actual.employee());
@@ -76,6 +81,9 @@ public class UserServiceTest {
                 actual.employee().getPersonalInfo().getFirstName());
     }
 
+    /**
+     * Tests successful login with correct credentials.
+     */
     @Test
     void testLoginUser_Success() {
         when(userRepository.findByUsernameAndPassword(USERNAME, PASSWORD)).thenReturn(user);
@@ -86,9 +94,11 @@ public class UserServiceTest {
         assertEmployeeDTOProperties(employeeDTO, result);
     }
 
+    /**
+     * Tests login where username and password contain extra whitespace.
+     */
     @Test
     void testLoginUser_WithWhitespace() {
-        // The service should trim whitespace before calling the repository
         when(userRepository.findByUsernameAndPassword(USERNAME, PASSWORD)).thenReturn(user);
         when(employeeService.getEmployeeById(USER_ID)).thenReturn(employeeDTO);
 
@@ -97,6 +107,9 @@ public class UserServiceTest {
         assertEmployeeDTOProperties(employeeDTO, result);
     }
 
+    /**
+     * Tests login attempt with incorrect credentials.
+     */
     @Test
     void testLoginUser_InvalidCredentials() {
         when(userRepository.findByUsernameAndPassword(WRONG_USERNAME, WRONG_PASSWORD)).thenReturn(null);
@@ -106,6 +119,9 @@ public class UserServiceTest {
         assertNull(result);
     }
 
+    /**
+     * Tests successful authentication using a valid employee number.
+     */
     @Test
     void testAuthenticateUser_Success() {
         when(employeeService.getEmployeeByEmployeeNum(EMPLOYEE_NUMBER)).thenReturn(employeeDTO);
@@ -115,6 +131,9 @@ public class UserServiceTest {
         assertEmployeeDTOProperties(employeeDTO, result);
     }
 
+    /**
+     * Tests authentication failure when the employee number is not found.
+     */
     @Test
     void testAuthenticateUser_InvalidEmployee() {
         when(employeeService.getEmployeeByEmployeeNum(INVALID_EMPLOYEE_NUMBER)).thenReturn(null);
@@ -124,6 +143,9 @@ public class UserServiceTest {
         assertNull(result);
     }
 
+    /**
+     * Tests authentication with a null employee number.
+     */
     @Test
     void testAuthenticateUser_NullEmployeeNum() {
         EmployeeDTO result = userService.authenticateUser(null);

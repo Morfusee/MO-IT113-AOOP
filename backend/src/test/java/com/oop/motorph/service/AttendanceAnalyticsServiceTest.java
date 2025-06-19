@@ -38,6 +38,7 @@ public class AttendanceAnalyticsServiceTest {
     private List<Attendance> attendances;
     private AttendanceAnalyticsDTO expectedDTO;
 
+    // Test constants
     private static final Long EMPLOYEE_NUMBER = 10001L;
     private static final Date START_DATE = Date.valueOf("2024-02-01");
     private static final Date END_DATE = Date.valueOf("2024-02-02");
@@ -45,6 +46,9 @@ public class AttendanceAnalyticsServiceTest {
     private static final Time CHECK_OUT_TIME = Time.valueOf("17:00:00");
     private static final double TOTAL_RENDERED_HOURS = 18.0;
 
+    /**
+     * Initializes test data before each test case.
+     */
     @BeforeEach
     void setUp() {
         attendance1 = new Attendance(EMPLOYEE_NUMBER, START_DATE, CHECK_IN_TIME, CHECK_OUT_TIME);
@@ -53,10 +57,16 @@ public class AttendanceAnalyticsServiceTest {
         expectedDTO = new AttendanceAnalyticsDTO(2L, 0L, 0L, TOTAL_RENDERED_HOURS, CHECK_IN_TIME, CHECK_OUT_TIME);
     }
 
+    /**
+     * Mocks the mapper's behavior for converting attendance list to DTO.
+     */
     private void mockMapperBehavior() {
         when(attendanceAnalyticsDTOMapper.mapToAnalyticsDTO(attendances)).thenReturn(expectedDTO);
     }
 
+    /**
+     * Asserts the content of an {@link AttendanceAnalyticsDTO}.
+     */
     private void assertAttendanceAnalyticsDTO(AttendanceAnalyticsDTO result) {
         assertNotNull(result);
         assertEquals(expectedDTO.totalPresent(), result.totalPresent());
@@ -67,44 +77,45 @@ public class AttendanceAnalyticsServiceTest {
         assertEquals(expectedDTO.averageCheckOut(), result.averageCheckOut());
     }
 
+    /**
+     * Tests that analytics are correctly returned for all attendances.
+     */
     @Test
     void testGetAllAttendanceAnalytics() {
-        // Arrange
         when(attendanceRepository.findAll()).thenReturn(attendances);
         mockMapperBehavior();
 
-        // Act
         AttendanceAnalyticsDTO result = attendanceAnalyticsService.getAllAttendanceAnalytics();
 
-        // Assert
         assertAttendanceAnalyticsDTO(result);
     }
 
+    /**
+     * Tests that analytics are returned for a specific employee.
+     */
     @Test
     void testGetAttendanceAnalyticsByEmployeeNum() {
-        // Arrange
         when(attendanceRepository.findByEmployeeNumber(EMPLOYEE_NUMBER)).thenReturn(attendances);
         mockMapperBehavior();
 
-        // Act
         AttendanceAnalyticsDTO result = attendanceAnalyticsService.getAttendanceAnalyticsByEmployeeNum(EMPLOYEE_NUMBER);
 
-        // Assert
         assertAttendanceAnalyticsDTO(result);
     }
 
+    /**
+     * Tests that analytics are returned for a specific employee within a date
+     * range.
+     */
     @Test
     void testGetAttendanceAnalyticsByEmployeeNumAndDateRange() {
-        // Arrange
         when(attendanceRepository.findByEmployeeNumberAndDateBetween(EMPLOYEE_NUMBER, START_DATE, END_DATE))
                 .thenReturn(attendances);
         mockMapperBehavior();
 
-        // Act
         AttendanceAnalyticsDTO result = attendanceAnalyticsService.getAttendanceAnalyticsByEmployeeNum(
                 EMPLOYEE_NUMBER, START_DATE, END_DATE);
 
-        // Assert
         assertAttendanceAnalyticsDTO(result);
     }
 }

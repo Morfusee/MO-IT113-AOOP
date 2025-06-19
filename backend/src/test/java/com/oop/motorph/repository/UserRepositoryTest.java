@@ -12,9 +12,6 @@ import com.oop.motorph.entity.*;
 
 import jakarta.transaction.Transactional;
 
-/**
- * Unit tests for {@link UserRepository}.
- */
 @DataJpaTest
 public class UserRepositoryTest {
 
