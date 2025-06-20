@@ -18,6 +18,7 @@ import {
   IconArrowRight,
   IconCaretDownFilled,
   IconDownload,
+  IconPlus,
 } from "@tabler/icons-react";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
@@ -51,6 +52,7 @@ import {
   formatTaxableSalary,
 } from "../utils/formatters";
 import { isAdmin } from "../utils/permissionUtils";
+import { modals } from "@mantine/modals";
 
 function Payroll() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2022, 1));
@@ -76,8 +78,7 @@ function Payroll() {
       className="relative"
     >
       <Flex mah={"100%"} w={"100%"} gap={rem(10)} direction={"column"}>
-        {/* <Flex gap={10} justify={"space-between"} wrap={"wrap"}> */}
-        <Flex gap={10} align={"center"}>
+        <Flex gap={10} wrap={"wrap"}>
           <DatesProvider
             settings={{
               locale: "en",
@@ -94,18 +95,27 @@ function Payroll() {
             />
           </DatesProvider>
           <AsyncSelect />
-        </Flex>
-        <Flex gap={10} align={"center"}>
-          <Button variant="default" onClick={getGeneratePayrollReport}>
-            Approve
+          <Button
+            ml={"auto"}
+            leftSection={<IconPlus size={15} />}
+            variant="default"
+            onClick={() =>
+              modals.openContextModal({
+                modal: "generateReport",
+                innerProps: {},
+              })
+            }
+          >
+            Generate Report
           </Button>
         </Flex>
+        <Flex gap={rem(10)} wrap={"wrap"}>
+          {payrollMonths.map((month, index) => (
+            <PayrollList month={month} key={index} />
+          ))}
+        </Flex>
       </Flex>
-      <Flex gap={rem(10)} wrap={"wrap"}>
-        {payrollMonths.map((month, index) => (
-          <PayrollList month={month} key={index} />
-        ))}
-      </Flex>
+
       <PayrollDetails />
       {/* </Flex> */}
     </Container>
