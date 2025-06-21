@@ -7,24 +7,32 @@ import {
   ScrollArea,
   useCombobox,
 } from "@mantine/core";
+import { UseFormReturnType } from "@mantine/form";
 import { useMemo, useState } from "react";
 import employeeController from "../../controllers/employeeController";
+import userController from "../../controllers/userController";
 import { FetchedUser } from "../../types/responses";
 import { formatFullName } from "../../utils/formatters";
-import { useSearchParams } from "react-router";
-import userController from "../../controllers/userController";
+import { IGenerateReportForm } from "../modals/GenerateReport";
 import { isAdmin } from "../../utils/permissionUtils";
 
-export function AsyncSelect({ label }: { label?: string }) {
-  const [searchParams, setSearchParams] = useSearchParams("");
+export function NoParamAsyncSelect({
+  label,
+  externalForm,
+}: {
+  label?: string;
+  externalForm: UseFormReturnType<IGenerateReportForm>;
+}) {
   const [data, setData] = useState<FetchedUser[]>([]);
   const [loading, setLoading] = useState(false);
 
   const { getAllEmployees } = employeeController();
   const { getUser } = userController();
 
+  const employeeFullName = externalForm.getValues().employeeFullName;
+
   const filteredOptions = useMemo(() => {
-    const search = searchParams.get("fullName")?.toString();
+    const search = employeeFullName;
 
     if (!search) return data;
 
@@ -36,7 +44,7 @@ export function AsyncSelect({ label }: { label?: string }) {
         .toLowerCase()
         .includes(search.toLowerCase().trim())
     );
-  }, [data, searchParams]);
+  }, [data, employeeFullName]);
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -52,19 +60,18 @@ export function AsyncSelect({ label }: { label?: string }) {
     },
   });
 
-  const handleSearchParamsCallback = (
-    params: URLSearchParams,
+  const handleExternalFormCallback = (
+    form: UseFormReturnType<IGenerateReportForm>,
     value: string
   ) => {
     // If the value is empty, remove the employee number from the search params
     if (value === "") {
-      params.delete("fullName");
-      params.delete("employeeNumber");
-      return params;
+      form.setFieldValue("employeeFullName", "");
+      return form;
     }
 
-    params.set("fullName", value);
-    params.set(
+    form.setFieldValue("employeeFullName", value);
+    form.setFieldValue(
       "employeeNumber",
       data
         .find(
@@ -78,30 +85,30 @@ export function AsyncSelect({ label }: { label?: string }) {
         )
         ?.employee.employeeNumber.toString() || ""
     );
-    return params;
+    return form;
   };
 
   const handleResetValues = () => {
-    setSearchParams((params) => handleSearchParamsCallback(params, ""));
+    externalForm.setFieldValue("employeeFullName", "");
+    externalForm.setFieldValue("employeeNumber", "");
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     combobox.openDropdown();
     combobox.updateSelectedOptionIndex();
-    setSearchParams((params) =>
-      handleSearchParamsCallback(params, event.currentTarget.value)
-    );
+    handleExternalFormCallback(externalForm, event.currentTarget.value);
   };
 
   const handleOnBlur = () => {
     combobox.closeDropdown();
-    setSearchParams((params) =>
-      handleSearchParamsCallback(params, searchParams.get("fullName") || "")
+    handleExternalFormCallback(
+      externalForm,
+      externalForm.getValues().employeeFullName || ""
     );
   };
 
   const handleOnOptionSubmit = (value: string) => {
-    setSearchParams((params) => handleSearchParamsCallback(params, value));
+    handleExternalFormCallback(externalForm, value);
     combobox.closeDropdown();
   };
 
@@ -109,20 +116,21 @@ export function AsyncSelect({ label }: { label?: string }) {
     return isAdmin(getUser()?.employmentInfo.position);
   }, [getUser]);
 
-  if (!memoizedIsAdmin) return null;
-
   return (
     <Combobox
+      disabled={memoizedIsAdmin}
       store={combobox}
       onOptionSubmit={handleOnOptionSubmit}
     >
       <Combobox.Target>
         <InputBase
-          value={searchParams.get("fullName") || ""}
+          key={externalForm.key("employeeFullName")}
+          {...externalForm.getInputProps("employeeFullName")}
+          value={employeeFullName || ""}
           rightSection={
             loading ? (
               <Loader size={18} />
-            ) : searchParams.get("fullName") !== null ? (
+            ) : employeeFullName !== null ? (
               <CloseButton
                 size="sm"
                 onMouseDown={(event) => event.preventDefault()}
@@ -134,7 +142,6 @@ export function AsyncSelect({ label }: { label?: string }) {
             )
           }
           onClick={() => combobox.toggleDropdown()}
-          onChange={handleOnChange}
           onBlur={handleOnBlur}
           placeholder="Search Employee"
           miw={rem(300)}
@@ -144,6 +151,7 @@ export function AsyncSelect({ label }: { label?: string }) {
               paddingBottom: label ? "5px" : "0px",
             },
           }}
+          onChange={handleOnChange}
         />
       </Combobox.Target>
 
