@@ -117,16 +117,13 @@ export function NoParamAsyncSelect({
   }, [getUser]);
 
   return (
-    <Combobox
-      disabled={memoizedIsAdmin}
-      store={combobox}
-      onOptionSubmit={handleOnOptionSubmit}
-    >
+    <Combobox store={combobox} onOptionSubmit={handleOnOptionSubmit}>
       <Combobox.Target>
         <InputBase
           key={externalForm.key("employeeFullName")}
           {...externalForm.getInputProps("employeeFullName")}
           value={employeeFullName || ""}
+          disabled={!memoizedIsAdmin}
           rightSection={
             loading ? (
               <Loader size={18} />
@@ -136,6 +133,7 @@ export function NoParamAsyncSelect({
                 onMouseDown={(event) => event.preventDefault()}
                 onClick={handleResetValues}
                 aria-label="Clear value"
+                disabled={!memoizedIsAdmin}
               />
             ) : (
               <Combobox.Chevron />
