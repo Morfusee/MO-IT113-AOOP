@@ -53,12 +53,13 @@ import {
 } from "../utils/formatters";
 import { isAdmin } from "../utils/permissionUtils";
 import { modals } from "@mantine/modals";
+import reportController from "../controllers/reportController";
 
 function Payroll() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2022, 1));
   const [payrollMonths, setPayrollMonths] = useState<FetchedPayrollMonths>([]);
 
-  const { getPayrollMonths, getGeneratePayrollReport } = payrollController();
+  const { getPayrollMonths } = payrollController();
 
   useEffect(() => {
     getPayrollMonths(selectedDate).then((response) => {
@@ -183,9 +184,15 @@ function PayrollList({ month }: { month: FetchedPayrollMonths[number] }) {
 
 function PayrollDetails() {
   const [searchParam, setSearchParam] = useSearchParams();
-  const { getPayroll, getGeneratePayrollReport } = payrollController();
+  const { getPayroll } = payrollController();
   const { getUser } = userController();
+  const { getEmployeePayrollReport } = reportController();
 
+  // Local Vars
+  const startDate = searchParam.get("startDate")?.toString()!;
+  const endDate = searchParam.get("endDate")?.toString()!;
+
+  // Use States
   const [payrollDetails, setPayrollDetails] = useState({
     grossSalary: grossSalaryDetailsFallback,
     allowances: allowancesDetailsFallback,
@@ -195,9 +202,22 @@ function PayrollDetails() {
     netSalary: netSalaryDetailsFallback,
   });
 
-  const memoizedPayroll = useMemo(() => {
+  // Funcs
+  const employeeToFetch = useMemo(() => {
     const user = getUser();
-    let employeeToFetch = user?.employeeNumber;
+    if (!user) return undefined;
+    if (
+      isAdmin(user.employmentInfo.position) &&
+      searchParam.get("employeeNumber")
+    ) {
+      return parseInt(searchParam.get("employeeNumber")!);
+    }
+    return user.employeeNumber;
+  }, [searchParam]);
+
+  const memoizedPayroll = useMemo(() => {
+    // const user = getUser();
+    // let employeeToFetch = user?.employeeNumber;
     const startDate = searchParam.get("startDate");
     const endDate = searchParam.get("endDate");
 
@@ -205,12 +225,12 @@ function PayrollDetails() {
       return;
     }
 
-    if (
-      isAdmin(user?.employmentInfo.position) &&
-      searchParam.get("employeeNumber")
-    ) {
-      employeeToFetch = parseInt(searchParam.get("employeeNumber")!);
-    }
+    // if (
+    //   isAdmin(user?.employmentInfo.position) &&
+    //   searchParam.get("employeeNumber")
+    // ) {
+    //   employeeToFetch = parseInt(searchParam.get("employeeNumber")!);
+    // }
 
     getPayroll(employeeToFetch, startDate, endDate).then((response) => {
       setPayrollDetails({
@@ -278,7 +298,14 @@ function PayrollDetails() {
               <ActionIcon
                 variant="subtle"
                 ml={"auto"}
-                onClick={getGeneratePayrollReport}
+                onClick={() =>
+                  getEmployeePayrollReport(
+                    "Employee Payroll Report",
+                    employeeToFetch?.toString()!,
+                    startDate,
+                    endDate
+                  )
+                }
               >
                 <IconDownload />
               </ActionIcon>
