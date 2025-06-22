@@ -12,5 +12,5 @@ export const BackendRoutes = {
   LEAVE_REQUEST: "/leave-requests",
   LOGOUT: "/users/logout",
   PAYROLL: "/payroll",
-  GENERATE_REPORT: "/reports/payroll"
+  REPORT: "/reports"
 };
