@@ -2,58 +2,29 @@ package com.oop.motorph.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-// @NoArgsConstructor
-// @AllArgsConstructor
-// @Data
+/**
+ * Represents embedded employment information for an employee.
+ * This class is designed to be embedded within an {@link Employee} entity,
+ * allowing its fields to be directly mapped into the same table as the owning
+ * entity.
+ * It provides default values for new instances.
+ */
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Embeddable
 public class EmploymentInfo {
 
     @Column(name = "status")
-    private String status;
+    private String status = "Regular"; // Default status for a new employee.
 
     @Column(name = "position")
-    private String position;
+    private String position = "N/A"; // Default position for a new employee.
 
     @Column(name = "immediate_supervisor")
-    private String immediateSupervisor;
-
-    // Constructors
-    public EmploymentInfo() {
-        this.status = "Regular";
-        this.position = "N/A";
-        this.immediateSupervisor = "N/A";
-    }
-
-    public EmploymentInfo(String status, String position, String immediateSupervisor) {
-        this.status = status;
-        this.position = position;
-        this.immediateSupervisor = immediateSupervisor;
-    }
-
-    // Getters
-    public String getStatus() {
-        return status;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public String getImmediateSupervisor() {
-        return immediateSupervisor;
-    }
-
-    // Setters
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public void setImmediateSupervisor(String immediateSupervisor) {
-        this.immediateSupervisor = immediateSupervisor;
-    }
+    private String immediateSupervisor = "N/A"; // Default immediate supervisor for a new employee.
 }

@@ -15,7 +15,7 @@ import { useSearchParams } from "react-router";
 import userController from "../../controllers/userController";
 import { isAdmin } from "../../utils/permissionUtils";
 
-export function AsyncSelect() {
+export function AsyncSelect({ label }: { label?: string }) {
   const [searchParams, setSearchParams] = useSearchParams("");
   const [data, setData] = useState<FetchedUser[]>([]);
   const [loading, setLoading] = useState(false);
@@ -114,7 +114,6 @@ export function AsyncSelect() {
   return (
     <Combobox
       store={combobox}
-      withinPortal={false}
       onOptionSubmit={handleOnOptionSubmit}
     >
       <Combobox.Target>
@@ -139,6 +138,12 @@ export function AsyncSelect() {
           onBlur={handleOnBlur}
           placeholder="Search Employee"
           miw={rem(300)}
+          label={label}
+          styles={{
+            label: {
+              paddingBottom: label ? "5px" : "0px",
+            },
+          }}
         />
       </Combobox.Target>
 

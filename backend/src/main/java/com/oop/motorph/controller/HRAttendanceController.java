@@ -19,6 +19,13 @@ import com.oop.motorph.service.AttendanceAnalyticsService;
 import com.oop.motorph.service.AttendanceService;
 import com.oop.motorph.utils.ApiResponse;
 
+/**
+ * REST controller for Human Resources (HR) to manage attendance records and
+ * analytics.
+ * This controller provides endpoints for HR personnel to view attendance data
+ * for all employees or specific employees,
+ * with optional date filtering.
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/manager/attendances")
@@ -30,6 +37,21 @@ public class HRAttendanceController {
     @Autowired
     private AttendanceAnalyticsService attendanceAnalyticsService;
 
+    /**
+     * Retrieves attendance records based on optional employee number and date
+     * range.
+     * This endpoint allows HR to fetch all attendance records, or filter by
+     * employee number,
+     * or by a date range, or a combination of employee number and date range.
+     *
+     * @param employeeNum  Optional employee number to filter attendance records.
+     * @param startDateStr Optional start date string (yyyy-MM-dd) to filter
+     *                     attendance records.
+     * @param endDateStr   Optional end date string (yyyy-MM-dd) to filter
+     *                     attendance records.
+     * @return A ResponseEntity containing an ApiResponse with attendance data or an
+     *         error message.
+     */
     @GetMapping("")
     public ResponseEntity<ApiResponse<?>> getAttendances(
             @RequestParam(required = false) Long employeeNum,
@@ -55,12 +77,12 @@ public class HRAttendanceController {
                         attendanceService.getAttendanceByEmployeeNum(employeeNum)));
             }
 
-            // Get the first day of the month
+            // If only endDate is provided, set startDate to the first day of the month
             if (startDate == null && endDate != null) {
                 startDate = Date.valueOf(endDate.toLocalDate().withDayOfMonth(1));
             }
 
-            // Get the last day of the month
+            // If only startDate is provided, set endDate to the last day of the month
             if (endDate == null && startDate != null) {
                 endDate = Date.valueOf(startDate.toLocalDate().withDayOfMonth(startDate.toLocalDate().lengthOfMonth()));
             }
@@ -77,6 +99,15 @@ public class HRAttendanceController {
 
     }
 
+    /**
+     * Retrieves a single attendance record by its unique ID.
+     * This endpoint is useful for HR to view detailed information about a specific
+     * attendance entry.
+     *
+     * @param attendanceId The unique ID of the attendance record to retrieve.
+     * @return A ResponseEntity containing an ApiResponse with the AttendanceDTO or
+     *         an error message.
+     */
     @GetMapping("/{attendanceId}")
     public ResponseEntity<ApiResponse<?>> getAttendanceById(@PathVariable Long attendanceId) {
         try {
@@ -92,6 +123,21 @@ public class HRAttendanceController {
         }
     }
 
+    /**
+     * Retrieves attendance analytics based on optional employee number and date
+     * range.
+     * This endpoint provides aggregated attendance data for HR, allowing them to
+     * see
+     * overall trends or specific employee analytics.
+     *
+     * @param employeeNum  Optional employee number to filter attendance analytics.
+     * @param startDateStr Optional start date string (yyyy-MM-dd) for the analytics
+     *                     period.
+     * @param endDateStr   Optional end date string (yyyy-MM-dd) for the analytics
+     *                     period.
+     * @return A ResponseEntity containing an ApiResponse with attendance analytics
+     *         data or an error message.
+     */
     @GetMapping("/analytics")
     public ResponseEntity<ApiResponse<?>> getAttendancesAnalytics(
             @RequestParam(required = false) Long employeeNum,
@@ -117,12 +163,12 @@ public class HRAttendanceController {
                         attendanceAnalyticsService.getAttendanceAnalyticsByEmployeeNum(employeeNum)));
             }
 
-            // Get the first day of the month
+            // If only endDate is provided, set startDate to the first day of the month
             if (startDate == null && endDate != null) {
                 startDate = Date.valueOf(endDate.toLocalDate().withDayOfMonth(1));
             }
 
-            // Get the last day of the month
+            // If only startDate is provided, set endDate to the last day of the month
             if (endDate == null && startDate != null) {
                 endDate = Date.valueOf(startDate.toLocalDate().withDayOfMonth(startDate.toLocalDate().lengthOfMonth()));
             }
@@ -140,13 +186,3 @@ public class HRAttendanceController {
         }
     }
 }
-
-// Example post request
-/*
- * {
- * "employeeNumber": 10002,
- * "date": "2025-02-17",
- * "timeIn": "08:00:00",
- * "timeOut": "17:00:00"
- * }
- */

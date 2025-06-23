@@ -47,21 +47,50 @@ public class EmployeeService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    // Get all employees
+    /**
+     * Retrieves all employees.
+     * 
+     * @return List of EmployeeDTOs.
+     */
     public List<EmployeeDTO> getAllEmployees() {
-        return employeeRepository.findAll().stream().map(employeeDTOMapper).toList();
+        return employeeRepository.findAll().stream()
+                .map(employeeDTOMapper)
+                .toList();
     }
 
-    // Get employee by id
+    /**
+     * Retrieves an employee by database ID.
+     * 
+     * @param employeeNum The database ID of the employee.
+     * @return EmployeeDTO if found, otherwise null.
+     */
     public EmployeeDTO getEmployeeById(Long employeeNum) {
-        return employeeRepository.findById(employeeNum).stream().map(employeeDTOMapper).findFirst()
+        return employeeRepository.findById(employeeNum).stream()
+                .map(employeeDTOMapper)
+                .findFirst()
                 .orElse(null);
     }
 
-    // Get employee by employeeNum
+    /**
+     * Retrieves an employee by employee number.
+     * 
+     * @param employeeNum The unique employee number.
+     * @return EmployeeDTO if found, otherwise null.
+     */
     public EmployeeDTO getEmployeeByEmployeeNum(Long employeeNum) {
-        return employeeRepository.findByEmployeeNumber(employeeNum).stream().map(employeeDTOMapper)
-                .findFirst().orElse(null);
+        return employeeRepository.findByEmployeeNumber(employeeNum).stream()
+                .map(employeeDTOMapper)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Retrieves all employee numbers.
+     * 
+     * @return List of employee numbers.
+     */
+    public List<Long> getAllEmployeeNums() {
+        return employeeRepository.findAllEmployeeNumbers();
     }
 
 }

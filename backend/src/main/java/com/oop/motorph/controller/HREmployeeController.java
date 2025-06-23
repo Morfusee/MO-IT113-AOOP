@@ -22,6 +22,11 @@ import com.oop.motorph.service.EmployeeService;
 import com.oop.motorph.service.HRManagerService;
 import com.oop.motorph.utils.ApiResponse;
 
+/**
+ * REST controller for Human Resources (HR) to manage employee records.
+ * This controller provides endpoints for HR personnel to perform CRUD
+ * operations on employee data.
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/manager/employees")
@@ -32,6 +37,14 @@ public class HREmployeeController {
     @Autowired
     private HRManagerService hrManagerService;
 
+    /**
+     * Retrieves a list of all employees.
+     * This endpoint is typically used by HR to get an overview of all employee
+     * records.
+     *
+     * @return A ResponseEntity containing an ApiResponse with a list of
+     *         EmployeeDTOs or an error message.
+     */
     @GetMapping("")
     public ResponseEntity<ApiResponse<?>> getAllEmployees() {
         try {
@@ -47,6 +60,15 @@ public class HREmployeeController {
         }
     }
 
+    /**
+     * Retrieves a single employee by their employee number.
+     * This endpoint allows HR to view detailed information about a specific
+     * employee.
+     *
+     * @param employeeNum The employee number to retrieve.
+     * @return A ResponseEntity containing an ApiResponse with an EmployeeDTO or an
+     *         error message.
+     */
     @GetMapping("/{employeeNum}")
     public ResponseEntity<ApiResponse<?>> getEmployeeById(@PathVariable Long employeeNum) {
         try {
@@ -55,7 +77,6 @@ public class HREmployeeController {
                     "Employee fetched successfully.",
                     fetchedEmployee));
         } catch (Exception e) {
-
             return ResponseEntity.badRequest().body(ApiResponse.error(
                     Response.SC_BAD_REQUEST,
                     "Failed to fetch employee.",
@@ -63,6 +84,15 @@ public class HREmployeeController {
         }
     }
 
+    /**
+     * Creates a new employee record.
+     * This endpoint is used by HR to add new employees to the system.
+     *
+     * @param employeeRequest The EmployeeRequestDTO containing the data for the new
+     *                        employee.
+     * @return A ResponseEntity containing an ApiResponse with the created
+     *         EmployeeDTO or an error message.
+     */
     @PostMapping("")
     public ResponseEntity<ApiResponse<?>> createEmployee(@RequestBody EmployeeRequestDTO employeeRequest) {
         try {
@@ -73,11 +103,19 @@ public class HREmployeeController {
                     Response.SC_BAD_REQUEST,
                     "Failed to create employee.",
                     Map.of("error", e.getMessage())));
-
         }
-
     }
 
+    /**
+     * Updates an existing employee record.
+     * This endpoint allows HR to modify details of an employee.
+     *
+     * @param employeeNum     The employee number of the employee to update.
+     * @param employeeRequest The EmployeeRequestDTO containing the updated employee
+     *                        data.
+     * @return A ResponseEntity containing an ApiResponse with the updated
+     *         EmployeeDTO or an error message.
+     */
     @PatchMapping("/{employeeNum}")
     public ResponseEntity<ApiResponse<?>> updateEmployee(@PathVariable Long employeeNum,
             @RequestBody EmployeeRequestDTO employeeRequest) {
@@ -93,6 +131,14 @@ public class HREmployeeController {
         }
     }
 
+    /**
+     * Deletes an employee record by their employee number.
+     * This endpoint is used by HR to remove an employee from the system.
+     *
+     * @param employeeNum The employee number of the employee to delete.
+     * @return A ResponseEntity containing an ApiResponse with the deleted
+     *         EmployeeDTO or an error message.
+     */
     @DeleteMapping("/{employeeNum}")
     public ResponseEntity<ApiResponse<?>> deleteEmployee(@PathVariable Long employeeNum) {
         try {

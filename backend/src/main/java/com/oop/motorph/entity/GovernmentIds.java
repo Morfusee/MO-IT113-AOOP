@@ -10,12 +10,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents government identification details for an employee.
+ * This entity maps to the "GOVERNMENTIDENTIFICATION" table in the database.
+ * It stores various government-issued IDs, with default values if not provided.
+ */
 @Entity
-// @Data
-// @NoArgsConstructor
-// @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "GOVERNMENTIDENTIFICATION")
-
 public class GovernmentIds {
 
     @Id
@@ -24,71 +28,30 @@ public class GovernmentIds {
     private Long governmentId;
 
     @Column(name = "philhealth")
-    private String philhealth;
+    private String philhealth = "N/A"; // Default value for PhilHealth ID.
 
     @Column(name = "sss")
-    private String sss;
+    private String sss = "N/A"; // Default value for SSS ID.
 
     @Column(name = "pagibig")
-    private String pagibig;
+    private String pagibig = "N/A"; // Default value for Pag-IBIG ID.
 
     @Column(name = "tin")
-    private String tin;
+    private String tin = "N/A"; // Default value for TIN.
 
-    // Constructors
-    public GovernmentIds() {
-        this.philhealth = "N/A";
-        this.sss = "N/A";
-        this.pagibig = "N/A";
-        this.tin = "N/A";
-    }
-
+    /**
+     * Constructs a GovernmentIds object with specified government identification
+     * numbers.
+     *
+     * @param philhealth The PhilHealth ID.
+     * @param sss        The SSS ID.
+     * @param pagibig    The Pag-IBIG ID.
+     * @param tin        The TIN.
+     */
     public GovernmentIds(String philhealth, String sss, String pagibig, String tin) {
         this.philhealth = philhealth;
         this.sss = sss;
         this.pagibig = pagibig;
-        this.tin = tin;
-    }
-
-    // Getters
-    public Long getGovernmentId() {
-        return governmentId;
-    }
-
-    public String getPhilhealth() {
-        return philhealth;
-    }
-
-    public String getSss() {
-        return sss;
-    }
-
-    public String getPagibig() {
-        return pagibig;
-    }
-
-    public String getTin() {
-        return tin;
-    }
-
-    // Setters
-    public void setGovernmentId(Long governmentId) {
-        this.governmentId = governmentId;
-    }
-
-    public void setPhilhealth(String philhealth) {
-        this.philhealth = philhealth;
-    }
-
-    public void setSss(String sss) {
-        this.sss = sss;
-    }
-
-    public void setPagibig(String pagibig) {
-        this.pagibig = pagibig;
-    }
-
-    public void setTin(String tin) {
         this.tin = tin;
     }
 }

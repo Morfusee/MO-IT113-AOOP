@@ -17,9 +17,22 @@ import {
   IconArrowLeft,
   IconArrowRight,
   IconCaretDownFilled,
+  IconDownload,
+  IconPlus,
 } from "@tabler/icons-react";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router";
+import { AsyncSelect } from "../components/combobox/AsyncSelect";
+import {
+  allowancesDetailsFallback,
+  deductionsDetailsFallback,
+  grossSalaryDetailsFallback,
+  netSalaryDetailsFallback,
+  salaryAfterTaxDetailsFallback,
+  taxableSalaryDetailsFallback,
+} from "../constants/payrollSections";
 import payrollController from "../controllers/payrollController";
+import userController from "../controllers/userController";
 import {
   PayrollAllowancesDetails,
   PayrollDeductionsDetails,
@@ -30,18 +43,6 @@ import {
 } from "../types/payroll";
 import { FetchedPayrollMonths } from "../types/responses";
 import { getLastDayOfMonth, stringToMonthString } from "../utils/dateUtils";
-import userController from "../controllers/userController";
-import { useSearchParams } from "react-router";
-import {
-  allowancesDetailsFallback,
-  deductionsDetailsFallback,
-  grossSalaryDetailsFallback,
-  netSalaryDetailsFallback,
-  salaryAfterTaxDetailsFallback,
-  taxableSalaryDetailsFallback,
-} from "../constants/payrollSections";
-import { AsyncSelect } from "../components/combobox/AsyncSelect";
-import { isAdmin } from "../utils/permissionUtils";
 import {
   formatAllowances,
   formatDeductions,
@@ -50,6 +51,9 @@ import {
   formatSalaryAfterTax,
   formatTaxableSalary,
 } from "../utils/formatters";
+import { isAdmin } from "../utils/permissionUtils";
+import { modals } from "@mantine/modals";
+import reportController from "../controllers/reportController";
 
 function Payroll() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2022, 1));
@@ -75,7 +79,7 @@ function Payroll() {
       className="relative"
     >
       <Flex mah={"100%"} w={"100%"} gap={rem(10)} direction={"column"}>
-        <Flex gap={10} align={"center"} w={"100%"}>
+        <Flex gap={10} wrap={"wrap"}>
           <DatesProvider
             settings={{
               locale: "en",
@@ -92,14 +96,29 @@ function Payroll() {
             />
           </DatesProvider>
           <AsyncSelect />
+          <Button
+            ml={"auto"}
+            leftSection={<IconPlus size={15} />}
+            variant="default"
+            onClick={() =>
+              modals.openContextModal({
+                modal: "generateReport",
+                innerProps: {},
+              })
+            }
+          >
+            Generate Report
+          </Button>
         </Flex>
         <Flex gap={rem(10)} wrap={"wrap"}>
           {payrollMonths.map((month, index) => (
             <PayrollList month={month} key={index} />
           ))}
         </Flex>
-        <PayrollDetails />
       </Flex>
+
+      <PayrollDetails />
+      {/* </Flex> */}
     </Container>
   );
 }
@@ -167,7 +186,13 @@ function PayrollDetails() {
   const [searchParam, setSearchParam] = useSearchParams();
   const { getPayroll } = payrollController();
   const { getUser } = userController();
+  const { getEmployeePayrollReport } = reportController();
 
+  // Local Vars
+  const startDate = searchParam.get("startDate")?.toString()!;
+  const endDate = searchParam.get("endDate")?.toString()!;
+
+  // Use States
   const [payrollDetails, setPayrollDetails] = useState({
     grossSalary: grossSalaryDetailsFallback,
     allowances: allowancesDetailsFallback,
@@ -177,9 +202,22 @@ function PayrollDetails() {
     netSalary: netSalaryDetailsFallback,
   });
 
-  const memoizedPayroll = useMemo(() => {
+  // Funcs
+  const employeeToFetch = useMemo(() => {
     const user = getUser();
-    let employeeToFetch = user?.employeeNumber;
+    if (!user) return undefined;
+    if (
+      isAdmin(user.employmentInfo.position) &&
+      searchParam.get("employeeNumber")
+    ) {
+      return parseInt(searchParam.get("employeeNumber")!);
+    }
+    return user.employeeNumber;
+  }, [searchParam]);
+
+  const memoizedPayroll = useMemo(() => {
+    // const user = getUser();
+    // let employeeToFetch = user?.employeeNumber;
     const startDate = searchParam.get("startDate");
     const endDate = searchParam.get("endDate");
 
@@ -187,12 +225,12 @@ function PayrollDetails() {
       return;
     }
 
-    if (
-      isAdmin(user?.employmentInfo.position) &&
-      searchParam.get("employeeNumber")
-    ) {
-      employeeToFetch = parseInt(searchParam.get("employeeNumber")!);
-    }
+    // if (
+    //   isAdmin(user?.employmentInfo.position) &&
+    //   searchParam.get("employeeNumber")
+    // ) {
+    //   employeeToFetch = parseInt(searchParam.get("employeeNumber")!);
+    // }
 
     getPayroll(employeeToFetch, startDate, endDate).then((response) => {
       setPayrollDetails({
@@ -257,6 +295,20 @@ function PayrollDetails() {
                   )}
                 </Text>
               </Stack>
+              <ActionIcon
+                variant="subtle"
+                ml={"auto"}
+                onClick={() =>
+                  getEmployeePayrollReport(
+                    "Employee Payroll Report",
+                    employeeToFetch?.toString()!,
+                    startDate,
+                    endDate
+                  )
+                }
+              >
+                <IconDownload />
+              </ActionIcon>
             </Flex>
 
             <PayrollSummaryGrossSalary

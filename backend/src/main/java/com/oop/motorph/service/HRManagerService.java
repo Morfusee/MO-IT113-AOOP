@@ -38,78 +38,98 @@ public class HRManagerService {
     @Autowired
     private GovernmentIdRepository governmentIdRepository;
 
-    // Get all employees
+    /**
+     * Retrieves all employees.
+     * 
+     * @return List of EmployeeDTOs.
+     */
     public List<EmployeeDTO> getAllEmployees() {
         return employeeRepository.findAll().stream().map(employeeDTOMapper).toList();
     }
 
-    // Save operation
+    /**
+     * Creates a new employee.
+     * 
+     * @param employeeRequest The request payload containing employee data.
+     * @return The created EmployeeDTO.
+     */
     public EmployeeDTO createEmployee(EmployeeRequestDTO employeeRequest) {
 
-        // Map EmployeeRequestDTO to Employee
+        // Map EmployeeRequestDTO to Employee entity
         Employee employee = employeeRequestDTOMapper.toEmployee(employeeRequest);
 
-        // Check first if the username exists already
+        // Check if the username is already taken
         if (userRepository.existsByUsername(employee.getUsername())) {
             throw new RuntimeException(ApiResponse.badRequestException("Username is already taken").getMessage());
         }
 
-        // Save and explicitly set GovernmentIds
+        // Save government IDs if provided
         if (employeeRequest.governmentIds() != null) {
             GovernmentIds governmentIds = governmentIdRepository.save(employee.getGovernmentIds());
             employee.setGovernmentIds(governmentIds);
         }
 
-        // Save and explicitly set Compensation
+        // Save compensation if provided
         if (employeeRequest.compensation() != null) {
             Compensation compensation = compensationRepository.save(employee.getCompensation());
             employee.setCompensation(compensation);
         }
 
-        // Save employee (with governmentIds & compensation)
+        // Save the complete employee record
         return employeeDTOMapper.apply(employeeRepository.save(employee));
     }
 
-    // Update operation
+    /**
+     * Updates an existing employee.
+     * 
+     * @param employeeNum     The employee number to update.
+     * @param employeeRequest The new employee data.
+     * @return The updated EmployeeDTO.
+     */
     public EmployeeDTO updateEmployee(Long employeeNum, EmployeeRequestDTO employeeRequest) {
 
-        // Check first if the username exists already
+        // Check if the username is already taken
         if (userRepository.existsByUsername(employeeRequest.user().username())) {
             throw new RuntimeException(ApiResponse.badRequestException("Username is already taken").getMessage());
         }
 
-        // Get employee by employee number
+        // Retrieve the existing employee
         Employee employee = employeeRepository.findByEmployeeNumber(employeeNum).orElseThrow(
                 () -> new RuntimeException(ApiResponse.entityNotFoundException("Employee not found").getMessage()));
 
-        // Update employee
+        // Update fields from request
         employeeRequestDTOMapper.updateEntity(employeeRequest, employee);
 
-        // Save and explicitly set GovernmentIds
+        // Update government IDs if provided
         if (employeeRequest.governmentIds() != null) {
             GovernmentIds governmentIds = governmentIdRepository.save(employee.getGovernmentIds());
             employee.setGovernmentIds(governmentIds);
         }
 
-        // Save and explicitly set Compensation
+        // Update compensation if provided
         if (employeeRequest.compensation() != null) {
             Compensation compensation = compensationRepository.save(employee.getCompensation());
             employee.setCompensation(compensation);
         }
 
-        // Save employee (with updated governmentIds & compensation)
+        // Save updated employee
         return employeeDTOMapper.apply(employeeRepository.save(employee));
     }
 
-    // Delete operation
+    /**
+     * Deletes an employee by their employee number.
+     * 
+     * @param employeeNum The employee number of the employee to delete.
+     * @return The deleted EmployeeDTO.
+     */
     public EmployeeDTO deleteEmployeeById(Long employeeNum) {
-        // Find employee by employee number
-        EmployeeDTO employeeDTO = employeeRepository.findByEmployeeNumber(employeeNum).map(employeeDTOMapper)
-                .orElseThrow(
-                        () -> new RuntimeException(
-                                ApiResponse.entityNotFoundException("Employee not found").getMessage()));
+        // Retrieve employee
+        EmployeeDTO employeeDTO = employeeRepository.findByEmployeeNumber(employeeNum)
+                .map(employeeDTOMapper)
+                .orElseThrow(() -> new RuntimeException(
+                        ApiResponse.entityNotFoundException("Employee not found").getMessage()));
 
-        // Delete employee using user id
+        // Delete employee using user ID
         employeeRepository.deleteById(employeeDTO.employee().getUserId());
 
         return employeeDTO;

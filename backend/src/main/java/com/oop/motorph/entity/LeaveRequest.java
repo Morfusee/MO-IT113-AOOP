@@ -11,14 +11,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
+/**
+ * Represents a leave request submitted by an employee.
+ * This entity maps to the "LEAVEREQUEST" table in the database.
+ * It includes details such as the employee, leave period, type, and status.
+ */
 @Entity
-// @Data
-// @Builder
-// @NoArgsConstructor
-// @AllArgsConstructor
+@Data
+@Builder
+@AllArgsConstructor
 @Table(name = "LEAVEREQUEST")
-
 public class LeaveRequest {
 
     @Id
@@ -47,7 +53,10 @@ public class LeaveRequest {
     @Column(name = "status", nullable = false)
     private String status;
 
-    // Constructors
+    /**
+     * Default constructor for LeaveRequest.
+     * Initializes fields with default or current timestamp values.
+     */
     public LeaveRequest() {
         this.employeeNum = 0L;
         this.startDate = new Timestamp(System.currentTimeMillis());
@@ -57,6 +66,18 @@ public class LeaveRequest {
         this.status = "N/A";
     }
 
+    /**
+     * Parameterized constructor for LeaveRequest.
+     * Initializes a LeaveRequest with specified details.
+     *
+     * @param employeeNum The employee number submitting the request.
+     * @param startDate   The start date and time of the leave.
+     * @param endDate     The end date and time of the leave.
+     * @param notes       Any additional notes or reasons for the leave.
+     * @param leaveType   The type of leave (e.g., sick, vacation).
+     * @param status      The current status of the leave request (e.g., pending,
+     *                    approved).
+     */
     public LeaveRequest(Long employeeNum, Timestamp startDate, Timestamp endDate, String notes, String leaveType,
             String status) {
         this.employeeNum = employeeNum;
@@ -64,72 +85,6 @@ public class LeaveRequest {
         this.endDate = endDate;
         this.notes = notes;
         this.leaveType = leaveType;
-        this.status = status;
-    }
-
-    // Getters
-    public Integer getId() {
-        return id;
-    }
-
-    public Long getEmployeeNum() {
-        return employeeNum;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Timestamp getStartDate() {
-        return startDate;
-    }
-
-    public Timestamp getEndDate() {
-        return endDate;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public String getLeaveType() {
-        return leaveType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    // Setters
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setEmployeeNum(Long employeeNum) {
-        this.employeeNum = employeeNum;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public void setStartDate(Timestamp startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
-    }
-
-    public void setStatus(String status) {
         this.status = status;
     }
 }
