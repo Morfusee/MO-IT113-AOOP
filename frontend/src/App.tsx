@@ -15,11 +15,13 @@ import Payroll from "./pages/Payroll";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminRoutes from "./routes/AdminRoutes";
+import GenerateReport from "./components/modals/GenerateReport";
 
 const modals = {
   createLeaveRequest: CreateLeaveRequest,
   viewEmployee: ViewEmployee,
   createOrEditEmployee: CreateOrEditEmployee,
+  generateReport: GenerateReport,
 };
 declare module "@mantine/modals" {
   export interface MantineModalsOverride {

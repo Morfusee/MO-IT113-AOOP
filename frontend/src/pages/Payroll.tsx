@@ -18,6 +18,7 @@ import {
   IconArrowRight,
   IconCaretDownFilled,
   IconDownload,
+  IconPlus,
 } from "@tabler/icons-react";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
@@ -51,12 +52,14 @@ import {
   formatTaxableSalary,
 } from "../utils/formatters";
 import { isAdmin } from "../utils/permissionUtils";
+import { modals } from "@mantine/modals";
+import reportController from "../controllers/reportController";
 
 function Payroll() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2022, 1));
   const [payrollMonths, setPayrollMonths] = useState<FetchedPayrollMonths>([]);
 
-  const { getPayrollMonths, getGeneratePayrollReport } = payrollController();
+  const { getPayrollMonths } = payrollController();
 
   useEffect(() => {
     getPayrollMonths(selectedDate).then((response) => {
@@ -76,8 +79,7 @@ function Payroll() {
       className="relative"
     >
       <Flex mah={"100%"} w={"100%"} gap={rem(10)} direction={"column"}>
-        {/* <Flex gap={10} justify={"space-between"} wrap={"wrap"}> */}
-        <Flex gap={10} align={"center"}>
+        <Flex gap={10} wrap={"wrap"}>
           <DatesProvider
             settings={{
               locale: "en",
@@ -94,18 +96,27 @@ function Payroll() {
             />
           </DatesProvider>
           <AsyncSelect />
-        </Flex>
-        <Flex gap={10} align={"center"}>
-          <Button variant="default" onClick={getGeneratePayrollReport}>
-            Approve
+          <Button
+            ml={"auto"}
+            leftSection={<IconPlus size={15} />}
+            variant="default"
+            onClick={() =>
+              modals.openContextModal({
+                modal: "generateReport",
+                innerProps: {},
+              })
+            }
+          >
+            Generate Report
           </Button>
         </Flex>
+        <Flex gap={rem(10)} wrap={"wrap"}>
+          {payrollMonths.map((month, index) => (
+            <PayrollList month={month} key={index} />
+          ))}
+        </Flex>
       </Flex>
-      <Flex gap={rem(10)} wrap={"wrap"}>
-        {payrollMonths.map((month, index) => (
-          <PayrollList month={month} key={index} />
-        ))}
-      </Flex>
+
       <PayrollDetails />
       {/* </Flex> */}
     </Container>
@@ -173,9 +184,15 @@ function PayrollList({ month }: { month: FetchedPayrollMonths[number] }) {
 
 function PayrollDetails() {
   const [searchParam, setSearchParam] = useSearchParams();
-  const { getPayroll, getGeneratePayrollReport } = payrollController();
+  const { getPayroll } = payrollController();
   const { getUser } = userController();
+  const { getEmployeePayrollReport } = reportController();
 
+  // Local Vars
+  const startDate = searchParam.get("startDate")?.toString()!;
+  const endDate = searchParam.get("endDate")?.toString()!;
+
+  // Use States
   const [payrollDetails, setPayrollDetails] = useState({
     grossSalary: grossSalaryDetailsFallback,
     allowances: allowancesDetailsFallback,
@@ -185,9 +202,22 @@ function PayrollDetails() {
     netSalary: netSalaryDetailsFallback,
   });
 
-  const memoizedPayroll = useMemo(() => {
+  // Funcs
+  const employeeToFetch = useMemo(() => {
     const user = getUser();
-    let employeeToFetch = user?.employeeNumber;
+    if (!user) return undefined;
+    if (
+      isAdmin(user.employmentInfo.position) &&
+      searchParam.get("employeeNumber")
+    ) {
+      return parseInt(searchParam.get("employeeNumber")!);
+    }
+    return user.employeeNumber;
+  }, [searchParam]);
+
+  const memoizedPayroll = useMemo(() => {
+    // const user = getUser();
+    // let employeeToFetch = user?.employeeNumber;
     const startDate = searchParam.get("startDate");
     const endDate = searchParam.get("endDate");
 
@@ -195,12 +225,12 @@ function PayrollDetails() {
       return;
     }
 
-    if (
-      isAdmin(user?.employmentInfo.position) &&
-      searchParam.get("employeeNumber")
-    ) {
-      employeeToFetch = parseInt(searchParam.get("employeeNumber")!);
-    }
+    // if (
+    //   isAdmin(user?.employmentInfo.position) &&
+    //   searchParam.get("employeeNumber")
+    // ) {
+    //   employeeToFetch = parseInt(searchParam.get("employeeNumber")!);
+    // }
 
     getPayroll(employeeToFetch, startDate, endDate).then((response) => {
       setPayrollDetails({
@@ -268,7 +298,14 @@ function PayrollDetails() {
               <ActionIcon
                 variant="subtle"
                 ml={"auto"}
-                onClick={getGeneratePayrollReport}
+                onClick={() =>
+                  getEmployeePayrollReport(
+                    "Employee Payroll Report",
+                    employeeToFetch?.toString()!,
+                    startDate,
+                    endDate
+                  )
+                }
               >
                 <IconDownload />
               </ActionIcon>
