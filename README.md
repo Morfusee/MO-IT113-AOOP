@@ -60,8 +60,6 @@ For more details on cloning a repository, check [GitHub's documentation](https:/
 ![image](https://github.com/user-attachments/assets/a0cfb782-dd31-41f4-bdf3-f64fba835d86)
 
 
----
-
 ## Running the Backend
 
 There are two ways to start the backend server:
@@ -97,7 +95,6 @@ If you prefer another Java-supported IDE, you can run the backend from there and
 
 ![image](https://github.com/user-attachments/assets/4622802e-99f7-4c9c-85bd-4320fbf27f56)
 
-
 4. Click the **Run** button, and a dropdown will appear.
 
 ![image](https://github.com/user-attachments/assets/91b07753-5e48-42c5-a815-1002167909b0)
@@ -106,6 +103,24 @@ If you prefer another Java-supported IDE, you can run the backend from there and
 6. Once started, the console will display logs indicating that `MotorphApplication` has started successfully.
 
 ![image](https://github.com/user-attachments/assets/5fb87827-8beb-43cc-9cd0-79b621e9b71c)
+
+---
+
+### If You Encounter Java Issues in VSCode
+
+Sometimes VSCode may still fail to properly run the Java application due to workspace cache problems. If that happens:
+
+1. Press `Ctrl + Shift + P` to open the Command Palette.
+2. Type and select **Java: Clean Java Language Server Workspace**.
+
+![image](https://github.com/user-attachments/assets/bd3a2248-342b-4487-abde-90c2097ba100)
+
+3. When prompted, click **Reload and Delete**.
+
+![image](https://github.com/user-attachments/assets/6ce50098-eb85-46dc-be34-6608e6842db2)
+
+4. VSCode will restart and clean the Java workspace.
+5. Try running `MotorphApplication.java` again afterward.
 
 ---
 
@@ -130,18 +145,3 @@ If you prefer another Java-supported IDE, you can run the backend from there and
 - If you encounter errors, ensure all dependencies are installed properly.
 - If Java SDK is not detected in VSCode, try restarting the editor and checking the extensions.
 - If you need additional support, refer to the official documentation links provided in this guide.
-
-### If you've tried everything after setting things up for Java, try doing the following:
-1. Press `Ctrl + Shift + P`.
-2. Search for **Java: Clean Java Language Server Workspace**. Click it.
-
-![image](https://github.com/user-attachments/assets/bd3a2248-342b-4487-abde-90c2097ba100)
-
-3.  You will then be presented with the following prompt:
-
-![image](https://github.com/user-attachments/assets/6ce50098-eb85-46dc-be34-6608e6842db2)
-
-4. Press `Reload and Delete`. This will restart VSCode.
-5. Try running the Java application again.
-
-
